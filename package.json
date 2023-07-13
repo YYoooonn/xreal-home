@@ -10,7 +10,7 @@
     "format": "prettier -w ."
   },
   "dependencies": {
-    "@react-three/drei": "^9.66.1",
+    "@react-three/drei": "9.57.3",
     "@react-three/fiber": "^8.13.0",
     "@vanilla-extract/css": "^1.11.0",
     "@vanilla-extract/next-plugin": "^2.1.2",
@@ -18,14 +18,14 @@
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "three": "^0.152.2",
+    "three": "0.150.1",
     "three-stdlib": "^2.21.10"
   },
   "devDependencies": {
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
-    "@types/three": "^0.151.0",
+    "@types/three": "0.149.0",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "prettier": "^2.8.7",
