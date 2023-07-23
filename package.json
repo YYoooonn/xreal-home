@@ -10,6 +10,7 @@
     "format": "prettier -w ."
   },
   "dependencies": {
+    "@react-spring/three": "^9.7.3",
     "@react-three/drei": "9.57.3",
     "@react-three/fiber": "^8.13.0",
     "@vanilla-extract/css": "^1.11.0",
@@ -18,8 +19,9 @@
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "three": "0.150.1",
-    "three-stdlib": "^2.21.10"
+    "three": "^0.154.0",
+    "three-stdlib": "^2.21.10",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/node": "18.15.11",
