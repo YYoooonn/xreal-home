@@ -70,15 +70,15 @@ function BlackTiles() {
 function WhiteTiles() {
   // -2 ~ 2 까지는 임의로 설정
   return (
-    <group position={[0, 0, 0]}>
-      <WhiteTile position={[-2, 0, 2]} isButton={false} />
-      <WhiteTile position={[-2, 0, -2]} isButton={false} />
-      <WhiteTile position={[-1, 0, 1]} isButton={false} />
-      <WhiteTile position={[-1, 0, 0]} isButton={false} />
-      <WhiteTile position={[1, 0, -1]} isButton={false} />
-      <WhiteTile position={[1, 0, 0]} isButton={false} />
-      <WhiteTile position={[2, 0, 2]} isButton={false} />
-      <WhiteTile position={[2, 0, -2]} isButton={false} />
+    <group>
+      <WhiteTile position={[-2, 0, 2]} />
+      <WhiteTile position={[-2, 0, -2]} />
+      <WhiteTile position={[-1, 0, 1]} />
+      <WhiteTile position={[-1, 0, 0]} />
+      <WhiteTile position={[1, 0, -1]} />
+      <WhiteTile position={[1, 0, 0]} />
+      <WhiteTile position={[2, 0, 2]} />
+      <WhiteTile position={[2, 0, -2]} />
     </group>
   );
 }

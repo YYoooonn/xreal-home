@@ -13,7 +13,7 @@ type GLTFButton = GLTF & {
 };
 
 // TODO 현재 버튼 dummy
-const urlButton = '/assets/models/CAT_VR.glb';
+const urlButton = '/assets/models/Cat_VR.glb';
 useGLTF.preload(urlButton);
 
 // TODO 임의로 설정
