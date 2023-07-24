@@ -1,3 +1,19 @@
+import Link from "next/link";
+
 export default function Home() {
-  return <>Hello World!</>;
+  return(
+    <>
+      <h1>Work in Progress</h1>
+      <h2>
+        <Link href={'/main'} >
+          main
+        </Link>
+      </h2>
+      <h2>
+        <Link href={'/sample'} >
+          sample
+        </Link>
+      </h2>
+    </>
+  );
 }

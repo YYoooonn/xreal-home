@@ -25,7 +25,7 @@ export default function Main() {
         />
         <OrbitControls
           makeDefault={false}
-          enableRotate={true}
+          enableRotate={false}
           enableZoom={false}
         />
         {/* PointLihgtwithHelper 나중에 제거 보기 편하기 위함*/}
