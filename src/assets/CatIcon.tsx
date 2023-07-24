@@ -48,10 +48,10 @@ function Icon({
         setClicked(true);
       }}
     >
-      {nodes.Event_Group.children.map((child) => {
+      {nodes.Event_Group.children.map((child, i) => {
         if (child instanceof Mesh) {
           return (
-            <animated.mesh castShadow name="Tile">
+            <animated.mesh key={i} castShadow name="Tile">
               <bufferGeometry {...child.geometry} />
               <material attach={'material'} {...child.material} />
             </animated.mesh>
