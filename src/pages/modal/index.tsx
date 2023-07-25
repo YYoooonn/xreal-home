@@ -1,8 +1,15 @@
 import { useModalControl } from "@/modals/ModalControlProvider";
 import MainModal from "@/modals/main";
+import React from "react";
 
 export default function ModalPage() {
-  const { open } = useModalControl();
+  const { open, addEventListener, removeEventListener } = useModalControl();
+
+  React.useEffect(() => {
+    const handleOpen = () => console.log("modal opened");
+    addEventListener("open", handleOpen);
+    return () => removeEventListener("open", handleOpen);
+  }, []);
 
   const handleClick = () => {
     open(MainModal);

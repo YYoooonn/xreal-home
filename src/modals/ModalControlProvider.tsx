@@ -1,7 +1,6 @@
 import NoSSR from "@/components/NoSSR";
 import React from "react";
 import { createPortal } from "react-dom";
-import { EventEmitter } from "events";
 
 interface ModalControllable {
   open: (Modal: React.ComponentType<ModalProps>) => number;
@@ -40,8 +39,13 @@ export default function ModalControlProvider({
 }: React.PropsWithChildren) {
   const [totalCount, setTotalCount] = React.useState(0);
   const [modals, setModals] = React.useState<Record<number, JSX.Element>>({});
+  const [listeners, setListeners] = React.useState<
+    Record<"open" | "close", Set<() => void>>
+  >({ open: new Set(), close: new Set() });
+
   const open = (Modal: React.ComponentType<ModalProps>) => {
-    emitterRef.current.emit("open");
+    listeners.open.forEach((l) => l());
+
     setModals((rest) => ({
       [totalCount]: <Modal id={totalCount} />,
       ...rest,
@@ -50,13 +54,22 @@ export default function ModalControlProvider({
     return totalCount + 1;
   };
   const close = (id: number) => {
-    emitterRef.current.emit("close");
+    listeners.close.forEach((l) => l());
+
     setModals(({ [id]: _, ...rest }) => rest);
   };
 
-  const emitterRef = React.useRef<EventEmitter>(new EventEmitter());
-  const addEventListener = emitterRef.current.on;
-  const removeEventListener = emitterRef.current.off;
+  const addEventListener = (key: "open" | "close", listener: () => void) =>
+    setListeners((prev) => {
+      prev[key].add(listener);
+      return { ...prev };
+    });
+
+  const removeEventListener = (key: "open" | "close", listener: () => void) =>
+    setListeners((prev) => {
+      prev[key].delete(listener);
+      return { ...prev };
+    });
 
   return (
     <>
