@@ -783,9 +783,9 @@
     vite-node "^0.28.5"
 
 "@vanilla-extract/next-plugin@^2.1.2":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/next-plugin/-/next-plugin-2.2.0.tgz#2f60a1394c129b81ccf6f0b6f3840ee0343815eb"
-  integrity sha512-qW/AGVTyO/cI2kUGkkPFAyXoEbhZkT0wfD+wdd9KrRWytVnZhqIE0pwx2icy1ylVlNhpRJHqnevEadFkyuSIuQ==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/next-plugin/-/next-plugin-2.2.1.tgz#57481cebae4f9bde4f28ee4f61f11b108a8decdf"
+  integrity sha512-43wkBf17IbGJfZpDODcp5HA8ZFdzpu+3ts3F6fenFzxuOUShRknAiMDkB2StXjX/QvFbJoNHALZidEnkZxsNQw==
   dependencies:
     "@vanilla-extract/webpack-plugin" "^2.2.0"
     browserslist "^4.19.1"
@@ -991,9 +991,9 @@ draco3d@^1.4.1:
   integrity sha512-+3NaRjWktb5r61ZFoDejlykPEFKT5N/LkbXsaddlw6xNSXBanUYpFc2AXXpbJDilPHazcSreU/DpQIaxfX0NfQ==
 
 electron-to-chromium@^1.4.431:
-  version "1.4.469"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.469.tgz#c9cea85ab94031e239ca4ab03158726672d6f960"
-  integrity sha512-HRN9XQjElxJBrdDky5iiUUr3eDwXGTg6Cp4IV8MuNc8VqMkYSneSnIe6poFKx9PsNzkudCgaWCBVxwDqirwQWQ==
+  version "1.4.470"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.470.tgz#0e932816be8d5f2b491ad2aa449ea47db4785398"
+  integrity sha512-zZM48Lmy2FKWgqyvsX9XK+J6FfP7aCDUFLmgooLJzA7v1agCs/sxSoBpTIwDLhmbhpx9yJIxj2INig/ncjJRqg==
 
 emojis-list@^3.0.0:
   version "3.0.0"
