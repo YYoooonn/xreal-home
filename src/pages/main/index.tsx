@@ -1,18 +1,18 @@
-import Floor from '@/assets/Floor';
-import { Canvas } from '@react-three/fiber';
+import Floor from "@/assets/Floor";
+import { Canvas } from "@react-three/fiber";
 import {
   OrthographicCamera,
   useHelper,
   OrbitControls,
-} from '@react-three/drei';
-import { useRef } from 'react';
-import { PointLightHelper } from 'three';
+} from "@react-three/drei";
+import { useRef } from "react";
+import { PointLightHelper } from "three";
 
 export default function Main() {
   return (
     <div className="canvas">
       <Canvas shadows frameloop="demand">
-        <color attach="background" args={['#000000']} />
+        <color attach="background" args={["#000000"]} />
         <ambientLight intensity={0.05} />
         <Floor />
         <OrthographicCamera
