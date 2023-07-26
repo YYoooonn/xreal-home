@@ -6,11 +6,11 @@ import {
   Grid,
   OrbitControls,
   SpotLight,
-} from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+} from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
 function MainGrid() {
-  const hexString = '#000000';
+  const hexString = "#000000";
   const SIZE = 10;
   const HALF_SIZE = SIZE / 2;
   return (
@@ -37,7 +37,7 @@ function MainGrid() {
               castShadow
             >
               Y
-              <meshPhongMaterial color={'#00FA77'} />
+              <meshPhongMaterial color={"#00FA77"} />
               {/* <wireframeGeometry/> */}
             </Text3D>
           </Float>
@@ -52,8 +52,8 @@ function MainGrid() {
           sectionThickness={1}
           infiniteGrid={true}
           followCamera={false}
-          sectionColor={'#00FA77'}
-          cellColor={'#FFFFFF'}
+          sectionColor={"#00FA77"}
+          cellColor={"#FFFFFF"}
           fadeDistance={10000}
         />
         <OrbitControls
@@ -68,7 +68,7 @@ function MainGrid() {
           anglePower={0.7}
           angle={1.5}
           penumbra={0.5}
-          color={'#00FA77'}
+          color={"#00FA77"}
         />
       </Canvas>
     </div>

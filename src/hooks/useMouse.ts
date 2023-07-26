@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 /*
 변수 관리를 위한 zustand
 https://github.com/pmndrs/zustand

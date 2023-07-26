@@ -1,10 +1,10 @@
-import { config, animated, useSpring } from '@react-spring/three';
-import { Mesh, MeshStandardMaterial, Group, DoubleSide } from 'three';
-import { useGLTF, useCursor } from '@react-three/drei';
-import { ThreeEvent } from '@react-three/fiber';
-import { GLTF } from 'three-stdlib';
-import { useState } from 'react';
-import useClicked from '@/hooks/useMouse';
+import { config, animated, useSpring } from "@react-spring/three";
+import { Mesh, MeshStandardMaterial, Group, DoubleSide } from "three";
+import { useGLTF, useCursor } from "@react-three/drei";
+import { ThreeEvent } from "@react-three/fiber";
+import { GLTF } from "three-stdlib";
+import { useState } from "react";
+import useClicked from "@/hooks/useMouse";
 
 type GLTFButton = GLTF & {
   nodes: {
@@ -13,13 +13,13 @@ type GLTFButton = GLTF & {
 };
 
 // TODO 현재 버튼 dummy
-const urlButton = '/assets/models/Cat_VR.glb';
+const urlButton = "/assets/models/Cat_VR.glb";
 useGLTF.preload(urlButton);
 
 // TODO 임의로 설정
 const hoveredMaterial = new MeshStandardMaterial();
-hoveredMaterial.color.set('hotpink');
-hoveredMaterial.side = DoubleSide
+hoveredMaterial.color.set("hotpink");
+hoveredMaterial.side = DoubleSide;
 
 function Button(props: { position: [x: number, y: number, z: number] }) {
   const { nodes } = useGLTF(urlButton) as GLTFButton;

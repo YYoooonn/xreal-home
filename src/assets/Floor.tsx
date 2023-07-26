@@ -1,7 +1,7 @@
-import { Globals } from '@react-spring/three';
-import { BlackTile, WhiteTile, ButtonTile } from './Tile';
+import { Globals } from "@react-spring/three";
+import { BlackTile, WhiteTile, ButtonTile } from "./Tile";
 
-Globals.assign({ frameLoop: 'always' });
+Globals.assign({ frameLoop: "always" });
 /* TODO
 Cannot call the manual advancement of rafz whilst frameLoop is not set as demand 
 위 에러 메세지 해결 필요 */
