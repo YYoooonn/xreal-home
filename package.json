@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier -w ."
+    "format": "prettier --cache --write .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@react-spring/three": "9.6.1",
@@ -28,7 +29,14 @@
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
     "@types/three": "0.149.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.3",
     "prettier": "^2.8.7",
     "typescript": "5.0.4"
+  },
+  "lint-staged": {
+    "**/*.(js|jsx|css|ts|tsx)": [
+      "prettier --write"
+    ]
   }
 }

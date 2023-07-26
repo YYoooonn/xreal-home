@@ -1,8 +1,8 @@
-import { useGLTF } from '@react-three/drei';
-import { useSpring, config, animated } from '@react-spring/three';
-import { useState } from 'react';
-import { Mesh, Group } from 'three';
-import { GLTF } from 'three-stdlib';
+import { useGLTF } from "@react-three/drei";
+import { useSpring, config, animated } from "@react-spring/three";
+import { useState } from "react";
+import { Mesh, Group } from "three";
+import { GLTF } from "three-stdlib";
 
 type GLTFIcon = GLTF & {
   nodes: {
@@ -10,10 +10,10 @@ type GLTFIcon = GLTF & {
   };
 };
 
-const urlEvent = '/assets/models/Cat_Event.glb';
-const urlJoinUs = '/assets/models/Cat_JoinUs.glb';
-const urlMagazine = '/assets/models/Cat_Magazine.glb';
-const urlVR = '/assets/models/Cat_VR.glb';
+const urlEvent = "/assets/models/Cat_Event.glb";
+const urlJoinUs = "/assets/models/Cat_JoinUs.glb";
+const urlMagazine = "/assets/models/Cat_Magazine.glb";
+const urlVR = "/assets/models/Cat_VR.glb";
 useGLTF.preload(urlEvent);
 useGLTF.preload(urlJoinUs);
 useGLTF.preload(urlMagazine);
@@ -53,7 +53,7 @@ function Icon({
           return (
             <animated.mesh key={i} castShadow name="Tile">
               <bufferGeometry {...child.geometry} />
-              <material attach={'material'} {...child.material} />
+              <material attach={"material"} {...child.material} />
             </animated.mesh>
           );
         }
