@@ -10,6 +10,9 @@ export default function Home() {
       <h2>
         <Link href={"/sample"}>sample</Link>
       </h2>
+      <h2>
+        <Link href={"/modal"}>modal</Link>
+      </h2>
     </>
   );
 }
