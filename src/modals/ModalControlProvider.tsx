@@ -13,11 +13,11 @@ export interface ModalProps {
 
 function ModalRenderer({ modals }: { modals: Record<number, JSX.Element> }) {
   return createPortal(
-    <>
+    <div id="modals">
       {Object.entries(modals).map(([id, elem]) => (
         <React.Fragment key={id}>{elem}</React.Fragment>
       ))}
-    </>,
+    </div>,
     document.body
   );
 }

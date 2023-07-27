@@ -1,5 +1,5 @@
 import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/main";
+import MainModal from "@/modals/BasePageModal";
 import React from "react";
 
 export default function ModalPage() {
