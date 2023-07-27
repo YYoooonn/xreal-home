@@ -11,9 +11,10 @@ export default function ModalPage() {
     return () => removeEventListener("open", handleOpen);
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    open(MainModal, { name: e.target.value as any });
-  };
+  const handleChange =
+    (name: "xreal" | "events" | "joinus" | "magazine") => () => {
+      open(MainModal, { name });
+    };
 
   return (
     <div
@@ -22,13 +23,11 @@ export default function ModalPage() {
         height: "100vh",
       }}
     >
-      <select onChange={handleChange}>
-        {["xreal", "events", "joinus", "magazine"].map((v) => (
-          <option value={v} key={v}>
-            {v}
-          </option>
-        ))}
-      </select>
+      {(["xreal", "events", "joinus", "magazine"] as const).map((v) => (
+        <button key={v} onClick={handleChange(v)}>
+          {v}
+        </button>
+      ))}
     </div>
   );
 }
