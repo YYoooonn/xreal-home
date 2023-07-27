@@ -15,11 +15,14 @@ const pageTabMap = {
   magazine: ["introduction"],
 } as const;
 
-export interface BasePageModal extends ModalProps {
+export interface BasePageModalProps extends ModalProps {
   name: keyof typeof pageTabMap;
 }
 
-export default function BasePageModal({ id, name = "xreal" }: BasePageModal) {
+export default function BasePageModal({
+  id,
+  name = "xreal",
+}: BasePageModalProps) {
   const { close } = useModalControl();
 
   const handleClose = () => {
