@@ -8,7 +8,7 @@ export interface SideNavigatorProps {
 }
 export default function SideNavigator({ tabs }: SideNavigatorProps) {
   const router = useRouter();
-  const currentHash = router.asPath.split("#")[1];
+  const currentHash = router.asPath.split("#")[1] || tabs[0];
 
   return (
     <div className={styles.sideNavigatorContainer}>
