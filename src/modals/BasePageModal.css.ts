@@ -4,8 +4,16 @@ export const pageModalContainer = style({
   display: "flex",
   position: "absolute",
   inset: 0,
-  margin: `${5 * 8}px ${6 * 8}px`,
+  padding: `${5 * 8}px ${6 * 8}px`,
   pointerEvents: "auto",
+  selectors: {
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      inset: 0,
+      pointerEvents: "none",
+    },
+  },
 });
 
 export const pageModalSidebar = style({
