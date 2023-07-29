@@ -7,12 +7,25 @@ import CloseIcon from "@/assets/icons/close";
 import SideNavigator from "./SideNavigator";
 
 import * as styles from "./BasePageModal.css";
+import dynamic from "next/dynamic";
 
 const pageTabMap = {
-  xreal: ["vision", "organization", "curriculum", "press"],
-  events: ["methathon", "xmc"],
-  joinus: ["members", "recruiting", "sponser"],
-  magazine: ["introduction"],
+  xreal: {
+    tabs: ["vision", "organization", "curriculum", "press"],
+    Page: dynamic(() => import("./pages/xreal")),
+  },
+  events: {
+    tabs: ["methathon", "xmc"],
+    Page: dynamic(() => import("./pages/events")),
+  },
+  joinus: {
+    tabs: ["members", "recruiting", "sponser"],
+    Page: dynamic(() => import("./pages/joinus")),
+  },
+  magazine: {
+    tabs: ["introduction"],
+    Page: dynamic(() => import("./pages/magazine")),
+  },
 } as const;
 
 export interface BasePageModalProps extends ModalProps {
@@ -30,13 +43,14 @@ export default function BasePageModal({
   };
 
   const handleScrollup = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const { tabs, Page } = pageTabMap[name];
 
   return (
     <div className={styles.pageModalContainer}>
       <aside className={styles.pageModalSidebar}>
         <div className={styles.breadcrumbContainer}>{`home > ${name}`}</div>
         <div className={styles.veryBigModelIcon}></div>
-        <SideNavigator tabs={pageTabMap[name]} />
+        <SideNavigator tabs={tabs} />
       </aside>
       <div className={styles.pageModalMain}>
         <header className={styles.pageModalHeader}>
@@ -46,7 +60,7 @@ export default function BasePageModal({
         </header>
 
         <main className={styles.pageModalBody}>
-          <h1>Hello World!</h1>
+          <Page />
         </main>
         <footer className={styles.pageModalFooter}>
           <div className={styles.pageModalFooterLinks}>
