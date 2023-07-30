@@ -4,7 +4,7 @@ import { useGLTF, useCursor } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
 import { useState } from "react";
-import useClicked from "@/hooks/useMouse";
+import useFlipped from "@/hooks/useFlipped";
 
 type GLTFButton = GLTF & {
   nodes: {
@@ -24,10 +24,10 @@ hoveredMaterial.side = DoubleSide;
 function Button(props: { position: [x: number, y: number, z: number] }) {
   const { nodes } = useGLTF(urlButton) as GLTFButton;
   // 변수 관리를 위한 zustand
-  const { clicked, setClicked } = useClicked();
+  const { flipped, setFlipped } = useFlipped();
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
-    if (clicked != true) {
-      return setClicked();
+    if (!flipped) {
+      setFlipped();
     }
   };
   // 호버 처리
@@ -38,7 +38,7 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
   });
   // 호버된 경우 + 클릭 되지 않은 경우
   // TODO 클릭된 경우 사라지게 만든 뒤 해당 조건 제거 필요
-  useCursor(hovered && !clicked);
+  useCursor(hovered && !flipped);
   return (
     <animated.group
       scale={scale}

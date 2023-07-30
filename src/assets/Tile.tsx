@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement, useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { Group, Mesh } from "three";
@@ -20,7 +20,7 @@ type IconTileProps = {
   isWhite: boolean;
 };
 
-function Tile({ isWhite }: { isWhite: boolean }) {
+const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
   const { nodes } = useGLTF(urlTile) as GLTFTile;
   return (
     <group rotation-x={isWhite ? Math.PI : 0}>
@@ -36,7 +36,7 @@ function Tile({ isWhite }: { isWhite: boolean }) {
       })}
     </group>
   );
-}
+});
 
 function BlackTile(props: { position: Position }) {
   return (
