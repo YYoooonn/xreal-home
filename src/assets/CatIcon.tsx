@@ -5,21 +5,24 @@ import { Mesh, Group, DoubleSide, MeshStandardMaterial } from "three";
 import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
 
-const urlEvent = "/assets/models/Cat_Event.glb";
-const urlJoinUs = "/assets/models/Cat_JoinUs.glb";
-const urlMagazine = "/assets/models/Cat_Magazine.glb";
-const urlVR = "/assets/models/Cat_VR.glb";
+const urlEvent = "/assets/models/Cate_Event_Model.glb";
+const urlJoinUs = "/assets/models/Cate_Joinus_Model.glb";
+const urlMagazine = "/assets/models/Cate_Magazine_Model.glb";
+const urlVR = "/assets/models/Cate_Project_Model.glb";
+const urlXreal = "/assets/models/Cate_XREAL_Model.glb";
 useGLTF.preload(urlEvent);
 useGLTF.preload(urlJoinUs);
 useGLTF.preload(urlMagazine);
 useGLTF.preload(urlVR);
+useGLTF.preload(urlXreal);
 
 interface CatGLTF extends GLTF {
   nodes: {
-    Event_Group?: Group;
-    VRBody_Object?: Group;
-    JoinUs_Group?: Group;
-    Magazine_Group?: Group;
+    Cate_Event_Model?: Mesh;
+    Cate_Joinus_Model?: Mesh;
+    Cate_Magazine_Model?: Mesh;
+    Cate_Project_Model?: Mesh;
+    Cate_XREAL_Model?: Mesh;
   };
 }
 
@@ -71,22 +74,22 @@ function Icon(props: Icon) {
 }
 
 function MeshIcon({ hovered, gltf }: { hovered: boolean; gltf: CatGLTF }) {
-  const group = gltf.nodes.Event_Group
-    ? gltf.nodes.Event_Group
-    : gltf.nodes.JoinUs_Group
-    ? gltf.nodes.JoinUs_Group
-    : gltf.nodes.Magazine_Group
-    ? gltf.nodes.Magazine_Group
-    : gltf.nodes.VRBody_Object;
+  const mesh = gltf.nodes.Cate_Event_Model
+    ? gltf.nodes.Cate_Event_Model
+    : gltf.nodes.Cate_Joinus_Model
+    ? gltf.nodes.Cate_Joinus_Model
+    : gltf.nodes.Cate_Magazine_Model
+    ? gltf.nodes.Cate_Magazine_Model
+    : gltf.nodes.Cate_Project_Model
+    ? gltf.nodes.Cate_Project_Model
+    : gltf.nodes.Cate_XREAL_Model;
 
   return (
     <group>
-      {group?.children?.map((child, i) => {
-        if (child instanceof Mesh) {
-          const mat = hovered ? hoveredMaterial : child.material;
-          return <mesh key={i} geometry={child.geometry} material={mat} />;
-        }
-      })}
+      <mesh
+        geometry={mesh?.geometry}
+        material={hovered ? hoveredMaterial : mesh?.material}
+      />
     </group>
   );
 }

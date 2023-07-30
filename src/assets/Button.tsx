@@ -8,12 +8,12 @@ import useFlipped from "@/hooks/useFlipped";
 
 type GLTFButton = GLTF & {
   nodes: {
-    VRBody_Object: Group;
+    Cate_XREAL_Model: Mesh;
   };
 };
 
 // TODO 현재 버튼 dummy
-const urlButton = "/assets/models/Cat_VR.glb";
+const urlButton = "/assets/models/Cate_XREAL_Model.glb";
 useGLTF.preload(urlButton);
 
 // TODO 임의로 설정
@@ -51,18 +51,10 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
         setHovered(false);
       }}
     >
-      {nodes.VRBody_Object.children.map((child, i) => {
-        if (child instanceof Mesh) {
-          return (
-            <mesh
-              receiveShadow
-              key={i}
-              geometry={child.geometry}
-              material={hovered ? hoveredMaterial : child.material}
-            />
-          );
-        }
-      })}
+      <mesh
+        geometry={nodes.Cate_XREAL_Model.geometry}
+        material={hovered ? hoveredMaterial : nodes.Cate_XREAL_Model.material}
+      />
     </animated.group>
   );
 }
