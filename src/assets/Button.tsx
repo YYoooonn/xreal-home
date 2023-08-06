@@ -36,6 +36,7 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
     scale: hovered ? 1.2 : 1,
     config: config.wobbly,
   });
+
   // 호버된 경우 + 클릭 되지 않은 경우
   // TODO 클릭된 경우 사라지게 만든 뒤 해당 조건 제거 필요
   useCursor(hovered && !flipped);

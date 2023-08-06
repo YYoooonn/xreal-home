@@ -4,6 +4,9 @@ import { GLTF } from "three-stdlib";
 import { Group, Mesh } from "three";
 import { RotationWrapper } from "../components/spring/RotationWrapper";
 import Button from "./Button";
+import Icon from "./CatIcon";
+import { CAT } from "@/constants/category";
+import { SpringConfig } from "@react-spring/three";
 
 const urlTile = "/assets/models/Tile.glb";
 useGLTF.preload(urlTile);
@@ -18,6 +21,11 @@ type IconTileProps = {
   children: JSX.Element | JSX.Element[];
   position: [x: number, y: number, z: number];
   isWhite: boolean;
+};
+type ItemTileProps = {
+  type: CAT;
+  position: [x: number, y: number, z: number];
+  handler: () => void;
 };
 
 const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
@@ -75,4 +83,22 @@ function ButtonTile() {
   );
 }
 
-export { WhiteTile, BlackTile, ButtonTile };
+function IconTile({ position, type, handler }: ItemTileProps) {
+  return (
+    <IconTileWrapper position={position} isWhite={true}>
+      <Icon
+        type={type}
+        scaleConfig={{ tension: 100, friction: 20 }}
+        scaleRatio={1.1}
+        handler={() => {
+          handler();
+        }}
+        position={[0, -1, 0]}
+      />
+
+      {}
+    </IconTileWrapper>
+  );
+}
+
+export { WhiteTile, BlackTile, ButtonTile, IconTile };

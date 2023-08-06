@@ -53,7 +53,7 @@ function Icon(props: Icon) {
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
   const { scale } = useSpring({
-    scale: hovered ? (props.scaleRatio ? props.scaleRatio : 1.2) : 1,
+    scale: hovered ? (props.scaleRatio ? props.scaleRatio : 1.2) : 0.9,
     config: props.scaleConfig ? props.scaleConfig : config.wobbly,
   });
   return (
