@@ -6,7 +6,9 @@ import { RotationWrapper } from "../components/spring/RotationWrapper";
 import Button from "./Button";
 import Icon from "./CatIcon";
 import { CAT } from "@/constants/category";
-import { SpringConfig } from "@react-spring/three";
+import { SCALE_CONFIG, SCALE_RATIO } from "@/constants/springConfig";
+import { useModalControl } from "@/modals/ModalControlProvider";
+import MainModal from "@/modals/main";
 
 const urlTile = "/assets/models/Tile.glb";
 useGLTF.preload(urlTile);
@@ -14,7 +16,7 @@ useGLTF.preload(urlTile);
 type Position = [x: number, y: number, z: number];
 type GLTFTile = GLTF & {
   nodes: {
-    Cube: Group;
+    Tile: Group;
   };
 };
 type IconTileProps = {
@@ -25,14 +27,14 @@ type IconTileProps = {
 type ItemTileProps = {
   type: CAT;
   position: [x: number, y: number, z: number];
-  handler: () => void;
+  handler?: () => void;
 };
 
 const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
   const { nodes } = useGLTF(urlTile) as GLTFTile;
   return (
     <group rotation-x={isWhite ? Math.PI : 0}>
-      {nodes.Cube.children.map((child, i) => {
+      {nodes.Tile.children.map((child, i) => {
         if (child instanceof Mesh) {
           return (
             <mesh castShadow name="Tile" key={i}>
@@ -75,30 +77,17 @@ const IconTileWrapper = ({
   );
 };
 
-function ButtonTile() {
-  return (
-    <IconTileWrapper position={[0, 0, 0]} isWhite={true}>
-      <Button position={[0, 0.3, 0]} />
-    </IconTileWrapper>
-  );
-}
-
-function IconTile({ position, type, handler }: ItemTileProps) {
+function IconTile({ position, type }: ItemTileProps) {
   return (
     <IconTileWrapper position={position} isWhite={true}>
       <Icon
         type={type}
-        scaleConfig={{ tension: 100, friction: 20 }}
-        scaleRatio={1.1}
-        handler={() => {
-          handler();
-        }}
-        position={[0, -1, 0]}
+        scaleConfig={SCALE_CONFIG}
+        scaleRatio={SCALE_RATIO}
+        position={[0, -0.1, 0]}
       />
-
-      {}
     </IconTileWrapper>
   );
 }
 
-export { WhiteTile, BlackTile, ButtonTile, IconTile };
+export { WhiteTile, BlackTile, IconTile, IconTileWrapper };

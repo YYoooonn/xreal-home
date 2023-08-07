@@ -1,9 +1,11 @@
 import { useGLTF, useCursor } from "@react-three/drei";
 import { useSpring, config, animated, SpringConfig } from "@react-spring/three";
-import { useState } from "react";
-import { Mesh, Group, DoubleSide, MeshStandardMaterial } from "three";
+import React, { useState } from "react";
+import { Mesh, DoubleSide, MeshStandardMaterial } from "three";
 import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
+import { useModalControl } from "@/modals/ModalControlProvider";
+import MainModal from "@/modals/main";
 
 const urlEvent = "/assets/models/Cate_Event_Model.glb";
 const urlJoinUs = "/assets/models/Cate_Joinus_Model.glb";
@@ -40,24 +42,40 @@ hoveredMaterial.color.set("hotpink");
 hoveredMaterial.side = DoubleSide;
 
 function Icon(props: Icon) {
-  const url =
+  const MeshIcon =
     props.type === CAT.Event
-      ? urlEvent
+      ? IconEvent
       : props.type === CAT.JoinUs
-      ? urlJoinUs
+      ? IconJoinUs
       : props.type === CAT.VR
-      ? urlVR
-      : urlMagazine;
-  const gltf = useGLTF(url) as CatGLTF;
+      ? IconVR
+      : props.type === CAT.MAGAZINE
+      ? IconMagazine
+      : IconXreal;
   // TODO: 클릭 state
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
+
+  // icon 마다 다른 모달 반영 필요
+  const { open, addEventListener, removeEventListener } = useModalControl();
+
+  React.useEffect(() => {
+    const handleOpen = () => console.log("modal opened");
+    addEventListener("open", handleOpen);
+    return () => removeEventListener("open", handleOpen);
+  }, []);
+
+  const handler = () => {
+    open(MainModal);
+  };
+
   const { scale } = useSpring({
-    scale: hovered ? (props.scaleRatio ? props.scaleRatio : 1.2) : 0.9,
+    scale: hovered ? (props.scaleRatio ? props.scaleRatio : 1.2) : 1,
     config: props.scaleConfig ? props.scaleConfig : config.wobbly,
   });
   return (
     <animated.group
+      rotation-x={Math.PI}
       position={props.position}
       scale={scale}
       onPointerOver={() => {
@@ -66,32 +84,65 @@ function Icon(props: Icon) {
       onPointerLeave={() => {
         setHovered(false);
       }}
-      onClick={props.handler}
+      onClick={handler}
     >
-      <MeshIcon hovered={hovered} gltf={gltf} />
+      <MeshIcon hovered={hovered} />
     </animated.group>
   );
 }
 
-function MeshIcon({ hovered, gltf }: { hovered: boolean; gltf: CatGLTF }) {
-  const mesh = gltf.nodes.Cate_Event_Model
-    ? gltf.nodes.Cate_Event_Model
-    : gltf.nodes.Cate_Joinus_Model
-    ? gltf.nodes.Cate_Joinus_Model
-    : gltf.nodes.Cate_Magazine_Model
-    ? gltf.nodes.Cate_Magazine_Model
-    : gltf.nodes.Cate_Project_Model
-    ? gltf.nodes.Cate_Project_Model
-    : gltf.nodes.Cate_XREAL_Model;
-
+const IconVR = React.memo(({ hovered }: { hovered: boolean }) => {
+  const { nodes } = useGLTF(urlVR) as CatGLTF;
   return (
-    <group>
-      <mesh
-        geometry={mesh?.geometry}
-        material={hovered ? hoveredMaterial : mesh?.material}
-      />
-    </group>
+    <mesh
+      geometry={nodes.Cate_Project_Model?.geometry}
+      material={hovered ? hoveredMaterial : nodes.Cate_Project_Model?.material}
+    />
   );
-}
+});
+
+const IconEvent = React.memo(({ hovered }: { hovered: boolean }) => {
+  const { nodes } = useGLTF(urlEvent) as CatGLTF;
+  return (
+    <mesh
+      geometry={nodes.Cate_Event_Model?.geometry}
+      material={hovered ? hoveredMaterial : nodes.Cate_Event_Model?.material}
+    />
+  );
+});
+
+const IconJoinUs = React.memo(({ hovered }: { hovered: boolean }) => {
+  const { nodes } = useGLTF(urlJoinUs) as CatGLTF;
+  return (
+    <mesh
+      geometry={nodes.Cate_Joinus_Model?.geometry}
+      material={hovered ? hoveredMaterial : nodes.Cate_Joinus_Model?.material}
+    />
+  );
+});
+
+const IconMagazine = React.memo(({ hovered }: { hovered: boolean }) => {
+  const { nodes } = useGLTF(urlMagazine) as CatGLTF;
+  return (
+    <mesh
+      geometry={nodes.Cate_Magazine_Model?.geometry}
+      material={hovered ? hoveredMaterial : nodes.Cate_Magazine_Model?.material}
+    />
+  );
+});
+
+const IconXreal = React.memo(({ hovered }: { hovered: boolean }) => {
+  const { nodes } = useGLTF(urlXreal) as CatGLTF;
+  // transparent true로 변경, 알파맵 적용을 위함
+  if (nodes.Cate_XREAL_Model?.material instanceof MeshStandardMaterial) {
+    nodes.Cate_XREAL_Model?.material.setValues({ transparent: true });
+  }
+  return (
+    <mesh
+      geometry={nodes.Cate_XREAL_Model?.geometry}
+      material={nodes.Cate_XREAL_Model?.material}
+    />
+  );
+});
 
 export default Icon;

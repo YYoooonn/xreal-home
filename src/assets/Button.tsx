@@ -1,19 +1,18 @@
-import { config, animated, useSpring } from "@react-spring/three";
-import { Mesh, MeshStandardMaterial, Group, DoubleSide } from "three";
+import { config, animated, useSpring, Globals } from "@react-spring/three";
+import { Mesh, MeshStandardMaterial, DoubleSide } from "three";
 import { useGLTF, useCursor } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
-import { useState } from "react";
+import React from "react";
 import useFlipped from "@/hooks/useFlipped";
 
 type GLTFButton = GLTF & {
   nodes: {
-    Cate_XREAL_Model: Mesh;
+    StartButton: Mesh;
   };
 };
 
-// TODO 현재 버튼 dummy
-const urlButton = "/assets/models/Cate_XREAL_Model.glb";
+const urlButton = "/assets/models/Main_StartButton_Model.glb";
 useGLTF.preload(urlButton);
 
 // TODO 임의로 설정
@@ -31,7 +30,7 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
     }
   };
   // 호버 처리
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = React.useState(false);
   const { scale } = useSpring({
     scale: hovered ? 1.2 : 1,
     config: config.wobbly,
@@ -53,8 +52,8 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
       }}
     >
       <mesh
-        geometry={nodes.Cate_XREAL_Model.geometry}
-        material={hovered ? hoveredMaterial : nodes.Cate_XREAL_Model.material}
+        geometry={nodes.StartButton.geometry}
+        material={hovered ? hoveredMaterial : nodes.StartButton.material}
       />
     </animated.group>
   );

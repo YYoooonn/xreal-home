@@ -13,7 +13,7 @@ export default function Main() {
     <div className="canvas">
       <Canvas shadows frameloop="demand">
         <color attach="background" args={["#000000"]} />
-        <ambientLight intensity={0.05} />
+        <ambientLight intensity={1} />
         <Floor />
         <OrthographicCamera
           makeDefault
