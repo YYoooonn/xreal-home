@@ -1,14 +1,11 @@
-import React, { ReactElement, useMemo } from "react";
+import React, { ReactElement } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { Group, Mesh } from "three";
 import { RotationWrapper } from "../components/spring/RotationWrapper";
-import Button from "./Button";
 import Icon from "./CatIcon";
 import { CAT } from "@/constants/category";
 import { SCALE_CONFIG, SCALE_RATIO } from "@/constants/springConfig";
-import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/main";
 
 const urlTile = "/assets/models/Tile.glb";
 useGLTF.preload(urlTile);

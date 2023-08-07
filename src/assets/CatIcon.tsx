@@ -6,6 +6,7 @@ import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
 import { useModalControl } from "@/modals/ModalControlProvider";
 import MainModal from "@/modals/main";
+import useFlipped from "@/hooks/useFlipped";
 
 const urlEvent = "/assets/models/Cate_Event_Model.glb";
 const urlJoinUs = "/assets/models/Cate_Joinus_Model.glb";
@@ -52,9 +53,12 @@ function Icon(props: Icon) {
       : props.type === CAT.MAGAZINE
       ? IconMagazine
       : IconXreal;
-  // TODO: 클릭 state
+
+  const { flipped } = useFlipped();
+
+  // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
-  useCursor(hovered);
+  useCursor(hovered && flipped);
 
   // icon 마다 다른 모달 반영 필요
   const { open, addEventListener, removeEventListener } = useModalControl();
@@ -65,9 +69,14 @@ function Icon(props: Icon) {
     return () => removeEventListener("open", handleOpen);
   }, []);
 
-  const handler = () => {
-    open(MainModal);
-  };
+  // 뒤집힌 경우에만 클릭 가능하도록
+  const handler = flipped
+    ? () => {
+        open(MainModal);
+      }
+    : () => {
+        console.log("not flipped yet");
+      };
 
   const { scale } = useSpring({
     scale: hovered ? (props.scaleRatio ? props.scaleRatio : 1.2) : 1,
