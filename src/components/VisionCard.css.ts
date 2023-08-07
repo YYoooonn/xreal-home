@@ -1,0 +1,23 @@
+import { style } from "@vanilla-extract/css";
+
+export const container = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  gap: "24px",
+  padding: "0px 24px",
+});
+
+export const imageContainer = style({
+  width: "240px",
+  height: "240px",
+  borderRadius: "24px",
+  position: "relative",
+});
+
+export const nameLabel = style({
+  fontWeight: "bold",
+  fontSize: "24px",
+  lineHeight: "28px",
+});

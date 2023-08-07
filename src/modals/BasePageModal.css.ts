@@ -49,6 +49,7 @@ export const pageModalMain = style({
   borderRadius: "0 33px 33px 0",
   display: "flex",
   flexDirection: "column",
+  overflowY: "auto",
 });
 
 export const pageModalHeader = style({
@@ -65,6 +66,7 @@ export const pageModalBody = style({
 export const pageModalFooter = style({
   display: "flex",
   justifyContent: "space-between",
+  marginTop: "64px",
 });
 
 export const pageModalFooterLinks = style({

@@ -58,7 +58,6 @@ export default function BasePageModal({
             <CloseIcon />
           </IconButton>
         </header>
-
         <main className={styles.pageModalBody}>
           <Page />
         </main>
