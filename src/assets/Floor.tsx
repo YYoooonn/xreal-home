@@ -1,5 +1,10 @@
 import { Globals } from "@react-spring/three";
-import { BlackTile, WhiteTile, ButtonTile } from "./Tile";
+import { BlackTile, WhiteTile, ButtonTile, IconTile } from "./Tile";
+import { SpringConfig } from "@react-spring/three";
+import { CAT } from "@/constants/category";
+import { useModalControl } from "@/modals/ModalControlProvider";
+import MainModal from "@/modals/main";
+import React from "react";
 
 Globals.assign({ frameLoop: "always" });
 /* TODO
@@ -71,7 +76,6 @@ function WhiteTiles() {
   // -2 ~ 2 까지는 임의로 설정
   return (
     <group>
-      <WhiteTile position={[-2, 0, 2]} />
       <WhiteTile position={[-2, 0, -2]} />
       <WhiteTile position={[-1, 0, 1]} />
       <WhiteTile position={[-1, 0, 0]} />
@@ -83,12 +87,45 @@ function WhiteTiles() {
   );
 }
 
+function IconTiles() {
+  return (
+    <group>
+      <IconTile
+        position={[-2, 0, 2]}
+        type={CAT.Event}
+        handler={() => console.log("Event1 clicked!")}
+      />
+      <IconTile
+        position={[2, 0, 2]}
+        type={CAT.JoinUs}
+        handler={() => console.log("JoinUs1 clicked!")}
+      />
+      <IconTile
+        position={[2, 0, -2]}
+        type={CAT.Event}
+        handler={() => console.log("Event2 clicked!")}
+      />
+      <IconTile
+        position={[-2, 0, -2]}
+        type={CAT.JoinUs}
+        handler={() => console.log("JoinUs2 clicked!")}
+      />
+      <IconTile
+        position={[0, 0, 0]}
+        type={CAT.VR}
+        handler={() => console.log("VR clicked!")}
+      />
+    </group>
+  );
+}
+
 function Floor() {
   return (
     <>
       <BlackTiles />
       <ButtonTile />
       <WhiteTiles />
+      <IconTiles />
     </>
   );
 }

@@ -1,9 +1,14 @@
+import GoogleAnalytics from "@/lib/GoogleAnalytics";
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
+      </Head>
       <body>
         <Main />
         <NextScript />
