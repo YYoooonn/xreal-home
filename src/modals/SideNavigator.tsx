@@ -15,7 +15,7 @@ export default function SideNavigator({ tabs }: SideNavigatorProps) {
 
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLDivElement>(
-      "section[data-modal-section]"
+      "section[data-modal-section] > h2"
     );
     const anchorPoints = [] as number[];
     sections.forEach((section) => {
