@@ -19,7 +19,7 @@ export const pressListContainer = style({
   display: "flex",
   flexDirection: "column",
   gap: "16px",
-  padding: "0 120px",
+  margin: "0 auto",
 });
 
 const title = style({
