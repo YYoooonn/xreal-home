@@ -42,7 +42,10 @@ export default function BasePageModal({
     close(id);
   };
 
-  const handleScrollup = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleScrollup = () =>
+    document
+      .getElementById("page-modal")
+      ?.scrollTo({ top: 0, behavior: "smooth" });
   const { tabs, Page } = pageTabMap[name];
 
   return (
