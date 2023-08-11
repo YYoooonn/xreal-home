@@ -111,7 +111,7 @@ export default function XrealPage() {
             <PressCard
               title={title}
               description={description}
-              thumbnailSrc=""
+              thumbnailSrc="/assets/images/dummyImage.png"
             />
           ))}
         </div>
