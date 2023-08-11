@@ -1,11 +1,11 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 
 export const pageModalContainer = style({
-  display: "flex",
-  position: "absolute",
+  position: "fixed",
   inset: 0,
-  padding: `${5 * 8}px ${6 * 8}px`,
+  padding: `40px ${6 * 8}px`,
   pointerEvents: "auto",
+  overflowY: "auto",
   selectors: {
     "&::before": {
       content: "''",
@@ -16,13 +16,21 @@ export const pageModalContainer = style({
   },
 });
 
+export const pageModalInWrapper = style({
+  display: "flex",
+});
+
 export const pageModalSidebar = style({
   width: "300px",
-  height: "100%",
   padding: 3 * 8,
   backdropFilter: "blur(10px)",
   backgroundColor: "rgba(100%, 100%, 100%, 48%)",
   borderRadius: "33px 0 0 33px",
+});
+
+export const pageModalSidebarInWrapper = style({
+  position: "sticky",
+  inset: 0,
   display: "flex",
   flexDirection: "column",
   gap: 150 + 2 * 6 * 8,
@@ -65,6 +73,7 @@ export const pageModalBody = style({
 export const pageModalFooter = style({
   display: "flex",
   justifyContent: "space-between",
+  marginTop: "64px",
 });
 
 export const pageModalFooterLinks = style({
@@ -84,6 +93,9 @@ globalStyle(`${pageModalFooterLinks} a`, {
 });
 
 export const pageModalFooterScrollUpButton = style({
+  position: "fixed",
+  right: "95px",
+  bottom: "80px",
   background: "lightgray",
   padding: 10,
 });
