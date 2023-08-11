@@ -57,6 +57,7 @@ export const pageModalMain = style({
   borderRadius: "0 33px 33px 0",
   display: "flex",
   flexDirection: "column",
+  overflowY: "auto",
 });
 
 export const pageModalHeader = style({
