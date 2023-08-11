@@ -21,7 +21,7 @@ export default function PressCard({
       </div>
 
       <div className={styles.imageContainer}>
-        <Image src={thumbnailSrc} alt="thumbnail image" fill sizes="100vw" />
+        <Image src={thumbnailSrc} alt="thumbnail image" fill sizes="25vw" />
       </div>
     </article>
   );

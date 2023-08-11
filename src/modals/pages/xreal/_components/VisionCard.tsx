@@ -17,7 +17,7 @@ export default function VisionCard({
   return (
     <article className={styles.container + " " + className} {...props}>
       <div className={styles.imageContainer}>
-        <Image src={image} alt="icon" fill sizes="100vw" />
+        <Image src={image} alt="icon" fill sizes="240px" />
       </div>
       <p className={styles.nameLabel}>{name}</p>
       <p className={styles.description}>{description}</p>
