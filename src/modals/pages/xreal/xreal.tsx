@@ -107,8 +107,9 @@ export default function XrealPage() {
         <h2 className={styles.paragraph.title}>Press</h2>
         <h3 className={styles.paragraph.subTitle}>XREAL 기사</h3>
         <div className={styles.pressListContainer}>
-          {dummyPress.map(({ title, description }) => (
+          {dummyPress.map(({ title, description }, i) => (
             <PressCard
+              key={i}
               title={title}
               description={description}
               thumbnailSrc="/assets/images/dummyImage.png"
