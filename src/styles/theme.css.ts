@@ -1,18 +1,33 @@
-import { createTheme } from "@vanilla-extract/css";
+import { createGlobalTheme, globalStyle } from "@vanilla-extract/css";
+import color from "./palettes.json";
+import textStyle from "./textStyles.json";
 
-export const [themeClass, vars] = createTheme({
-  color: {
-    gray0: "#FFFFFF",
-    gray1: "#F3F3F3",
-    gray2: "#E9E9E9",
-    gray3: "#A6A6A6",
-    gray4: "#787878",
-    gray5: "#575757",
-    red: "#FF5353",
-    green: "#00FA77",
-    purple: "#9747FF",
-  },
-  font: {
-    body: "arial",
-  },
+export const theme = createGlobalTheme(":root", {
+  color,
+  textStyle,
+});
+
+const fontFamily = [
+  '"Pretendard Variable"',
+  "Pretendard",
+  "-apple-system",
+  "BlinkMacSystemFont",
+  "system-ui",
+  "Roboto",
+  '"Helvetica Neue"',
+  '"Segoe UI"',
+  '"Apple SD Gothic Neo"',
+  '"Noto Sans KR"',
+  '"Malgun Gothic"',
+  '"Apple Color Emoji"',
+  '"Segoe UI Emoji"',
+  '"Segoe UI Symbol"',
+  "sans-serif",
+].join(",");
+globalStyle("*", {
+  margin: 0,
+  fontFamily,
+  letterSpacing: "0",
+  textDecoration: "none",
+  textTransform: "none",
 });
