@@ -1,3 +1,4 @@
+import { inter_plex_sans, pretendard_variable } from "@/assets/fonts";
 import NoSSR from "@/components/NoSSR";
 import React from "react";
 import { createPortal } from "react-dom";
@@ -16,7 +17,10 @@ export interface ModalProps {
 
 function ModalRenderer({ modals }: { modals: Record<number, JSX.Element> }) {
   return createPortal(
-    <div id="modals">
+    <div
+      id="modals"
+      className={`${inter_plex_sans.variable} ${pretendard_variable.variable}`}
+    >
       {Object.entries(modals).map(([id, elem]) => (
         <React.Fragment key={id}>{elem}</React.Fragment>
       ))}
