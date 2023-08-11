@@ -1,6 +1,7 @@
 import { globalStyle } from "@vanilla-extract/css";
 
 globalStyle("*", {
+  fontFamily: "var(--font-pretendard-variable)",
   boxSizing: "border-box",
   padding: 0,
   margin: 0,
