@@ -46,7 +46,7 @@ export default function BasePageModal({
   const { tabs, Page } = pageTabMap[name];
 
   return (
-    <div className={styles.pageModalContainer}>
+    <div id="page-modal" className={styles.pageModalContainer}>
       <div className={styles.pageModalInWrapper}>
         <aside className={styles.pageModalSidebar}>
           <div className={styles.pageModalSidebarInWrapper}>

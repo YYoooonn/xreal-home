@@ -22,3 +22,8 @@ export const sideNavigatorIndicator = style({
 export const sideNavigatorActivedTab = style({
   fontWeight: "bold",
 });
+
+export const sideNavigatorTab = style({
+  all: "unset",
+  cursor: "pointer",
+});

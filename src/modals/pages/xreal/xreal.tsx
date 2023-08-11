@@ -12,7 +12,7 @@ const dummyPress = Array<{ title: string; description: string }>(10).fill({
 export default function XrealPage() {
   return (
     <div className={styles.pageContainer}>
-      <section>
+      <section data-modal-section>
         <h2 className={styles.paragraph.title}>Vision</h2>
         <h3 className={styles.paragraph.subTitle}>XREAL Mission (3-X)</h3>
         <p className={styles.paragraph.description}>
@@ -39,7 +39,7 @@ export default function XrealPage() {
           />
         </div>
       </section>
-      <section>
+      <section data-modal-section>
         <h2 className={styles.paragraph.title}>Organization</h2>
         <h3 className={styles.paragraph.subTitle}>XREAL 조직 소개</h3>
         <p className={styles.paragraph.description}>
@@ -55,7 +55,7 @@ export default function XrealPage() {
           section for flowchart
         </section>
       </section>
-      <section>
+      <section data-modal-section>
         <h2 className={styles.paragraph.title}>Curriculum</h2>
         <h3 className={styles.paragraph.subTitle}>XREAL 커리큘럼</h3>
         <p className={styles.paragraph.description}>
@@ -103,7 +103,7 @@ export default function XrealPage() {
           />
         </div>
       </section>
-      <section>
+      <section data-modal-section>
         <h2 className={styles.paragraph.title}>Press</h2>
         <h3 className={styles.paragraph.subTitle}>XREAL 기사</h3>
         <div className={styles.pressListContainer}>
