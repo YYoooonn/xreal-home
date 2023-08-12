@@ -10,6 +10,8 @@ import {
   organizationEdges,
   organizationNodes,
 } from "./_data/flowchartNodeEdges";
+import { useSideNav } from "@/components/SideNavProvider";
+import { useEffect } from "react";
 
 const dummyPress = Array<{ title: string; description: string }>(10).fill({
   title:
@@ -19,6 +21,9 @@ const dummyPress = Array<{ title: string; description: string }>(10).fill({
 });
 
 export default function XrealPage() {
+  const { collectData } = useSideNav();
+  useEffect(collectData, []);
+
   return (
     <div className={styles.pageContainer}>
       <section data-modal-section>
