@@ -6,12 +6,15 @@ export const container = style({
   flexWrap: "wrap",
   borderRadius: "10px",
   gap: "8px",
+  width: "100%",
+  maxWidth: "960px",
+  margin: "0 auto",
 });
 
 export const bodyContainer = style({
   flex: 1,
   width: "60%",
-  minWidth: "35ch",
+  minWidth: "min(100%, 35ch)",
 });
 
 export const title = style({
@@ -26,6 +29,8 @@ export const title = style({
 
 export const description = style({
   display: "-webkit-box",
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
   WebkitLineClamp: 4,
   ...theme.textStyle.body2,
 });
@@ -33,7 +38,7 @@ export const description = style({
 export const imageContainer = style({
   flex: 1,
   position: "relative",
-  minWidth: "200px",
+  minWidth: "min(100%, 200px)",
   height: "120px",
   backgroundColor: theme.color.gray2,
 });
