@@ -16,7 +16,7 @@ const pageTabMap = {
     Page: dynamic(() => import("./pages/xreal/xreal")),
   },
   events: {
-    tabs: ["methathon", "xmc"],
+    tabs: ["methathon", "xmc", "activity"],
     Page: dynamic(() => import("./pages/events")),
   },
   joinus: {

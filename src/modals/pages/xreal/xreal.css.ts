@@ -1,12 +1,7 @@
 import { theme } from "@/styles/theme.css";
 import { globalStyle, style } from "@vanilla-extract/css";
 
-export const pageContainer = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: "64px",
-});
-
+export * from "../_internal.css";
 export const visionList = style({
   marginTop: "40px",
   display: "flex",
@@ -21,27 +16,6 @@ export const pressListContainer = style({
   gap: "16px",
   margin: "0 auto",
 });
-
-const title = style({
-  ...theme.textStyle.heading3,
-});
-
-const subTitle = style({
-  ...theme.textStyle.subtitle1,
-  marginTop: 8,
-  marginBottom: 16,
-});
-
-const description = style({
-  ...theme.textStyle.body1,
-  maxWidth: "85ch",
-});
-
-export const paragraph = {
-  title,
-  subTitle,
-  description,
-};
 
 const rootNode = style({
   fontWeight: 700,
