@@ -1,6 +1,91 @@
 import PressCard from "./_components/PressCard";
 import VisionCard from "./_components/VisionCard";
+import ReactFlow, { Edge, MarkerType, Node } from "reactflow";
 import * as styles from "./xreal.css";
+import "reactflow/dist/base.css";
+
+const NODE_WIDTH = 135;
+const NODE_GAB = 60;
+
+const obj = {
+  운영진: ["회장단", "각_그룹_총괄/부총괄", "운영지원팀_팀장", "운영_위원"],
+  운영지원팀: [
+    "Research_운영팀",
+    "Design_운영팀",
+    "Dev_운영팀",
+    "Branding팀",
+    "Magazine팀",
+  ],
+  학회원: ["시니어", "주니어"],
+};
+const longestNodeLength = Math.max(...Object.values(obj).map((n) => n.length));
+const addGroup = (
+  groupName: string,
+  children: string[],
+  index: number
+): Node[] => {
+  const calCenterX = (nodeCount: number) =>
+    (NODE_WIDTH + NODE_GAB) * nodeCount - NODE_GAB + 30 * 2;
+  const parent = {
+    id: groupName + "G",
+    type: "group",
+    data: { label: "" },
+    position: {
+      x: (calCenterX(longestNodeLength) - calCenterX(children.length)) / 2,
+      y: (150 + 24 + 25) * index,
+    },
+    style: {
+      width: calCenterX(children.length),
+    },
+    className: "react-flow-group-node",
+    draggable: false,
+    selectable: false,
+  };
+  const groupRootNode: Node = {
+    id: groupName,
+    parentNode: groupName + "G",
+    data: { label: groupName },
+    position: {
+      x: parent.style.width / 2 - NODE_WIDTH / 2,
+      y: -25,
+    },
+    className: "react-flow-root-node",
+    draggable: false,
+    selectable: false,
+  };
+  const childNodes = children.map((child, i) => ({
+    id: child,
+    parentNode: groupName + "G",
+    data: { label: child },
+    position: {
+      x: 30 + (NODE_WIDTH + NODE_GAB) * i,
+      y: 75,
+    },
+    className: "react-flow-child-node",
+  }));
+
+  return [parent, groupRootNode, ...childNodes];
+};
+
+const nodes = Object.entries(obj)
+  .map(([group, nodes], i) => addGroup(group, nodes, i))
+  .flat();
+
+const edges = Object.entries(obj)
+  .map(([group, nodes]) =>
+    nodes.map<Edge>((node) => ({
+      id: `${group}-${node}`,
+      source: group,
+      target: node,
+      type: "smoothstep",
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        strokeWidth: 1.7,
+      },
+      borderRadius: "8px",
+    }))
+  )
+  .flat() as Edge[];
 
 const dummyPress = Array<{ title: string; description: string }>(10).fill({
   title:
@@ -52,7 +137,13 @@ export default function XrealPage() {
           학습에 참여합니다.
         </p>
         <section style={{ width: "1215px", height: "551px" }}>
-          section for flowchart
+          <ReactFlow
+            fitView
+            zoomOnScroll={false}
+            zoomOnDoubleClick={false}
+            nodes={nodes}
+            edges={edges}
+          />
         </section>
       </section>
       <section data-modal-section>
