@@ -3,7 +3,6 @@ import { BlackTile, WhiteTile, IconTile, IconTileWrapper } from "./Tile";
 import { SCALE_CONFIG, SCALE_RATIO } from "@/constants/springConfig";
 import { CAT } from "@/constants/category";
 import Icon from "./CatIcon";
-import React from "react";
 import Button from "./Button";
 
 Globals.assign({ frameLoop: "always" });
@@ -84,17 +83,6 @@ function WhiteTiles() {
   );
 }
 
-function IconTiles() {
-  return (
-    <group>
-      <IconTile position={[-2, 0, 2]} type={CAT.Event} />
-      <IconTile position={[2, 0, 2]} type={CAT.JoinUs} />
-      <IconTile position={[2, 0, -2]} type={CAT.MAGAZINE} />
-      <IconTile position={[-2, 0, -2]} type={CAT.VR} />
-    </group>
-  );
-}
-
 function ButtonTile() {
   return (
     <IconTileWrapper position={[0, 0, 0]} isWhite={true}>
@@ -102,19 +90,35 @@ function ButtonTile() {
         type={CAT.Xreal}
         scaleConfig={SCALE_CONFIG}
         scaleRatio={SCALE_RATIO}
-        position={[0, -0.1, 0]}
+        position={[0, 0.1, 0]}
       />
-      <Button position={[0, 0.3, 0]} />
+      <Button position={[0, 0, 0]} />
     </IconTileWrapper>
   );
 }
 
-function Floor() {
+function IconTiles(props: { cat?: boolean }) {
+  const Center = props.cat ? (
+    <IconTile position={[0, 0, 0]} type={CAT.Xreal} />
+  ) : (
+    <ButtonTile />
+  );
+  return (
+    <group>
+      <IconTile position={[-2, 0, 2]} type={CAT.VR} />
+      <IconTile position={[2, 0, 2]} type={CAT.Event} />
+      <IconTile position={[2, 0, -2]} type={CAT.JoinUs} />
+      <IconTile position={[-2, 0, -2]} type={CAT.MAGAZINE} />
+      {Center}
+    </group>
+  );
+}
+
+function Floor(props: { cat?: boolean }) {
   return (
     <>
       <BlackTiles />
-      <ButtonTile />
-      <IconTiles />
+      <IconTiles {...props} />
       <WhiteTiles />
     </>
   );

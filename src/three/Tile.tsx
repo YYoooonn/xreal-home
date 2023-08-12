@@ -61,15 +61,11 @@ function WhiteTile(props: { position: Position }) {
   );
 }
 
-const IconTileWrapper = ({
-  children,
-  position,
-  isWhite,
-}: IconTileProps): ReactElement => {
+const IconTileWrapper = (props: IconTileProps): ReactElement => {
   return (
-    <RotationWrapper position={position}>
-      <>{children}</>
-      <Tile isWhite={isWhite} />
+    <RotationWrapper position={props.position} isIcon={true}>
+      <>{props.children}</>
+      <Tile isWhite={props.isWhite} />
     </RotationWrapper>
   );
 };
@@ -81,7 +77,7 @@ function IconTile({ position, type }: ItemTileProps) {
         type={type}
         scaleConfig={SCALE_CONFIG}
         scaleRatio={SCALE_RATIO}
-        position={[0, -0.1, 0]}
+        position={[0, 0.1, 0]}
       />
     </IconTileWrapper>
   );

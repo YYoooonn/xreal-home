@@ -1,7 +1,12 @@
-import { useGLTF, useCursor } from "@react-three/drei";
+import { useGLTF, useCursor, Text } from "@react-three/drei";
 import { useSpring, config, animated, SpringConfig } from "@react-spring/three";
 import React, { useState } from "react";
-import { Mesh, DoubleSide, MeshStandardMaterial } from "three";
+import {
+  Mesh,
+  DoubleSide,
+  MeshStandardMaterial,
+  MeshNormalMaterial,
+} from "three";
 import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
 import { useModalControl } from "@/modals/ModalControlProvider";
@@ -31,7 +36,7 @@ interface CatGLTF extends GLTF {
 
 type Icon = {
   type: CAT;
-  position: [number, number, number];
+  position: [x: number, y: number, z: number];
   scaleConfig?: SpringConfig;
   scaleRatio?: number;
   handler?: () => void;
@@ -42,17 +47,19 @@ const hoveredMaterial = new MeshStandardMaterial();
 hoveredMaterial.color.set("hotpink");
 hoveredMaterial.side = DoubleSide;
 
+const textMat = new MeshNormalMaterial();
+
 function Icon(props: Icon) {
-  const MeshIcon =
+  const { name, MeshIcon } =
     props.type === CAT.Event
-      ? IconEvent
+      ? { name: "Event", MeshIcon: IconEvent }
       : props.type === CAT.JoinUs
-      ? IconJoinUs
+      ? { name: "Join Us", MeshIcon: IconJoinUs }
       : props.type === CAT.VR
-      ? IconVR
+      ? { name: "Projects", MeshIcon: IconVR }
       : props.type === CAT.MAGAZINE
-      ? IconMagazine
-      : IconXreal;
+      ? { name: "Magazine", MeshIcon: IconMagazine }
+      : { name: "XREAL", MeshIcon: IconXreal };
 
   const { flipped } = useFlipped();
 
@@ -79,26 +86,54 @@ function Icon(props: Icon) {
       };
 
   const { scale } = useSpring({
-    scale: hovered ? (props.scaleRatio ? props.scaleRatio : 1.2) : 1,
+    scale: !flipped
+      ? 0
+      : hovered
+      ? props.scaleRatio
+        ? props.scaleRatio
+        : 1.2
+      : 1,
     config: props.scaleConfig ? props.scaleConfig : config.wobbly,
   });
   return (
-    <animated.group
-      rotation-x={Math.PI}
-      position={props.position}
-      scale={scale}
-      onPointerOver={() => {
-        setHovered(true);
-      }}
-      onPointerLeave={() => {
-        setHovered(false);
-      }}
-      onClick={handler}
-    >
-      <MeshIcon hovered={hovered} />
-    </animated.group>
+    <group rotation-x={Math.PI}>
+      <animated.group
+        position={props.position}
+        scale={scale}
+        onPointerOver={() => {
+          setHovered(true);
+        }}
+        onPointerLeave={() => {
+          setHovered(false);
+        }}
+        onClick={handler}
+      >
+        <MeshIcon hovered={hovered} />
+      </animated.group>
+      <CatText name={name} position={props.position} />
+    </group>
   );
 }
+
+const CatText = React.memo(
+  (props: { name: string; position: [x: number, y: number, z: number] }) => {
+    // XXX TextTile같은 식으로 이동해야 하나?
+    return (
+      <Text
+        color={"#FFFFFF"}
+        position={[props.position[0] + 0.5, 0.1, props.position[2] + 0.6]}
+        fontSize={0.2}
+        rotation-x={Math.PI / 2}
+        rotation-z={Math.PI}
+        rotation-y={Math.PI}
+        anchorX={"right"}
+        anchorY={"top"}
+        material={textMat}
+        children={props.name}
+      />
+    );
+  }
+);
 
 const IconVR = React.memo(({ hovered }: { hovered: boolean }) => {
   const { nodes } = useGLTF(urlVR) as CatGLTF;
