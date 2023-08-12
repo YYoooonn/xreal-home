@@ -1,14 +1,13 @@
 import { Edge, MarkerType, Node } from "reactflow";
 import "reactflow/dist/base.css";
-import {
-  organizationDataset,
-  curriculumDataset,
-} from "./flowchartDataset.json";
+import flowchartDataset from "./flowchartDataset.json";
 import { reactflow } from "../xreal.css";
+import CurriculumEdge from "../_components/CurriculumEdge";
 
 const NODE_WIDTH = 135;
 const NODE_GAB = 60;
 
+const { organizationDataset, curriculumDataset } = flowchartDataset;
 const longestNodeLength = Math.max(
   ...Object.values(organizationDataset).map((n) => n.length)
 );
@@ -59,6 +58,8 @@ const addGroup = (
 
   return [parent, groupRootNode, ...childNodes];
 };
+
+const curriculumEdgeType = { "start-end": CurriculumEdge };
 
 const organizationNodes = Object.entries(organizationDataset)
   .map(([group, nodes], i) => addGroup(group, nodes, i))
@@ -117,6 +118,7 @@ const curriculumEdges: Edge[] = (
 export {
   curriculumEdges,
   curriculumNodes,
+  curriculumEdgeType,
   organizationEdges,
   organizationNodes,
 };

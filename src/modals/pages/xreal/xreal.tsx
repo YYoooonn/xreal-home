@@ -3,10 +3,10 @@ import VisionCard from "./_components/VisionCard";
 import ReactFlow from "reactflow";
 import * as styles from "./xreal.css";
 import "reactflow/dist/base.css";
-import CurriculumEdge from "./_components/CurriculumEdge";
 import {
   curriculumEdges,
   curriculumNodes,
+  curriculumEdgeType,
   organizationEdges,
   organizationNodes,
 } from "./_data/flowchartNodeEdges";
@@ -96,7 +96,7 @@ export default function XrealPage() {
             zoomOnDoubleClick={false}
             nodes={curriculumNodes}
             edges={curriculumEdges}
-            edgeTypes={{ "start-end": CurriculumEdge }}
+            edgeTypes={curriculumEdgeType}
           />
         </section>
         <div className={styles.visionList}>
