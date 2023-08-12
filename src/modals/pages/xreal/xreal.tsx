@@ -1,91 +1,15 @@
 import PressCard from "./_components/PressCard";
 import VisionCard from "./_components/VisionCard";
-import ReactFlow, { Edge, MarkerType, Node } from "reactflow";
+import ReactFlow from "reactflow";
 import * as styles from "./xreal.css";
 import "reactflow/dist/base.css";
-
-const NODE_WIDTH = 135;
-const NODE_GAB = 60;
-
-const obj = {
-  운영진: ["회장단", "각_그룹_총괄/부총괄", "운영지원팀_팀장", "운영_위원"],
-  운영지원팀: [
-    "Research_운영팀",
-    "Design_운영팀",
-    "Dev_운영팀",
-    "Branding팀",
-    "Magazine팀",
-  ],
-  학회원: ["시니어", "주니어"],
-};
-const longestNodeLength = Math.max(...Object.values(obj).map((n) => n.length));
-const addGroup = (
-  groupName: string,
-  children: string[],
-  index: number
-): Node[] => {
-  const calCenterX = (nodeCount: number) =>
-    (NODE_WIDTH + NODE_GAB) * nodeCount - NODE_GAB + 30 * 2;
-  const parent = {
-    id: groupName + "G",
-    type: "group",
-    data: { label: "" },
-    position: {
-      x: (calCenterX(longestNodeLength) - calCenterX(children.length)) / 2,
-      y: (150 + 24 + 25) * index,
-    },
-    style: {
-      width: calCenterX(children.length),
-    },
-    className: "react-flow-group-node",
-    draggable: false,
-    selectable: false,
-  };
-  const groupRootNode: Node = {
-    id: groupName,
-    parentNode: groupName + "G",
-    data: { label: groupName },
-    position: {
-      x: parent.style.width / 2 - NODE_WIDTH / 2,
-      y: -25,
-    },
-    className: "react-flow-root-node",
-    draggable: false,
-    selectable: false,
-  };
-  const childNodes = children.map((child, i) => ({
-    id: child,
-    parentNode: groupName + "G",
-    data: { label: child },
-    position: {
-      x: 30 + (NODE_WIDTH + NODE_GAB) * i,
-      y: 75,
-    },
-    className: "react-flow-child-node",
-  }));
-
-  return [parent, groupRootNode, ...childNodes];
-};
-
-const nodes = Object.entries(obj)
-  .map(([group, nodes], i) => addGroup(group, nodes, i))
-  .flat();
-
-const edges = Object.entries(obj)
-  .map(([group, nodes]) =>
-    nodes.map<Edge>((node) => ({
-      id: `${group}-${node}`,
-      source: group,
-      target: node,
-      type: "smoothstep",
-      markerEnd: {
-        type: MarkerType.ArrowClosed,
-        strokeWidth: 1.7,
-      },
-      borderRadius: "8px",
-    }))
-  )
-  .flat() as Edge[];
+import CurriculumEdge from "./_components/CurriculumEdge";
+import {
+  curriculumEdges,
+  curriculumNodes,
+  organizationEdges,
+  organizationNodes,
+} from "./_data/flowchartNodeEdges";
 
 const dummyPress = Array<{ title: string; description: string }>(10).fill({
   title:
@@ -136,13 +60,14 @@ export default function XrealPage() {
           성장하고, 시니어 학기에는 세 그룹이 다함께 프로젝트를 진행하는 심화
           학습에 참여합니다.
         </p>
-        <section style={{ width: "1215px", height: "551px" }}>
+        <section style={{ margin: "32px 0", width: "100%", height: "551px" }}>
           <ReactFlow
             fitView
+            preventScrolling={false}
             zoomOnScroll={false}
             zoomOnDoubleClick={false}
-            nodes={nodes}
-            edges={edges}
+            nodes={organizationNodes}
+            edges={organizationEdges}
           />
         </section>
       </section>
@@ -163,8 +88,16 @@ export default function XrealPage() {
           전달하고 학회 외부와 소통하기 위해 다양한 채널을 만들어 콘텐츠를
           제작하고 있습니다.
         </p>
-        <section style={{ width: "1173px", height: "222px" }}>
-          section for flowchart
+        <section style={{ margin: "32px 0", width: "100%", height: "222px" }}>
+          <ReactFlow
+            fitView
+            preventScrolling={false}
+            zoomOnScroll={false}
+            zoomOnDoubleClick={false}
+            nodes={curriculumNodes}
+            edges={curriculumEdges}
+            edgeTypes={{ "start-end": CurriculumEdge }}
+          />
         </section>
         <div className={styles.visionList}>
           <VisionCard

@@ -34,20 +34,6 @@ globalStyle(".react-flow__handle", {
   visibility: "hidden",
 });
 
-globalStyle(".react-flow-root-node", {
-  fontWeight: 700,
-  lineHeight: "152%",
-  fontSize: "16px",
-  borderColor: "black",
-});
-
-globalStyle(".react-flow-child-node", {
-  fontWeight: 600,
-  fontSize: "14px",
-  color: theme.color.gray5,
-  borderColor: "rgba(100%, 100%, 100%, 80%)",
-});
-
 globalStyle(".react-flow__node", {
   borderRadius: "8px",
   border: "0.8px solid black",
@@ -61,11 +47,4 @@ globalStyle(".react-flow__node", {
 
 globalStyle(".react-flow__edges", {
   zIndex: "999 !important",
-});
-
-globalStyle(".react-flow-group-node", {
-  background:
-    "linear-gradient(0deg, rgba(0, 250, 119, 0.15) 0%, rgba(0, 250, 119, 0.15) 100%), #FFF",
-  border: "none",
-  height: "150px",
 });
