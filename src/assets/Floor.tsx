@@ -3,7 +3,7 @@ import { BlackTile, WhiteTile, ButtonTile, IconTile } from "./Tile";
 import { SpringConfig } from "@react-spring/three";
 import { CAT } from "@/constants/category";
 import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/main";
+import MainModal from "@/modals/BasePageModal";
 import React from "react";
 
 Globals.assign({ frameLoop: "always" });
