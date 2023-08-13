@@ -10,7 +10,8 @@ import {
 import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
 import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/main";
+import MainModal from "@/modals/BasePageModal";
+
 import useFlipped from "@/hooks/useFlipped";
 
 const urlEvent = "/assets/models/Cate_Event_Model.glb";
@@ -77,13 +78,14 @@ function Icon(props: Icon) {
   }, []);
 
   // 뒤집힌 경우에만 클릭 가능하도록
-  const handler = flipped
-    ? () => {
-        open(MainModal);
-      }
-    : () => {
-        console.log("not flipped yet");
-      };
+  const handler = () => {
+    if (flipped)
+      open(MainModal, {
+        name: name.replace(/\s/, "").toLowerCase() as any,
+      });
+    // TODO: refactoring
+    else console.log("not flipped yet");
+  };
 
   const { scale } = useSpring({
     scale: !flipped

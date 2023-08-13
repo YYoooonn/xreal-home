@@ -1,9 +1,13 @@
+import { inter_plex_sans, pretendard_variable } from "@/assets/fonts";
 import NoSSR from "@/components/NoSSR";
 import React from "react";
 import { createPortal } from "react-dom";
 
 interface ModalControllable {
-  open: (Modal: React.ComponentType<ModalProps>) => number;
+  open: <MP extends ModalProps>(
+    Modal: React.ComponentType<MP>,
+    props: Omit<MP, "id">
+  ) => number;
   close: (id: number) => void;
 }
 
@@ -13,11 +17,14 @@ export interface ModalProps {
 
 function ModalRenderer({ modals }: { modals: Record<number, JSX.Element> }) {
   return createPortal(
-    <>
+    <div
+      id="modals"
+      className={`${inter_plex_sans.variable} ${pretendard_variable.variable}`}
+    >
       {Object.entries(modals).map(([id, elem]) => (
         <React.Fragment key={id}>{elem}</React.Fragment>
       ))}
-    </>,
+    </div>,
     document.body
   );
 }
@@ -28,10 +35,10 @@ const ModalControlContext = React.createContext<
     removeEventListener: (key: "open" | "close", listener: () => void) => void;
   }
 >({
-  open: (_Modal) => -1,
-  close: (_id) => {},
-  addEventListener: (_key, _listener) => {},
-  removeEventListener: (_key, _listener) => {},
+  open: () => -1,
+  close: () => {},
+  addEventListener: () => {},
+  removeEventListener: () => {},
 });
 
 export default function ModalControlProvider({
@@ -43,11 +50,14 @@ export default function ModalControlProvider({
     Record<"open" | "close", Set<() => void>>
   >({ open: new Set(), close: new Set() });
 
-  const open = (Modal: React.ComponentType<ModalProps>) => {
+  const open = <MP extends ModalProps>(
+    Modal: React.ComponentType<MP>,
+    props: Omit<MP, "id">
+  ) => {
     listeners.open.forEach((l) => l());
 
     setModals((rest) => ({
-      [totalCount]: <Modal id={totalCount} />,
+      [totalCount]: <Modal {...(props as unknown as MP)} id={totalCount} />,
       ...rest,
     }));
     setTotalCount((prev) => prev + 1);

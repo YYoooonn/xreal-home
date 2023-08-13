@@ -1,6 +1,7 @@
 import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/main";
-import React from "react";
+import MainModal from "@/modals/BasePageModal";
+import React, { useRef } from "react";
+import { inter_plex_sans, pretendard_variable } from "@/assets/fonts";
 
 export default function ModalPage() {
   const { open, addEventListener, removeEventListener } = useModalControl();
@@ -11,9 +12,24 @@ export default function ModalPage() {
     return () => removeEventListener("open", handleOpen);
   }, []);
 
-  const handleClick = () => {
-    open(MainModal);
-  };
+  const handleChange =
+    (name: "xreal" | "events" | "joinus" | "magazine") => () => {
+      open(MainModal, { name });
+    };
 
-  return <button onClick={handleClick}>click me!</button>;
+  return (
+    <div
+      className={`${inter_plex_sans.variable} ${pretendard_variable.variable}`}
+      style={{
+        backgroundImage: "url(/assets/images/background.png)",
+        height: "100vh",
+      }}
+    >
+      {(["xreal", "events", "joinus", "magazine"] as const).map((v) => (
+        <button key={v} onClick={handleChange(v)}>
+          {v}
+        </button>
+      ))}
+    </div>
+  );
 }

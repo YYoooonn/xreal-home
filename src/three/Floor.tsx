@@ -2,6 +2,7 @@ import { Globals } from "@react-spring/three";
 import { BlackTile, WhiteTile, IconTile, IconTileWrapper } from "./Tile";
 import { SCALE_CONFIG, SCALE_RATIO } from "@/constants/springConfig";
 import { CAT } from "@/constants/category";
+
 import Icon from "./CatIcon";
 import Button from "./Button";
 
