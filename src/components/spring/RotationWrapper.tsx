@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { animated, useSpring, SpringConfig } from "@react-spring/three";
 import useFlipped from "@/hooks/useFlipped";
 import { DELAY_RATIO, ROTATION_CONFIG } from "@/constants/springConfig";
@@ -7,6 +7,7 @@ type RotationProps = {
   children: JSX.Element | JSX.Element[];
   position: [x: number, y: number, z: number];
   clicked: boolean;
+  isIcon?: boolean;
   config?: SpringConfig;
   ratio?: number;
 };
@@ -14,6 +15,7 @@ type RotationProps = {
 type WrapperProps = {
   children: JSX.Element | JSX.Element[];
   position: [x: number, y: number, z: number];
+  isIcon?: boolean;
   config?: SpringConfig;
 };
 
@@ -22,23 +24,25 @@ function computeDelay(position: [number, number, number], ratio: number) {
   return (Math.abs(position[0]) + Math.abs(position[2])) * ratio + 10;
 }
 
-function computeRotation() {
+function computeRotation(isIcon?: boolean) {
   //난수 생성, 임의의 방향으로 rotation 하도록
   const rand = Math.floor(Math.random() * 4);
   const angle = rand % 2 == 1 ? -Math.PI : Math.PI;
-  if (rand < 1) {
-    return { x_angle: 0, z_angle: angle };
-  } else {
+  // icon들은 x방향으로만 돌도록, 뒤집힘 방지
+  if (rand < 1 || isIcon) {
     return { x_angle: angle, z_angle: 0 };
+  } else {
+    return { x_angle: 0, z_angle: angle };
   }
 }
 
 const RotationWrapper: React.FC<WrapperProps> = (props) => {
-  const { flipped, setFlipped } = useFlipped();
+  const { flipped } = useFlipped();
   return (
     <SpringRotationWrapper
       position={props.position}
       config={props.config}
+      isIcon={props.isIcon}
       clicked={flipped}
     >
       {props.children}
@@ -46,33 +50,19 @@ const RotationWrapper: React.FC<WrapperProps> = (props) => {
   );
 };
 
-const DebugRotationWrapper: React.FC<RotationProps> = (props) => {
-  return (
-    <SpringRotationWrapper position={props.position} clicked={props.clicked}>
-      {props.children}
-    </SpringRotationWrapper>
-  );
-};
-
-const SpringRotationWrapper: React.FC<RotationProps> = ({
-  children,
-  position,
-  clicked,
-  config,
-  ratio,
-}) => {
-  const rConfig = config ? config : ROTATION_CONFIG;
-  const dRatio = ratio ? ratio : DELAY_RATIO;
-  const delay = computeDelay(position, dRatio);
+const SpringRotationWrapper: React.FC<RotationProps> = (props) => {
+  const rConfig = props.config ? props.config : ROTATION_CONFIG;
+  const dRatio = props.ratio ? props.ratio : DELAY_RATIO;
+  const delay = computeDelay(props.position, dRatio);
   const [angle, setAngle] = useState({ x: 0, z: 0 });
-  const angleDifference = computeRotation();
+  const angleDifference = computeRotation(props.isIcon);
   const { rotation_x } = useSpring({
-    rotation_x: clicked ? angle.x + angleDifference.x_angle : angle.x,
+    rotation_x: props.clicked ? angle.x + angleDifference.x_angle : angle.x,
     delay: delay,
     config: rConfig,
   });
   const { rotation_z } = useSpring({
-    rotation_z: clicked ? angle.z + angleDifference.z_angle : angle.z,
+    rotation_z: props.clicked ? angle.z + angleDifference.z_angle : angle.z,
     delay: delay,
     config: rConfig,
   });
@@ -81,16 +71,16 @@ const SpringRotationWrapper: React.FC<RotationProps> = ({
       x: angle.x + angleDifference.x_angle,
       z: angle.z + angleDifference.z_angle,
     });
-  }, [clicked]);
+  }, [props.clicked]);
   return (
     <animated.group
-      position={position}
+      position={props.position}
       rotation-x={rotation_x}
       rotation-z={rotation_z}
     >
-      {children}
+      {props.children}
     </animated.group>
   );
 };
 
-export { RotationWrapper, DebugRotationWrapper };
+export { RotationWrapper };

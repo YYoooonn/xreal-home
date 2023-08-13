@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noemit",
+    "typecheck": "tsc",
     "format": "prettier --cache --write .",
     "prepare": "husky install"
   },
@@ -39,7 +39,7 @@
   },
   "lint-staged": {
     "**/*.(js|jsx|css|ts|tsx)": [
-      "yarn typecheck",
+      "bash -c yarn typecheck",
       "prettier --write"
     ]
   }

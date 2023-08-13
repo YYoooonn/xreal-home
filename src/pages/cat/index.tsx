@@ -1,15 +1,16 @@
 import Floor from "@/three/Floor";
 import { Canvas } from "@react-three/fiber";
-import { OrthographicCamera, OrbitControls, Stats } from "@react-three/drei";
+import { OrthographicCamera, OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
+import useFlipped from "@/hooks/useFlipped";
 
-export default function Main() {
+export default function Cat() {
+  MakeFlipped();
   return (
     <div className="canvas">
       <Canvas shadows frameloop="demand">
-        <color attach="background" args={["#000000"]} />
         <Lights />
-        <Floor cat={false} />
+        <Floor cat={true} />
         <OrthographicCamera
           makeDefault
           castShadow
@@ -26,4 +27,11 @@ export default function Main() {
       </Canvas>
     </div>
   );
+}
+
+function MakeFlipped() {
+  const { flipped, setFlipped } = useFlipped();
+  if (!flipped) {
+    setFlipped();
+  }
 }

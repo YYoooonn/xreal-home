@@ -1,10 +1,10 @@
 import { Globals } from "@react-spring/three";
-import { BlackTile, WhiteTile, ButtonTile, IconTile } from "./Tile";
-import { SpringConfig } from "@react-spring/three";
+import { BlackTile, WhiteTile, IconTile, IconTileWrapper } from "./Tile";
+import { SCALE_CONFIG, SCALE_RATIO } from "@/constants/springConfig";
 import { CAT } from "@/constants/category";
-import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/BasePageModal";
 import React from "react";
+import Icon from "./CatIcon";
+import Button from "./Button";
 
 Globals.assign({ frameLoop: "always" });
 /* TODO
@@ -76,56 +76,51 @@ function WhiteTiles() {
   // -2 ~ 2 까지는 임의로 설정
   return (
     <group>
-      <WhiteTile position={[-2, 0, -2]} />
       <WhiteTile position={[-1, 0, 1]} />
       <WhiteTile position={[-1, 0, 0]} />
       <WhiteTile position={[1, 0, -1]} />
       <WhiteTile position={[1, 0, 0]} />
-      <WhiteTile position={[2, 0, 2]} />
-      <WhiteTile position={[2, 0, -2]} />
     </group>
   );
 }
 
-function IconTiles() {
+function ButtonTile() {
+  return (
+    <IconTileWrapper position={[0, 0, 0]} isWhite={true}>
+      <Icon
+        type={CAT.Xreal}
+        scaleConfig={SCALE_CONFIG}
+        scaleRatio={SCALE_RATIO}
+        position={[0, 0.1, 0]}
+      />
+      <Button position={[0, 0, 0]} />
+    </IconTileWrapper>
+  );
+}
+
+function IconTiles(props: { cat?: boolean }) {
+  const Center = props.cat ? (
+    <IconTile position={[0, 0, 0]} type={CAT.Xreal} />
+  ) : (
+    <ButtonTile />
+  );
   return (
     <group>
-      <IconTile
-        position={[-2, 0, 2]}
-        type={CAT.Event}
-        handler={() => console.log("Event1 clicked!")}
-      />
-      <IconTile
-        position={[2, 0, 2]}
-        type={CAT.JoinUs}
-        handler={() => console.log("JoinUs1 clicked!")}
-      />
-      <IconTile
-        position={[2, 0, -2]}
-        type={CAT.Event}
-        handler={() => console.log("Event2 clicked!")}
-      />
-      <IconTile
-        position={[-2, 0, -2]}
-        type={CAT.JoinUs}
-        handler={() => console.log("JoinUs2 clicked!")}
-      />
-      <IconTile
-        position={[0, 0, 0]}
-        type={CAT.VR}
-        handler={() => console.log("VR clicked!")}
-      />
+      <IconTile position={[-2, 0, 2]} type={CAT.VR} />
+      <IconTile position={[2, 0, 2]} type={CAT.Event} />
+      <IconTile position={[2, 0, -2]} type={CAT.JoinUs} />
+      <IconTile position={[-2, 0, -2]} type={CAT.MAGAZINE} />
+      {Center}
     </group>
   );
 }
 
-function Floor() {
+function Floor(props: { cat?: boolean }) {
   return (
     <>
       <BlackTiles />
-      <ButtonTile />
+      <IconTiles {...props} />
       <WhiteTiles />
-      <IconTiles />
     </>
   );
 }
