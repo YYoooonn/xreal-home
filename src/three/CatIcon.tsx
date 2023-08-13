@@ -11,6 +11,7 @@ import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
 import { useModalControl } from "@/modals/ModalControlProvider";
 import MainModal from "@/modals/BasePageModal";
+
 import useFlipped from "@/hooks/useFlipped";
 
 const urlEvent = "/assets/models/Cate_Event_Model.glb";
