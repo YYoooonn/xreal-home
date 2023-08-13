@@ -39,7 +39,8 @@
   },
   "lint-staged": {
     "**/*.(js|jsx|css|ts|tsx)": [
-      "yarn typecheck && prettier --write"
+      "yarn typecheck",
+      "prettier --write"
     ]
   }
 }
