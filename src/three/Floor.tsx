@@ -87,12 +87,7 @@ function WhiteTiles() {
 function ButtonTile() {
   return (
     <IconTileWrapper position={[0, 0, 0]} isWhite={true}>
-      <Icon
-        type={CAT.Xreal}
-        scaleConfig={SCALE_CONFIG}
-        scaleRatio={SCALE_RATIO}
-        position={[0, 0.1, 0]}
-      />
+      <Icon type={CAT.Xreal} position={[0, 0.1, 0]} />
       <Button position={[0, 0, 0]} />
     </IconTileWrapper>
   );
@@ -106,7 +101,7 @@ function IconTiles(props: { cat?: boolean }) {
   );
   return (
     <group>
-      <IconTile position={[-2, 0, 2]} type={CAT.VR} />
+      <IconTile position={[-2, 0, 2]} type={CAT.Project} />
       <IconTile position={[2, 0, 2]} type={CAT.Event} />
       <IconTile position={[2, 0, -2]} type={CAT.JoinUs} />
       <IconTile position={[-2, 0, -2]} type={CAT.MAGAZINE} />

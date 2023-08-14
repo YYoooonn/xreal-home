@@ -1,5 +1,5 @@
 export const CAT = {
-  VR: Symbol("vr"),
+  Project: Symbol("project"),
   MAGAZINE: Symbol("magazine"),
   Event: Symbol("event"),
   JoinUs: Symbol("joinus"),

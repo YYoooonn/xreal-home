@@ -47,7 +47,7 @@ const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
 
 function BlackTile(props: { position: Position }) {
   return (
-    <RotationWrapper position={props.position}>
+    <RotationWrapper position={props.position} isIcon={false} isWhite={false}>
       <Tile isWhite={false} />
     </RotationWrapper>
   );
@@ -55,7 +55,7 @@ function BlackTile(props: { position: Position }) {
 
 function WhiteTile(props: { position: Position }) {
   return (
-    <RotationWrapper position={props.position}>
+    <RotationWrapper position={props.position} isIcon={false} isWhite={true}>
       <Tile isWhite={true} />
     </RotationWrapper>
   );
@@ -63,7 +63,7 @@ function WhiteTile(props: { position: Position }) {
 
 const IconTileWrapper = (props: IconTileProps): ReactElement => {
   return (
-    <RotationWrapper position={props.position} isIcon={true}>
+    <RotationWrapper position={props.position} isIcon={true} isWhite={true}>
       <>{props.children}</>
       <Tile isWhite={props.isWhite} />
     </RotationWrapper>
@@ -73,12 +73,7 @@ const IconTileWrapper = (props: IconTileProps): ReactElement => {
 function IconTile({ position, type }: ItemTileProps) {
   return (
     <IconTileWrapper position={position} isWhite={true}>
-      <Icon
-        type={type}
-        scaleConfig={SCALE_CONFIG}
-        scaleRatio={SCALE_RATIO}
-        position={[0, 0.1, 0]}
-      />
+      <Icon type={type} position={[0, 0.1, 0]} />
     </IconTileWrapper>
   );
 }

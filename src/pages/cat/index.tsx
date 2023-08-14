@@ -2,7 +2,7 @@ import Floor from "@/three/Floor";
 import { Canvas } from "@react-three/fiber";
 import { OrthographicCamera, OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
-import useFlipped from "@/hooks/useFlipped";
+import { useStatus, StatusEnum } from "@/hooks/useStatus";
 
 export default function Cat() {
   MakeFlipped();
@@ -30,8 +30,8 @@ export default function Cat() {
 }
 
 function MakeFlipped() {
-  const { flipped, setFlipped } = useFlipped();
-  if (!flipped) {
-    setFlipped();
+  const { status, setStatus } = useStatus();
+  if (status === StatusEnum.Main) {
+    setStatus(StatusEnum.Category);
   }
 }

@@ -11,8 +11,12 @@ import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
 import { useModalControl } from "@/modals/ModalControlProvider";
 import MainModal from "@/modals/BasePageModal";
-
-import useFlipped from "@/hooks/useFlipped";
+import {
+  SCALE_RATIO,
+  SCALE_CONFIG,
+  DISPOSE_DELAY,
+} from "@/constants/springConfig";
+import { useStatus, StatusEnum } from "@/hooks/useStatus";
 
 const urlEvent = "/assets/models/Cate_Event_Model.glb";
 const urlJoinUs = "/assets/models/Cate_Joinus_Model.glb";
@@ -38,8 +42,6 @@ interface CatGLTF extends GLTF {
 type Icon = {
   type: CAT;
   position: [x: number, y: number, z: number];
-  scaleConfig?: SpringConfig;
-  scaleRatio?: number;
   handler?: () => void;
 };
 
@@ -51,51 +53,40 @@ hoveredMaterial.side = DoubleSide;
 const textMat = new MeshNormalMaterial();
 
 function Icon(props: Icon) {
-  const { name, MeshIcon } =
+  const { status, setStatus } = useStatus();
+  const { name, MeshIcon, handler } =
     props.type === CAT.Event
-      ? { name: "Event", MeshIcon: IconEvent }
+      ? { name: "Event", MeshIcon: IconEvent, handler: getHandler(props.type) }
       : props.type === CAT.JoinUs
-      ? { name: "Join Us", MeshIcon: IconJoinUs }
-      : props.type === CAT.VR
-      ? { name: "Projects", MeshIcon: IconVR }
+      ? {
+          name: "Join Us",
+          MeshIcon: IconJoinUs,
+          handler: getHandler(props.type),
+        }
+      : props.type === CAT.Project
+      ? {
+          name: "Projects",
+          MeshIcon: IconVR,
+          handler: () => {
+            setStatus(StatusEnum.Project);
+          },
+        }
       : props.type === CAT.MAGAZINE
-      ? { name: "Magazine", MeshIcon: IconMagazine }
-      : { name: "XREAL", MeshIcon: IconXreal };
-
-  const { flipped } = useFlipped();
+      ? {
+          name: "Magazine",
+          MeshIcon: IconMagazine,
+          handler: getHandler(props.type),
+        }
+      : { name: "XREAL", MeshIcon: IconXreal, handler: getHandler(props.type) };
 
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
-  useCursor(hovered && flipped);
-
-  // icon 마다 다른 모달 반영 필요
-  const { open, addEventListener, removeEventListener } = useModalControl();
-
-  React.useEffect(() => {
-    const handleOpen = () => console.log("modal opened");
-    addEventListener("open", handleOpen);
-    return () => removeEventListener("open", handleOpen);
-  }, []);
-
-  // 뒤집힌 경우에만 클릭 가능하도록
-  const handler = () => {
-    if (flipped)
-      open(MainModal, {
-        name: name.replace(/\s/, "").toLowerCase() as any,
-      });
-    // TODO: refactoring
-    else console.log("not flipped yet");
-  };
+  useCursor(hovered && status === StatusEnum.Category);
 
   const { scale } = useSpring({
-    scale: !flipped
-      ? 0
-      : hovered
-      ? props.scaleRatio
-        ? props.scaleRatio
-        : 1.2
-      : 1,
-    config: props.scaleConfig ? props.scaleConfig : config.wobbly,
+    scale: status !== StatusEnum.Category ? 0 : hovered ? SCALE_RATIO : 1,
+    config: SCALE_CONFIG,
+    delay: status !== StatusEnum.Category ? DISPOSE_DELAY : 0,
   });
   return (
     <group rotation-x={Math.PI}>
@@ -115,6 +106,40 @@ function Icon(props: Icon) {
       <CatText name={name} position={props.position} />
     </group>
   );
+}
+
+function getHandler(type: CAT) {
+  const { open } = useModalControl();
+
+  // React.useEffect(() => {
+  //   const handleOpen = () => console.log("modal opened");
+  //   addEventListener("open", handleOpen);
+  //   return () => removeEventListener("open", handleOpen);
+  // }, []);
+
+  // 뒤집힌 경우에만 클릭 가능하도록
+  return () => {
+    if (type === CAT.Event) {
+      open(MainModal, {
+        name: "events",
+      });
+    } else if (type === CAT.JoinUs) {
+      open(MainModal, {
+        name: "joinus",
+      });
+    } else if (type === CAT.Xreal) {
+      open(MainModal, {
+        name: "xreal",
+      });
+    } else if (type === CAT.MAGAZINE) {
+      open(MainModal, {
+        name: "magazine",
+      });
+    } else {
+      console.log("Icon type not recognized");
+      return;
+    }
+  };
 }
 
 const CatText = React.memo(

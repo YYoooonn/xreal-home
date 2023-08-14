@@ -2,14 +2,14 @@ import { PointLightProps, SpotLightProps } from "@react-three/fiber";
 import { useHelper } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 import { PointLightHelper, SpotLightHelper, SpotLight } from "three";
-import useFlipped from "@/hooks/useFlipped";
+import { useStatus, StatusEnum } from "@/hooks/useStatus";
 
 function Lights() {
-  const { flipped } = useFlipped();
-  if (flipped) {
-    return <CatLights />;
-  } else {
+  const { status } = useStatus();
+  if (status === StatusEnum.Main) {
     return <ButtonLights />;
+  } else {
+    return <CatLights />;
   }
 }
 
