@@ -17,7 +17,7 @@ export default function SideNavigator({ tabs }: SideNavigatorProps) {
         })}
       />
       {tabs.map((tab, i) => (
-        <button
+        <a
           key={tab}
           onClick={scrollToIndex(i)}
           className={
@@ -27,7 +27,7 @@ export default function SideNavigator({ tabs }: SideNavigatorProps) {
           }
         >
           {tab}
-        </button>
+        </a>
       ))}
     </div>
   );

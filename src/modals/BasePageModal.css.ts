@@ -23,6 +23,7 @@ export const pageModalInWrapper = style({
 export const pageModalSidebar = style({
   width: "300px",
   padding: 3 * 8,
+  paddingRight: 0,
   backdropFilter: "blur(10px)",
   backgroundColor: "rgba(100%, 100%, 100%, 48%)",
   borderRadius: "33px 0 0 33px",
