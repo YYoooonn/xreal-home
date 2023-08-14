@@ -1,18 +1,19 @@
 import Floor from "@/three/Floor";
 import { Canvas } from "@react-three/fiber";
-import { OrthographicCamera, OrbitControls, Stats } from "@react-three/drei";
+import { OrthographicCamera, OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
-import { Suspense } from "react";
-import LoadingPage from "@/components/loading/LoadingPage";
+import { useStatus, StatusEnum } from "@/hooks/useStatus";
+import GuideUI from "./guideUI";
+import UI from "./UI";
 
-export default function Main() {
+export default function Cat() {
+  MakeFlipped();
   return (
-    <Suspense fallback={LoadingPage()}>
+    <>
       <div className="canvas">
         <Canvas shadows frameloop="demand">
-          <color attach="background" args={["#000000"]} />
           <Lights />
-          <Floor cat={false} />
+          <Floor cat={true} />
           <OrthographicCamera
             makeDefault
             castShadow
@@ -28,6 +29,15 @@ export default function Main() {
           />
         </Canvas>
       </div>
-    </Suspense>
+      <GuideUI />
+      <UI />
+    </>
   );
+}
+
+function MakeFlipped() {
+  const { status, setStatus } = useStatus();
+  if (status === StatusEnum.Main) {
+    setStatus(StatusEnum.Category);
+  }
 }
