@@ -1,6 +1,9 @@
 import { useSideNav } from "@/components/SideNavProvider";
 import { useEffect } from "react";
 import * as styles from "./_internal.css";
+import Image from "next/image";
+import CommasIcon from "@/assets/icons/commas";
+import Chip from "./_components/Chip";
 
 export default function EventsPage() {
   useEffect(useSideNav().collectData, []);
@@ -20,7 +23,14 @@ export default function EventsPage() {
           아이디어 피칭과 선정을 통해 팀 빌딩을 진행하고, 중간 발표와 최종
           발표를 거쳐 수상 팀을 선정합니다.
         </p>
-        <div className={styles.cardListContainer}></div>
+        <div className={styles.cardListContainer}>
+          {Array.from({ length: 4 }, (_, i) => (
+            <Chip key={i}>
+              <CommasIcon />
+              <p>{4 - i}기</p>
+            </Chip>
+          ))}
+        </div>
       </section>
       <section data-modal-section>
         <h2 className={styles.paragraph.title}>XMC</h2>
@@ -38,7 +48,15 @@ export default function EventsPage() {
           3기에서는 ‘Immersive Experiences for the Metaverse’라는 주제로 SBA
           본사 홀에서 XMC를 진행하였습니다.
         </p>
-        <div className={styles.cardListContainer}></div>
+        <div className={styles.cardListContainer}>
+          {" "}
+          {Array.from({ length: 4 }, (_, i) => (
+            <Chip key={i}>
+              <CommasIcon />
+              <p>{4 - i}기</p>
+            </Chip>
+          ))}
+        </div>
       </section>
       <section data-modal-section>
         <h2 className={styles.paragraph.title}>Activity</h2>
@@ -57,7 +75,15 @@ export default function EventsPage() {
           사용해보며, 착용 경험을 리뷰하고 칼럼을 작성하는 시간을 가지기도
           하였습니다.
         </p>
-        <div className={styles.cardListContainer}></div>
+        <div className={styles.cardListContainer}>
+          {" "}
+          {Array.from({ length: 4 }, (_, i) => (
+            <Chip key={i}>
+              <CommasIcon />
+              <p>{4 - i}기</p>
+            </Chip>
+          ))}
+        </div>
       </section>
     </div>
   );
