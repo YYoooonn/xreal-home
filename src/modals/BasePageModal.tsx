@@ -24,7 +24,12 @@ const pageTabMap = {
     Page: dynamic(() => import("./pages/joinus")),
   },
   magazine: {
-    tabs: ["introduction"],
+    tabs: [
+      "NEWSLETTER",
+      "XREAL'S GLOBAL MAGAZINE",
+      "XREAL'S DEEP DIVE",
+      "ENCYCLOPEDIA OF METAVERSE",
+    ],
     Page: dynamic(() => import("./pages/magazine")),
   },
 } as const;

@@ -26,4 +26,5 @@ export const overlay = style({
   fontWeight: "bolder",
   fontSize: "16px",
   lineHeight: "30px",
+  textAlign: "center",
 });

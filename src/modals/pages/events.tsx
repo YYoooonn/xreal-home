@@ -1,7 +1,6 @@
 import { useSideNav } from "@/components/SideNavProvider";
 import { useEffect } from "react";
 import * as styles from "./_internal.css";
-import Image from "next/image";
 import CommasIcon from "@/assets/icons/commas";
 import Chip from "./_components/Chip";
 

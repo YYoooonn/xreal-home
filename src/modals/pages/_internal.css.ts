@@ -10,7 +10,7 @@ export const pageContainer = style({
 export const cardListContainer = style({
   display: "flex",
   gap: "48px",
-  marginTop: "40px",
+  margin: "40px 0",
 });
 
 const title = style({
