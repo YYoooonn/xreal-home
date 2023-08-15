@@ -2,11 +2,12 @@ import Floor from "@/three/Floor";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
-import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import Camera from "@/three/Camera";
+import useFlipped from "@/hooks/useFlipped";
 
-export default function Category() {
-  MakeFlipped();
+export default function CategoryPage() {
+  useFlipped();
+
   return (
     <div className="canvas">
       <Canvas shadows frameloop="demand">
@@ -22,11 +23,4 @@ export default function Category() {
       </Canvas>
     </div>
   );
-}
-
-function MakeFlipped() {
-  const { status, setStatus } = useStatus();
-  if (status === StatusEnum.Main) {
-    setStatus(StatusEnum.Category);
-  }
 }

@@ -2,12 +2,13 @@ import Floor from "@/three/Floor";
 import { Canvas } from "@react-three/fiber";
 import { OrthographicCamera, OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
-import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import GuideUI from "@/components/pages/projects/guideUI";
 import UI from "@/components/pages/projects/UI";
+import useFlipped from "@/hooks/useFlipped";
 
-export default function Cat() {
-  MakeFlipped();
+export default function ProjectsPage() {
+  useFlipped();
+
   return (
     <>
       <div className="canvas">
@@ -33,11 +34,4 @@ export default function Cat() {
       <UI />
     </>
   );
-}
-
-function MakeFlipped() {
-  const { status, setStatus } = useStatus();
-  if (status === StatusEnum.Main) {
-    setStatus(StatusEnum.Category);
-  }
 }

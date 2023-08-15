@@ -6,7 +6,7 @@ import Camera from "@/three/Camera";
 import { Suspense } from "react";
 import LoadingPage from "@/components/loading/LoadingPage";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <Suspense fallback={<LoadingPage />}>
       <div className="canvas">
