@@ -3,21 +3,46 @@ import { useState } from "react";
 import * as styles from "./UI.css";
 import ArrowLeftIcon from "@/assets/icons/arrowLeft";
 import IconButton from "@/components/IconButton";
+import Link from "next/link";
+// import ProgressBar from "./ProgressBar";
+
+export function Dropdown() {
+  document.getElementById("DropdownCategories")?.classList.toggle("show");
+}
 
 export default function UI() {
-  return (
-    <div className={styles.ProjectsUI}>
-      <div className={styles.breadcrumbContainer}>{`home > projects`}</div>
-      <IconButton
-        className={styles.BackToPreviousPageButton}
-        // onClick={}
-      >
-        <ArrowLeftIcon />
-      </IconButton>
+  const [otherCategory, setOtherCategory] = useState(false);
 
-      <div className={styles.Category}>
-        <div className={`${styles.CategoryButton}`}>XR</div>
+  const toggleCategory = () => {
+    setOtherCategory(!otherCategory);
+  };
+
+  return (
+    <>
+      {/* <ProgressBar/> */}
+      <div className={styles.ProjectsUI}>
+        <div className={styles.LeftBtn}>
+          <div className={styles.breadcrumbContainer}>{`home > projects`}</div>
+          <Link href={"/"}>
+            <IconButton className={styles.BackToPreviousPageButton}>
+              <ArrowLeftIcon />
+            </IconButton>
+          </Link>
+        </div>
+
+        <div className={styles.Category}>
+          <button className={`${styles.CategoryButton}`}>XR</button>
+          <button className={`${styles.CategoryButton}`}>WEB3</button>
+          <button className={`${styles.CategoryButton}`}>STUDY</button>
+          <button className={`${styles.CategoryButton}`} onClick={Dropdown}>
+            OTHER
+          </button>
+
+          <div id="DropdownCategories" className={styles.DropdownContent}>
+            <button className={`${styles.CategoryButton}`}>AI</button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

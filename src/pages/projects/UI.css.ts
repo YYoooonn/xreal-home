@@ -7,22 +7,29 @@ export const ProjectsUI = style({
   top: 0,
   width: "100%",
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  flexDirection: "row",
+  justifyContent: "space-between",
   alignItems: "start",
+});
+
+export const LeftBtn = style({
+  marginTop: 3 * 8,
+  marginLeft: 4 * 8,
+  display: "flex",
+  flexDirection: "column",
 });
 
 export const breadcrumbContainer = style({
   textTransform: "uppercase",
   fontWeight: "bold",
-  marginTop: 5 * 8,
-  marginLeft: 7 * 8,
+  marginTop: 2 * 8,
+  marginLeft: 3 * 8,
   color: "white",
 });
 
 export const BackToPreviousPageButton = style({
-  marginTop: 32,
-  marginLeft: 64,
+  marginTop: 4 * 8,
+  marginLeft: 4 * 8,
   transform: "rotate(270deg)",
   background: "#5B5B5B",
   padding: 10,
@@ -30,26 +37,44 @@ export const BackToPreviousPageButton = style({
 
 export const Category = style({
   margin: 32,
-  justifyContent: "end",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "start",
 });
 
 export const CategoryButton = style({
   marginTop: 32,
   marginRight: 32,
   borderRadius: 8,
+  border: "none",
   width: 106,
   height: 40,
   fontWeight: "bold",
   color: "white",
   textAlign: "center",
-  textAlignLast: "center",
+  lineHeight: "40px",
   backgroundColor: "rgba(100,100,100,0%)",
+  cursor: "pointer",
   selectors: {
     "&:hover": {
       background: "rgba(100,100,100,30%)",
     },
-    "&:onclick": {
+    "&:focus": {
       backgroundColor: "rgba(100,100,100,100%)",
     },
   },
+});
+
+export const Dropdown = style({
+  position: "relative",
+  display: "inline-block",
+});
+
+export const DropdownContent = style({
+  display: "none",
+  position: "absolute",
+  backgroundColor: "rgba(100,100,100,30%)",
+  minWidth: 106,
+  zIndex: 1,
 });
