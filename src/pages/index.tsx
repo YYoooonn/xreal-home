@@ -8,7 +8,7 @@ import LoadingPage from "@/components/loading/LoadingPage";
 
 export default function Home() {
   return (
-    <Suspense fallback={LoadingPage()}>
+    <Suspense fallback={<LoadingPage />}>
       <div className="canvas">
         <Canvas shadows frameloop="demand">
           <color attach="background" args={["#000000"]} />
