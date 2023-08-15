@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-import scrollGuide from "public/assets/scrollGuide.png";
 import * as styles from "./guideUI.css";
 
 export default function GuideUI() {
@@ -15,7 +14,11 @@ export default function GuideUI() {
     <>
       {visible && (
         <div className={styles.GuideUI} onClick={removeElement}>
-          <Image src={scrollGuide} alt="scroll" className={styles.GuideImg} />
+          <Image
+            src="assets/images/scrollGuide.png"
+            alt="scroll"
+            className={styles.GuideImg}
+          />
           <p>scroll to move</p>
         </div>
       )}
