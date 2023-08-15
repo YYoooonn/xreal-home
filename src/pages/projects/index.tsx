@@ -3,8 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrthographicCamera, OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
-import GuideUI from "./guideUI";
-import UI from "./UI";
+import GuideUI from "@/components/pages/projects/guideUI";
+import UI from "@/components/pages/projects/UI";
 
 export default function Cat() {
   MakeFlipped();

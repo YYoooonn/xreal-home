@@ -1,4 +1,4 @@
-import { style, globalStyle } from "@vanilla-extract/css";
+import { style, createVar } from "@vanilla-extract/css";
 
 export const container = style({
   width: 500,
@@ -30,9 +30,11 @@ export const progressBar = style({
   backgroundColor: "#D9D9D9",
 });
 
+export const progress = createVar();
 export const progressValue = style({
   height: "100%",
   backgroundColor: "#00FA77",
+  width: `${progress}%`,
 });
 
 export const text = style({
