@@ -34,12 +34,20 @@ export default function UI() {
           <button className={`${styles.CategoryButton}`}>XR</button>
           <button className={`${styles.CategoryButton}`}>WEB3</button>
           <button className={`${styles.CategoryButton}`}>STUDY</button>
-          <button className={`${styles.CategoryButton}`} onClick={Dropdown}>
-            OTHER
-          </button>
-
-          <div id="DropdownCategories" className={styles.DropdownContent}>
-            <button className={`${styles.CategoryButton}`}>AI</button>
+          <div className={styles.DropDown}>
+            <button className={`${styles.DropBtn}`} onClick={Dropdown}>
+              OTHER
+            </button>
+            <div id="DropdownCategories" className={styles.DropdownContent}>
+              <button className={`${styles.CategoryButton}`}>AI</button>
+              <button className={`${styles.CategoryButton}`}>Media Art</button>
+              <button className={`${styles.CategoryButton}`}>NFT</button>
+              <button className={`${styles.CategoryButton}`}>UXUI</button>
+              <button className={`${styles.CategoryButton}`}>360 영상</button>
+              <button className={`${styles.CategoryButton}`}>
+                Virtual Human
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,4 @@
-import { RotationWrapper } from "@/components/spring/RotationWrapper";
 import { style, globalStyle } from "@vanilla-extract/css";
-import { transform } from "framer-motion";
 
 export const ProjectsUI = style({
   position: "absolute",
@@ -66,15 +64,43 @@ export const CategoryButton = style({
   },
 });
 
-export const Dropdown = style({
+export const DropBtn = style({
+  border: "none",
+  marginTop: 32,
+  marginRight: 32,
+  borderRadius: 8,
+  width: 106,
+  height: 40,
+  fontWeight: "bold",
+  color: "white",
+  textAlign: "center",
+  lineHeight: "40px",
+  backgroundColor: "rgba(100,100,100,0%)",
+  cursor: "pointer",
+  selectors: {
+    "&:hover": {
+      background: "rgba(100,100,100,30%)",
+    },
+    "&:focus": {
+      backgroundColor: "rgba(100,100,100,100%)",
+    },
+  },
+});
+
+export const DropDown = style({
   position: "relative",
   display: "inline-block",
+  selectors: {
+    // "&:hover": {DropdownContent.display: "block"}
+  },
 });
 
 export const DropdownContent = style({
   display: "none",
   position: "absolute",
-  backgroundColor: "rgba(100,100,100,30%)",
+  backgroundColor: "rgba(100,100,100,0%)",
   minWidth: 106,
   zIndex: 1,
+
+  selectors: {},
 });
