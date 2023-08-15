@@ -15,9 +15,11 @@ export default function GuideUI() {
       {visible && (
         <div className={styles.GuideUI} onClick={removeElement}>
           <Image
-            src="assets/images/scrollGuide.png"
+            src="/assets/images/scrollGuide.png"
             alt="scroll"
             className={styles.GuideImg}
+            width={100}
+            height={330}
           />
           <p>scroll to move</p>
         </div>
