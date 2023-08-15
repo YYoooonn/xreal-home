@@ -1,5 +1,6 @@
 import { useProgress } from "@react-three/drei";
 import * as styles from "./LoadingPage.css";
+import React from "react";
 
 const pos = [
   [0, 0],
@@ -57,24 +58,33 @@ const pos = [
 ];
 
 export default function LoadingPage() {
-  const { active, progress, errors, item, loaded, total } = useProgress();
-  console.log(progress);
-
+  const { progress } = useProgress();
   return (
     <section className={styles.loadingSection}>
       <div className={styles.logo}>
-        {Array.from({ length: 51 }, (_, i) => (
-          <span
-            key={i}
-            className={styles.logoBox}
-            style={{
-              marginLeft: pos[i][0] * 12,
-              marginTop: pos[i][1] * 12,
-            }}
-          />
-        ))}
+        <Spans />
       </div>
-      <div className={styles.progressBar} />
+      <div
+        className={styles.progressBar}
+        style={{ backgroundSize: `${1.2 * Math.floor(progress)}%` }}
+      />
     </section>
   );
 }
+
+const Spans = React.memo(() => {
+  return (
+    <>
+      {Array.from({ length: 51 }, (_, i) => (
+        <span
+          key={i}
+          className={styles.logoBox}
+          style={{
+            marginLeft: pos[i][0] * 12,
+            marginTop: pos[i][1] * 12,
+          }}
+        />
+      ))}
+    </>
+  );
+});

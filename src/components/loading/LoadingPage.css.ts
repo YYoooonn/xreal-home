@@ -28,15 +28,25 @@ const loadingLogo = keyframes({
     left: side / 2,
     borderRadius: "100%",
   },
-  "65%": {
+  "20%": {
     borderRadius: "100%",
   },
-  "100%": {
+  "50%": {
     width: side,
     height: side,
     top: 0,
     left: 0,
-    borderRadius: 0,
+    borderRadius: "0%",
+  },
+  "80%": {
+    borderRadius: "100%",
+  },
+  "100%": {
+    width: 0,
+    height: 0,
+    top: side / 2,
+    left: side / 2,
+    borderRadius: "100%",
   },
 });
 
@@ -45,7 +55,7 @@ export const logoBox = style({
   width: side,
   height: side,
   backgroundColor: "black",
-  animation: `${loadingLogo} 3s linear`,
+  animation: `${loadingLogo} 3s ease infinite`,
 });
 
 const loadingBar = keyframes({
@@ -59,5 +69,5 @@ export const progressBar = style({
   height: "8px",
   mask: "linear-gradient(90deg, #000 70%, #0000 0) 0/2.5%",
   background: "linear-gradient(#000 0 0) 0/0% no-repeat #ffffff",
-  animation: `${loadingBar} 3s 1 steps(40)`,
+  backgroundSize: "120%",
 });
