@@ -80,7 +80,7 @@ function ProjectIcon(props: Imoji) {
   );
 }
 
-const Imoji = React.memo((props: { name: string; hovered: boolean }) => {
+function Imoji({ name, hovered }: { name: string; hovered: boolean }) {
   const { nodes } = useGLTF(urlProjectImoji) as ImojiGLTF;
   return (
     <mesh
@@ -90,12 +90,12 @@ const Imoji = React.memo((props: { name: string; hovered: boolean }) => {
       position={[0.35, 0.2, -0.3]}
       scale={1}
       geometry={nodes.Emoji_Fire.geometry}
-      material={props.hovered ? InvisibleMat : nodes.Emoji_Fire.material}
+      material={hovered ? InvisibleMat : nodes.Emoji_Fire.material}
     />
   );
-});
+}
 
-const ProjectText = React.memo((props: { name: string; hovered: boolean }) => {
+function ProjectText({ name, hovered }: { name: string; hovered: boolean }) {
   return (
     <Text
       position={[0, 0.5, 0]}
@@ -104,15 +104,16 @@ const ProjectText = React.memo((props: { name: string; hovered: boolean }) => {
       rotation-y={Math.PI / 4}
       fontSize={0.3}
       font={"/assets/fonts/IBMPlexSans-Bold.woff"}
-      material={props.hovered ? TextMat : InvisibleMat}
+      material={hovered ? TextMat : InvisibleMat}
       outlineBlur={0.06}
       outlineWidth={0.06}
       outlineOpacity={0.25}
       outlineColor={"white"}
-      children={props.name}
-    />
+    >
+      {name}
+    </Text>
   );
-});
+}
 
 function ProIcons() {
   return (

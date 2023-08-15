@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import * as styles from "./_internal.css";
 
 export default function EventsPage() {
-  useEffect(useSideNav().collectData, []);
+  const { collectData } = useSideNav();
+  useEffect(() => collectData(), []);
 
   return (
     <div className={styles.pageContainer}>
