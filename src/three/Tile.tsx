@@ -3,9 +3,8 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { Group, Mesh } from "three";
 import { RotationWrapper } from "../components/spring/RotationWrapper";
-import Icon from "./CatIcon";
+import CatIcon from "./CatIcon";
 import { CAT } from "@/constants/category";
-import { SCALE_CONFIG, SCALE_RATIO } from "@/constants/springConfig";
 
 const urlTile = "/assets/models/Tile.glb";
 useGLTF.preload(urlTile);
@@ -73,7 +72,7 @@ const IconTileWrapper = (props: IconTileProps): ReactElement => {
 function IconTile({ position, type }: ItemTileProps) {
   return (
     <IconTileWrapper position={position} isWhite={true}>
-      <Icon type={type} position={[0, 0.1, 0]} />
+      <CatIcon type={type} position={[0, 0.1, 0]} />
     </IconTileWrapper>
   );
 }

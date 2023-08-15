@@ -58,6 +58,7 @@ const pos = [
 
 export default function LoadingPage() {
   const { active, progress, errors, item, loaded, total } = useProgress();
+  console.log(progress);
 
   return (
     <section className={styles.loadingSection}>

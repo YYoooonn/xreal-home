@@ -1,5 +1,5 @@
 import { useGLTF, useCursor, Text } from "@react-three/drei";
-import { useSpring, config, animated, SpringConfig } from "@react-spring/three";
+import { useSpring, animated } from "@react-spring/three";
 import React, { useState } from "react";
 import {
   Mesh,
@@ -52,44 +52,56 @@ hoveredMaterial.side = DoubleSide;
 
 const textMat = new MeshNormalMaterial();
 
-function Icon(props: Icon) {
+function CatIcon(props: Icon) {
   const { status, setStatus } = useStatus();
-  const { name, MeshIcon, handler } =
+  const { name, MeshIcon, handleClick } =
     props.type === CAT.Event
-      ? { name: "Event", MeshIcon: IconEvent, handler: getHandler(props.type) }
+      ? {
+          name: "Events",
+          MeshIcon: IconEvent,
+          handleClick: getModalHandler(props.type),
+        }
       : props.type === CAT.JoinUs
       ? {
           name: "Join Us",
           MeshIcon: IconJoinUs,
-          handler: getHandler(props.type),
-        }
-      : props.type === CAT.Project
-      ? {
-          name: "Projects",
-          MeshIcon: IconVR,
-          handler: () => {
-            setStatus(StatusEnum.Project);
-          },
+          handleClick: getModalHandler(props.type),
         }
       : props.type === CAT.MAGAZINE
       ? {
           name: "Magazine",
           MeshIcon: IconMagazine,
-          handler: getHandler(props.type),
+          handleClick: getModalHandler(props.type),
         }
-      : { name: "XREAL", MeshIcon: IconXreal, handler: getHandler(props.type) };
+      : props.type === CAT.Xreal
+      ? {
+          name: "XREAL",
+          MeshIcon: IconXreal,
+          handleClick: getModalHandler(props.type),
+        }
+      : {
+          name: "Projects",
+          MeshIcon: IconVR,
+          handleClick: () => {
+            setStatus(StatusEnum.Project);
+          },
+        };
 
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
   useCursor(hovered && status === StatusEnum.Category);
 
   const { scale } = useSpring({
-    scale: status !== StatusEnum.Category ? 0 : hovered ? SCALE_RATIO : 1,
+    scale: hovered ? SCALE_RATIO : 1,
     config: SCALE_CONFIG,
-    delay: status !== StatusEnum.Category ? DISPOSE_DELAY : 0,
+  });
+  const { scale_dispose } = useSpring({
+    scale_dispose: status !== StatusEnum.Category ? 0 : 1,
+    config: SCALE_CONFIG,
+    delay: DISPOSE_DELAY,
   });
   return (
-    <group rotation-x={Math.PI}>
+    <animated.group rotation-x={Math.PI} scale={scale_dispose}>
       <animated.group
         position={props.position}
         scale={scale}
@@ -99,16 +111,16 @@ function Icon(props: Icon) {
         onPointerLeave={() => {
           setHovered(false);
         }}
-        onClick={handler}
+        onClick={handleClick}
       >
         <MeshIcon hovered={hovered} />
       </animated.group>
       <CatText name={name} position={props.position} />
-    </group>
+    </animated.group>
   );
 }
 
-function getHandler(type: CAT) {
+function getModalHandler(type: CAT) {
   const { open } = useModalControl();
 
   // React.useEffect(() => {
@@ -148,12 +160,13 @@ const CatText = React.memo(
     return (
       <Text
         color={"#FFFFFF"}
-        position={[props.position[0] + 0.5, 0.1, props.position[2] + 0.6]}
+        position={[props.position[0], 0.08, props.position[2] + 0.55]}
         fontSize={0.2}
+        font="/assets/fonts/IBMPlexSans-Bold.woff"
         rotation-x={Math.PI / 2}
         rotation-z={Math.PI}
         rotation-y={Math.PI}
-        anchorX={"right"}
+        anchorX={"center"}
         anchorY={"top"}
         material={textMat}
         children={props.name}
@@ -216,4 +229,4 @@ const IconXreal = React.memo(({ hovered }: { hovered: boolean }) => {
   );
 });
 
-export default Icon;
+export default CatIcon;

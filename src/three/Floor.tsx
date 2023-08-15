@@ -1,10 +1,10 @@
 import { Globals } from "@react-spring/three";
 import { BlackTile, WhiteTile, IconTile, IconTileWrapper } from "./Tile";
-import { SCALE_CONFIG, SCALE_RATIO } from "@/constants/springConfig";
 import { CAT } from "@/constants/category";
 
-import Icon from "./CatIcon";
+import CatIcon from "./CatIcon";
 import Button from "./Button";
+import ProIcons from "./ProIcon";
 
 Globals.assign({ frameLoop: "always" });
 /* TODO
@@ -13,8 +13,8 @@ Cannot call the manual advancement of rafz whilst frameLoop is not set as demand
 
 const MIN_COLUMN = 2;
 const MIN_ROW = 2;
-const MAX_COLUMN = 10;
-const MAX_ROW = 10;
+const MAX_COLUMN = 15;
+const MAX_ROW = 15;
 
 function BlackTiles() {
   return (
@@ -87,7 +87,7 @@ function WhiteTiles() {
 function ButtonTile() {
   return (
     <IconTileWrapper position={[0, 0, 0]} isWhite={true}>
-      <Icon type={CAT.Xreal} position={[0, 0.1, 0]} />
+      <CatIcon type={CAT.Xreal} position={[0, 0.1, 0]} />
       <Button position={[0, 0, 0]} />
     </IconTileWrapper>
   );
@@ -115,6 +115,7 @@ function Floor(props: { cat?: boolean }) {
     <>
       <BlackTiles />
       <IconTiles {...props} />
+      <ProIcons />
       <WhiteTiles />
     </>
   );
