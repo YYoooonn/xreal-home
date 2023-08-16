@@ -90,9 +90,7 @@ export const DropBtn = style({
 export const DropDown = style({
   position: "relative",
   display: "inline-block",
-  selectors: {
-    // "&:hover": {DropdownContent.display: "block"}
-  },
+  selectors: {},
 });
 
 export const DropdownContent = style({
@@ -102,5 +100,7 @@ export const DropdownContent = style({
   minWidth: 106,
   zIndex: 1,
 
-  selectors: {},
+  selectors: {
+    [`${DropDown}:hover &`]: { display: "block" },
+  },
 });

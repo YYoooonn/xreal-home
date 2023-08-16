@@ -2,9 +2,9 @@ import Floor from "@/three/Floor";
 import { Canvas } from "@react-three/fiber";
 import { OrthographicCamera, OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
-import GuideUI from "@/components/pages/projects/guideUI";
-import UI from "@/components/pages/projects/UI";
 import useFlipped from "@/hooks/useFlipped";
+import ProjectsPageUI from "@/components/pages/projects/UI";
+import GuideUI from "@/components/pages/projects/GuideUI";
 
 export default function ProjectsPage() {
   useFlipped();
@@ -31,7 +31,7 @@ export default function ProjectsPage() {
         </Canvas>
       </div>
       <GuideUI />
-      <UI />
+      <ProjectsPageUI />
     </>
   );
 }
