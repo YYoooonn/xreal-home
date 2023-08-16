@@ -1,6 +1,9 @@
 import { useProgress } from "@react-three/drei";
 import * as styles from "./LoadingPage.css";
 import React from "react";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { progress } from "../pages/projects/ProgressBar.css";
+import Floor from "@/three/Floor";
 
 const pos = [
   [0, 0],
@@ -59,6 +62,8 @@ const pos = [
 
 export default function LoadingPage() {
   const { progress } = useProgress();
+  console.log(progress);
+
   return (
     <section className={styles.loadingSection}>
       <div className={styles.logo}>
@@ -66,7 +71,8 @@ export default function LoadingPage() {
       </div>
       <div
         className={styles.progressBar}
-        style={{ backgroundSize: `${1.2 * Math.floor(progress)}%` }}
+        // style={{ backgroundSize: `${Math.floor(progress)}%` }}
+        style={assignInlineVars({ [styles.progress]: progress.toString() })}
       />
     </section>
   );

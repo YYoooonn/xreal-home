@@ -1,4 +1,5 @@
-import { style, keyframes } from "@vanilla-extract/css";
+import Floor from "@/three/Floor";
+import { style, keyframes, createVar } from "@vanilla-extract/css";
 
 export const loadingSection = style({
   position: "fixed",
@@ -55,19 +56,20 @@ export const logoBox = style({
   width: side,
   height: side,
   backgroundColor: "black",
-  animation: `${loadingLogo} 3s ease infinite`,
+  animation: `${loadingLogo} 3s linear infinite`,
 });
 
 const loadingBar = keyframes({
   "100%": {
-    backgroundSize: "120%",
+    backgroundSize: "100%",
   },
 });
 
+export const progress = createVar();
 export const progressBar = style({
   width: "320px",
   height: "8px",
   mask: "linear-gradient(90deg, #000 70%, #0000 0) 0/2.5%",
   background: "linear-gradient(#000 0 0) 0/0% no-repeat #ffffff",
-  backgroundSize: "120%",
+  backgroundSize: `${progress}%`,
 });

@@ -13,7 +13,7 @@ export default function GuideUI() {
   return (
     <>
       {visible && (
-        <div className={styles.GuideUI} onClick={removeElement}>
+        <div className={styles.GuideUI} onWheel={removeElement}>
           <Image
             src="/assets/images/scrollGuide.png"
             alt="scroll"

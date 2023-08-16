@@ -64,6 +64,28 @@ export const CategoryButton = style({
   },
 });
 
+export const DropdownCategoryButton = style({
+  marginRight: 32,
+  borderRadius: 8,
+  border: "none",
+  width: 106,
+  height: 40,
+  fontWeight: "bold",
+  color: "white",
+  textAlign: "center",
+  lineHeight: "40px",
+  backgroundColor: "rgba(100,100,100,0%)",
+  cursor: "pointer",
+  selectors: {
+    "&:hover": {
+      background: "rgba(100,100,100,30%)",
+    },
+    "&:focus": {
+      backgroundColor: "rgba(100,100,100,100%)",
+    },
+  },
+});
+
 export const DropBtn = style({
   border: "none",
   marginTop: 32,

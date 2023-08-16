@@ -1,21 +1,16 @@
-import Image from "next/image";
 import { useState } from "react";
-import * as styles from "./UI.css";
+import * as styles from "./ProjectsPageUI.css";
 import ArrowLeftIcon from "@/assets/icons/arrowLeft";
 import IconButton from "@/components/IconButton";
 import Link from "next/link";
 // import ProgressBar from "./ProgressBar";
 
-function dropdown() {
-  document.getElementById("DropdownCategories")?.classList.toggle("show");
-}
-
 export default function ProjectsPageUI() {
-  const [otherCategory, setOtherCategory] = useState(false);
+  // const [otherCategory, setOtherCategory] = useState(false);
 
-  const toggleCategory = () => {
-    setOtherCategory(!otherCategory);
-  };
+  // const toggleCategory = () => {
+  //   setOtherCategory(!otherCategory);
+  // };
 
   return (
     <>
@@ -35,16 +30,20 @@ export default function ProjectsPageUI() {
           <button className={styles.CategoryButton}>WEB3</button>
           <button className={styles.CategoryButton}>STUDY</button>
           <div className={styles.DropDown}>
-            <button className={`${styles.DropBtn}`} onClick={dropdown}>
-              OTHER
-            </button>
+            <button className={`${styles.DropBtn}`}>OTHER</button>
             <div id="DropdownCategories" className={styles.DropdownContent}>
-              <button className={styles.CategoryButton}>AI</button>
-              <button className={styles.CategoryButton}>Media Art</button>
-              <button className={styles.CategoryButton}>NFT</button>
-              <button className={styles.CategoryButton}>UXUI</button>
-              <button className={styles.CategoryButton}>360 영상</button>
-              <button className={styles.CategoryButton}>Virtual Human</button>
+              <button className={styles.DropdownCategoryButton}>AI</button>
+              <button className={styles.DropdownCategoryButton}>
+                Media Art
+              </button>
+              <button className={styles.DropdownCategoryButton}>NFT</button>
+              <button className={styles.DropdownCategoryButton}>UXUI</button>
+              <button className={styles.DropdownCategoryButton}>
+                360 영상
+              </button>
+              <button className={styles.DropdownCategoryButton}>
+                Virtual Human
+              </button>
             </div>
           </div>
         </div>
