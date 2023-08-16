@@ -7,18 +7,7 @@ import { SCALE_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 
 import positions from "./_data/positions";
-
-const urlProjectTile = "/assets/models/projects/Tile_Project.glb";
-const urlProjectImoji = "/assets/models/projects/Imoji_Fire.glb";
-useGLTF.preload(urlProjectImoji);
-useGLTF.preload(urlProjectTile);
-
-interface ImojiGLTF extends GLTF {
-  nodes: { Emoji_Fire: Mesh };
-}
-interface TileGLTF extends GLTF {
-  nodes: { Tile_Project: Group };
-}
+import { urlProjectTile, urlProjectImoji } from "@/assets/models";
 
 type Imoji = {
   title: string;
@@ -39,7 +28,7 @@ const TextMat = new MeshStandardMaterial({
 
 function ProjectIcon(props: Imoji) {
   const { status } = useStatus();
-  const { nodes } = useGLTF(urlProjectTile) as TileGLTF;
+  const { nodes } = useGLTF(urlProjectTile);
 
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
@@ -81,7 +70,7 @@ function ProjectIcon(props: Imoji) {
 }
 
 function Imoji({ name, hovered }: { name: string; hovered: boolean }) {
-  const { nodes } = useGLTF(urlProjectImoji) as ImojiGLTF;
+  const { nodes } = useGLTF(urlProjectImoji);
   return (
     <mesh
       rotation-x={-Math.PI / 2}

@@ -1,26 +1,11 @@
 import { config, animated, useSpring } from "@react-spring/three";
-import { Mesh, MeshStandardMaterial, DoubleSide } from "three";
+import { MeshStandardMaterial, DoubleSide } from "three";
 import { useGLTF, useCursor } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber";
-import { GLTF } from "three-stdlib";
 import React from "react";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import { DISPOSE_DELAY, SCALE_CONFIG } from "@/constants/springConfig";
-type GLTFButton = GLTF & {
-  nodes: {
-    Button001: Mesh;
-  };
-};
-type GLTFArrow = GLTF & {
-  nodes: {
-    Arrow: Mesh;
-  };
-};
-
-const urlButton = "/assets/models/Button.glb";
-const urlArrow = "/assets/models/Arrow.glb";
-useGLTF.preload(urlButton);
-useGLTF.preload(urlArrow);
+import { urlArrow, urlButton } from "@/assets/models";
 
 // TODO 임의로 설정
 const hoveredMaterial = new MeshStandardMaterial();
@@ -28,7 +13,7 @@ hoveredMaterial.color.set("hotpink");
 hoveredMaterial.side = DoubleSide;
 
 function Button(props: { position: [x: number, y: number, z: number] }) {
-  const { nodes } = useGLTF(urlButton) as GLTFButton;
+  const { nodes } = useGLTF(urlButton);
   const { status, setStatus } = useStatus();
   const isMain = status === StatusEnum.Main;
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
@@ -77,7 +62,7 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
 }
 
 function Arrow(props: { hovered: boolean }) {
-  const ArrowGLTF = useGLTF(urlArrow) as GLTFArrow;
+  const ArrowGLTF = useGLTF(urlArrow);
   const { y } = useSpring({
     y: props.hovered ? -0.4 : 0,
     config: config.wobbly,

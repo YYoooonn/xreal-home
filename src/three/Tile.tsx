@@ -1,20 +1,12 @@
 import React, { ReactElement } from "react";
 import { useGLTF } from "@react-three/drei";
-import { GLTF } from "three-stdlib";
-import { Group, Mesh } from "three";
+import { Mesh } from "three";
 import { RotationWrapper } from "../components/spring/RotationWrapper";
 import CatIcon from "./CatIcon";
 import { CAT } from "@/constants/category";
-
-const urlTile = "/assets/models/Tile.glb";
-useGLTF.preload(urlTile);
+import { urlTile } from "@/assets/models";
 
 type Position = [x: number, y: number, z: number];
-type GLTFTile = GLTF & {
-  nodes: {
-    Tile: Group;
-  };
-};
 type IconTileProps = {
   children: JSX.Element | JSX.Element[];
   position: [x: number, y: number, z: number];
@@ -26,8 +18,9 @@ type ItemTileProps = {
   handler?: () => void;
 };
 
-const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
-  const { nodes } = useGLTF(urlTile) as GLTFTile;
+function Tile({ isWhite }: { isWhite: boolean }) {
+  const { nodes } = useGLTF(urlTile);
+
   return (
     <group rotation-x={isWhite ? Math.PI : 0}>
       {nodes.Tile.children.map((child, i) => {
@@ -35,14 +28,14 @@ const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
           return (
             <mesh castShadow name="Tile" key={i}>
               <bufferGeometry {...child.geometry} />
-              <material attach={"material"} {...child.material} />
+              <material attach="material" {...child.material} />
             </mesh>
           );
         }
       })}
     </group>
   );
-});
+}
 
 function BlackTile(props: { position: Position }) {
   return (
