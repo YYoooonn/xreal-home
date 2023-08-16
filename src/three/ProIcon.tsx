@@ -5,22 +5,24 @@ import { Mesh, DoubleSide, MeshStandardMaterial, Group, Vector3 } from "three";
 import { GLTF } from "three-stdlib";
 import { SCALE_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
-
 import positions from "./_data/positions";
 
 const urlProjectTile = "/assets/models/projects/Tile_Project.glb";
-const urlProjectImoji = "/assets/models/projects/Imoji_Fire.glb";
-useGLTF.preload(urlProjectImoji);
+const urlEmojiFire = "/assets/models/projects/Emoji_fire.glb";
+const urlEmojiGriningFace = "/assets/models/projects/Emoji_grinning_face.glb";
+useGLTF.preload(urlEmojiFire);
+useGLTF.preload(urlEmojiGriningFace);
 useGLTF.preload(urlProjectTile);
 
-interface ImojiGLTF extends GLTF {
-  nodes: { Emoji_Fire: Mesh };
+interface EmojiGLTF extends GLTF {
+  nodes: { Emoji_fire: Mesh };
 }
+
 interface TileGLTF extends GLTF {
   nodes: { Tile_Project: Group };
 }
 
-type Imoji = {
+type EmojiProps = {
   title: string;
   icon: string;
   position: [x: number, y: number, z: number] | Vector3;
@@ -37,7 +39,7 @@ const TextMat = new MeshStandardMaterial({
   side: DoubleSide,
 });
 
-function ProjectIcon(props: Imoji) {
+function ProjectIcon(props: EmojiProps) {
   const { status } = useStatus();
   const { nodes } = useGLTF(urlProjectTile) as TileGLTF;
 
@@ -63,7 +65,7 @@ function ProjectIcon(props: Imoji) {
           console.log("clicked");
         }}
       >
-        <Imoji name={props.icon} hovered={hovered} />
+        <Emoji name={props.icon} hovered={hovered} />
         <ProjectText name={"Project"} hovered={hovered} />
       </group>
       {nodes.Tile_Project.children.map((child, i) => {
@@ -80,17 +82,27 @@ function ProjectIcon(props: Imoji) {
   );
 }
 
-const Imoji = React.memo((props: { name: string; hovered: boolean }) => {
-  const { nodes } = useGLTF(urlProjectImoji) as ImojiGLTF;
+// TODO 모델링 네이밍 변경 요청
+const Emoji = React.memo((props: { name: string; hovered: boolean }) => {
+  const isFire = Math.random() > 0.5;
+  const { nodes } = isFire
+    ? (useGLTF(urlEmojiFire) as any)
+    : (useGLTF(urlEmojiGriningFace) as any);
   return (
     <mesh
-      rotation-x={-Math.PI / 2}
-      rotation-y={Math.PI}
-      rotation-z={(2 * Math.PI) / 7}
-      position={[0.35, 0.2, -0.3]}
+      rotation-y={isFire ? -Math.PI / 4 : -Math.PI / 6}
+      position={[0, 0.15, 0]}
       scale={1}
-      geometry={nodes.Emoji_Fire.geometry}
-      material={props.hovered ? InvisibleMat : nodes.Emoji_Fire.material}
+      geometry={
+        isFire ? nodes.Emoji_fire.geometry : nodes.Emoji_grinning_face.geometry
+      }
+      material={
+        props.hovered
+          ? InvisibleMat
+          : isFire
+          ? nodes.Emoji_fire.material
+          : nodes.Emoji_grinning_face.material
+      }
     />
   );
 });

@@ -17,6 +17,7 @@ import {
   DISPOSE_DELAY,
 } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
+import useUrl from "@/hooks/useUrl";
 
 const urlEvent = "/assets/models/Cate_Event_Model.glb";
 const urlJoinUs = "/assets/models/Cate_Joinus_Model.glb";
@@ -84,6 +85,7 @@ function CatIcon(props: Icon) {
           MeshIcon: IconVR,
           handleClick: () => {
             setStatus(StatusEnum.Project);
+            useUrl("projects");
           },
         };
 

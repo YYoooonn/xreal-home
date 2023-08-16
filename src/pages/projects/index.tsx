@@ -1,37 +1,24 @@
-import Floor from "@/three/Floor";
-import { Canvas } from "@react-three/fiber";
-import { OrthographicCamera, OrbitControls } from "@react-three/drei";
-import Lights from "@/three/Lightings";
-import useFlipped from "@/hooks/useFlipped";
+import useProjectStatus from "@/hooks/useProjectStatus";
 import ProjectsPageUI from "@/components/pages/projects/ProjectsPageUI";
 import GuideUI from "@/components/pages/projects/guideUI";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import LoadingPage from "@/components/loading/LoadingPage";
+
+const Scene = dynamic(() => import("@/three/Scene"), {
+  ssr: false,
+});
 
 export default function ProjectsPage() {
-  useFlipped();
+  useProjectStatus();
 
   return (
-    <>
+    <Suspense fallback={<LoadingPage />}>
       <div className="canvas">
-        <Canvas shadows frameloop="demand">
-          <Lights />
-          <Floor cat={true} />
-          <OrthographicCamera
-            makeDefault
-            castShadow
-            position={[100, 80, 100]}
-            near={0.001}
-            far={10000}
-            zoom={150}
-          />
-          <OrbitControls
-            makeDefault={false}
-            enableRotate={false}
-            enableZoom={false}
-          />
-        </Canvas>
+        <Scene />
       </div>
       <GuideUI />
       <ProjectsPageUI />
-    </>
+    </Suspense>
   );
 }

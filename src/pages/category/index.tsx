@@ -1,26 +1,20 @@
-import Floor from "@/three/Floor";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import Lights from "@/three/Lightings";
-import Camera from "@/three/Camera";
 import useFlipped from "@/hooks/useFlipped";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import LoadingPage from "@/components/loading/LoadingPage";
+
+const Scene = dynamic(() => import("@/three/Scene"), {
+  ssr: false,
+});
 
 export default function CategoryPage() {
   useFlipped();
 
   return (
-    <div className="canvas">
-      <Canvas shadows frameloop="demand">
-        <Lights />
-        <Floor cat={true} />
-        <Camera />
-        <OrbitControls
-          enablePan={false}
-          makeDefault={false}
-          enableRotate={false}
-          enableZoom={false}
-        />
-      </Canvas>
-    </div>
+    <Suspense fallback={<LoadingPage />}>
+      <div className="canvas">
+        <Scene />
+      </div>
+    </Suspense>
   );
 }

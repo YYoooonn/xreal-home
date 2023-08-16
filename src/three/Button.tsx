@@ -6,6 +6,7 @@ import { GLTF } from "three-stdlib";
 import React from "react";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import { DISPOSE_DELAY, SCALE_CONFIG } from "@/constants/springConfig";
+import useUrl from "@/hooks/useUrl";
 type GLTFButton = GLTF & {
   nodes: {
     Button001: Mesh;
@@ -35,11 +36,7 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
     if (isMain) {
       setStatus(StatusEnum.Category);
       // XXX: url이동
-      history.pushState(
-        { ...history.state, as: "category", url: "category" },
-        "",
-        "category"
-      );
+      useUrl("category");
     }
   };
   // 호버 처리

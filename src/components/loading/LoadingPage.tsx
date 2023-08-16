@@ -62,8 +62,8 @@ const pos = [
 
 export default function LoadingPage() {
   const { progress } = useProgress();
-  console.log(progress);
-
+  // console.log(progress);
+  // TODO Spans 미리 만들어 주는 방법은?
   return (
     <section className={styles.loadingSection}>
       <div className={styles.logo}>
@@ -79,6 +79,7 @@ export default function LoadingPage() {
 }
 
 const Spans = React.memo(() => {
+  // console.log("spans called");
   return (
     <>
       {Array.from({ length: 51 }, (_, i) => (

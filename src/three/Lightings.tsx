@@ -61,32 +61,22 @@ function ProjectLights() {
     <>
       <color attach="background" args={["#000000"]} />
       <ambientLight intensity={0.6} color={"#FFFFFF"} />
-      <PointLihgtwithHelper
-        position={[1.8, 0.1, -2]}
-        intensity={3}
-        color={"#7FFFD4"}
-      />
-      <PointLihgtwithHelper
-        position={[-2, 0.1, 2]}
-        intensity={3}
-        color={"#7FFFD4"}
-      />
-      <PointLihgtwithHelper
-        position={[-2, 0.1, -2]}
-        intensity={3}
-        color={"#7FFFD4"}
-      />
-      <PointLihgtwithHelper
-        position={[2, 0.1, 2]}
-        intensity={3}
-        color={"#7FFFD4"}
-      />
-      <SpotLightwithHelper
-        position={[0, 9, 0]}
-        distance={10}
-        intensity={10}
-        color={"#FFFFFF"}
-      />
+      {Array.from({ length: 5 }).map((_, i) => {
+        return (
+          <group key={i} position={[15 * i, 0, 0]}>
+            <PointLihgtwithHelper
+              position={[0, 2, 0]}
+              intensity={3}
+              color={"#7FFFD4"}
+            />
+            <PointLihgtwithHelper
+              position={[7, 2, 0]}
+              intensity={3}
+              color={"#7FFFD4"}
+            />
+          </group>
+        );
+      })}
     </>
   );
 }
