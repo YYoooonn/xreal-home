@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as styles from "./ProgressBar.css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 
+// TODO: Progress bar 구현(레퍼런스 보고 코드 가져오기만 한 상태입니다)
 // Generate some dummy data
 const DUMMY_DATA = Array.from({ length: 100 }, (x, i) => {
   return {

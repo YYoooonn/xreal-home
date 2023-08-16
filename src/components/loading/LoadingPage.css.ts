@@ -1,4 +1,3 @@
-import Floor from "@/three/Floor";
 import { style, keyframes, createVar } from "@vanilla-extract/css";
 
 export const loadingSection = style({

@@ -1,6 +1,6 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 
-export const ProjectsUI = style({
+export const projectsUI = style({
   position: "absolute",
   top: 0,
   width: "100%",
@@ -10,7 +10,7 @@ export const ProjectsUI = style({
   alignItems: "start",
 });
 
-export const LeftBtn = style({
+export const leftBtn = style({
   marginTop: 3 * 8,
   marginLeft: 4 * 8,
   display: "flex",
@@ -25,7 +25,7 @@ export const breadcrumbContainer = style({
   color: "white",
 });
 
-export const BackToPreviousPageButton = style({
+export const backToPreviousPageButton = style({
   marginTop: 4 * 8,
   marginLeft: 4 * 8,
   transform: "rotate(270deg)",
@@ -33,7 +33,7 @@ export const BackToPreviousPageButton = style({
   padding: 10,
 });
 
-export const Category = style({
+export const category = style({
   margin: 32,
   display: "flex",
   flexDirection: "row",
@@ -41,7 +41,7 @@ export const Category = style({
   alignItems: "start",
 });
 
-export const CategoryButton = style({
+export const categoryButton = style({
   marginTop: 32,
   marginRight: 32,
   borderRadius: 8,
@@ -64,7 +64,7 @@ export const CategoryButton = style({
   },
 });
 
-export const DropdownCategoryButton = style({
+export const dropdownCategoryButton = style({
   marginRight: 32,
   borderRadius: 8,
   border: "none",
@@ -86,7 +86,7 @@ export const DropdownCategoryButton = style({
   },
 });
 
-export const DropBtn = style({
+export const dropBtn = style({
   border: "none",
   marginTop: 32,
   marginRight: 32,
@@ -109,13 +109,13 @@ export const DropBtn = style({
   },
 });
 
-export const DropDown = style({
+export const dropDown = style({
   position: "relative",
   display: "inline-block",
   selectors: {},
 });
 
-export const DropdownContent = style({
+export const dropdownContent = style({
   display: "none",
   position: "absolute",
   backgroundColor: "rgba(100,100,100,0%)",
@@ -123,6 +123,6 @@ export const DropdownContent = style({
   zIndex: 1,
 
   selectors: {
-    [`${DropDown}:hover &`]: { display: "block" },
+    [`${dropDown}:hover &`]: { display: "block" },
   },
 });
