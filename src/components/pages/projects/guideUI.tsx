@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import * as styles from "./GuideUI.css";
+import * as styles from "./guideUI.css";
 
 export default function GuideUI() {
   const [visible, setVisible] = useState(true);

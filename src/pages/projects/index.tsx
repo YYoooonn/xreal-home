@@ -4,7 +4,7 @@ import { OrthographicCamera, OrbitControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
 import useFlipped from "@/hooks/useFlipped";
 import ProjectsPageUI from "@/components/pages/projects/ProjectsPageUI";
-import GuideUI from "@/components/pages/projects/GuideUI";
+import GuideUI from "@/components/pages/projects/guideUI";
 
 export default function ProjectsPage() {
   useFlipped();
