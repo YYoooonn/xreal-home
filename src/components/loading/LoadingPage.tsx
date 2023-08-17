@@ -78,7 +78,7 @@ export default function LoadingPage() {
   );
 }
 
-const Spans = React.memo(() => {
+function Spans() {
   // console.log("spans called");
   return (
     <>
@@ -94,4 +94,4 @@ const Spans = React.memo(() => {
       ))}
     </>
   );
-});
+}

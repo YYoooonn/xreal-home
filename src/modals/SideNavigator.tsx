@@ -18,7 +18,7 @@ export default function SideNavigator({ tabs }: SideNavigatorProps) {
       />
       {tabs.map((tab, i) => (
         <button
-          key={tab}
+          key={i}
           onClick={scrollToIndex(i)}
           className={
             styles.sideNavigatorTab +

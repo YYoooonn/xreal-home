@@ -1,26 +1,16 @@
-import { useGLTF, useCursor, Text, Float } from "@react-three/drei";
+import { useGLTF, useCursor, Text } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/three";
 import React, { useState } from "react";
-import { Mesh, DoubleSide, MeshStandardMaterial, Group, Vector3 } from "three";
-import { GLTF } from "three-stdlib";
+import { Mesh, DoubleSide, MeshStandardMaterial, Vector3 } from "three";
 import { SCALE_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import positions from "./_data/positions";
-
-const urlProjectTile = "/assets/models/projects/Tile_Project.glb";
-const urlEmojiFire = "/assets/models/projects/Emoji_fire.glb";
-const urlEmojiGriningFace = "/assets/models/projects/Emoji_grinning_face.glb";
-useGLTF.preload(urlEmojiFire);
-useGLTF.preload(urlEmojiGriningFace);
-useGLTF.preload(urlProjectTile);
-
-interface EmojiGLTF extends GLTF {
-  nodes: { Emoji_fire: Mesh };
-}
-
-interface TileGLTF extends GLTF {
-  nodes: { Tile_Project: Group };
-}
+import {
+  urlProjectTile,
+  urlProjectImoji,
+  urlEmojiFire,
+  urlEmojiGriningFace,
+} from "@/assets/models";
 
 type EmojiProps = {
   title: string;
@@ -41,7 +31,7 @@ const TextMat = new MeshStandardMaterial({
 
 function ProjectIcon(props: EmojiProps) {
   const { status } = useStatus();
-  const { nodes } = useGLTF(urlProjectTile) as TileGLTF;
+  const { nodes } = useGLTF(urlProjectTile);
 
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
@@ -83,31 +73,22 @@ function ProjectIcon(props: EmojiProps) {
 }
 
 // TODO 모델링 네이밍 변경 요청
-const Emoji = React.memo((props: { name: string; hovered: boolean }) => {
+function Emoji(props: { name: string; hovered: boolean }) {
   const isFire = Math.random() > 0.5;
-  const { nodes } = isFire
-    ? (useGLTF(urlEmojiFire) as any)
-    : (useGLTF(urlEmojiGriningFace) as any);
+  const { nodes } = useGLTF(isFire ? urlEmojiFire : urlEmojiGriningFace);
+
   return (
     <mesh
       rotation-y={isFire ? -Math.PI / 4 : -Math.PI / 6}
       position={[0, 0.15, 0]}
       scale={1}
-      geometry={
-        isFire ? nodes.Emoji_fire.geometry : nodes.Emoji_grinning_face.geometry
-      }
-      material={
-        props.hovered
-          ? InvisibleMat
-          : isFire
-          ? nodes.Emoji_fire.material
-          : nodes.Emoji_grinning_face.material
-      }
+      geometry={nodes.Emoji_Fire.geometry}
+      material={props.hovered ? InvisibleMat : nodes.Emoji_Fire.material}
     />
   );
-});
+}
 
-const ProjectText = React.memo((props: { name: string; hovered: boolean }) => {
+function ProjectText({ name, hovered }: { name: string; hovered: boolean }) {
   return (
     <Text
       position={[0, 0.5, 0]}
@@ -116,15 +97,16 @@ const ProjectText = React.memo((props: { name: string; hovered: boolean }) => {
       rotation-y={Math.PI / 4}
       fontSize={0.3}
       font={"/assets/fonts/IBMPlexSans-Bold.woff"}
-      material={props.hovered ? TextMat : InvisibleMat}
+      material={hovered ? TextMat : InvisibleMat}
       outlineBlur={0.06}
       outlineWidth={0.06}
       outlineOpacity={0.25}
       outlineColor={"white"}
-      children={props.name}
-    />
+    >
+      {name}
+    </Text>
   );
-});
+}
 
 function ProIcons() {
   return (
