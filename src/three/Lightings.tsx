@@ -2,17 +2,22 @@ import { PointLightProps, SpotLightProps } from "@react-three/fiber";
 import { useHelper } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 import { PointLightHelper, SpotLightHelper, SpotLight } from "three";
-import { useStatus, StatusEnum } from "@/hooks/useStatus";
+// import { useStatus, StatusEnum } from "@/hooks/useStatus";
+
+// TODO 수정 필요, 라이팅 때문에 화면 끊김 발생
+// function Lights() {
+//   const { status } = useStatus();
+//   if (status === StatusEnum.Main) {
+//     return <MainLights />;
+//   } else if (status === StatusEnum.Category) {
+//     return <CategoryLights />;
+//   } else {
+//     return <ProjectLights />;
+//   }
+// }
 
 function Lights() {
-  const { status } = useStatus();
-  if (status === StatusEnum.Main) {
-    return <MainLights />;
-  } else if (status === StatusEnum.Category) {
-    return <CategoryLights />;
-  } else {
-    return <ProjectLights />;
-  }
+  return <CategoryLights />;
 }
 
 function MainLights() {

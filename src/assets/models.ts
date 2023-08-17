@@ -9,7 +9,6 @@ export const urlXreal = "/assets/models/Cate_XREAL_Model.glb";
 export const urlButton = "/assets/models/Button.glb";
 export const urlArrow = "/assets/models/Arrow.glb";
 export const urlProjectTile = "/assets/models/projects/Tile_Project.glb";
-export const urlProjectImoji = "/assets/models/projects/Imoji_Fire.glb";
 export const urlTile = "/assets/models/Tile.glb";
 export const urlEmojiFire = "/assets/models/projects/Emoji_fire.glb";
 export const urlEmojiGriningFace =
@@ -21,7 +20,6 @@ useGLTF.preload(urlProject);
 useGLTF.preload(urlXreal);
 useGLTF.preload(urlButton);
 useGLTF.preload(urlArrow);
-useGLTF.preload(urlProjectImoji);
 useGLTF.preload(urlProjectTile);
 useGLTF.preload(urlTile);
 useGLTF.preload(urlEmojiFire);
@@ -37,7 +35,8 @@ declare module "three-stdlib" {
       Cate_XREAL_Model?: Mesh;
       Button001: Mesh;
       Arrow: Mesh;
-      Emoji_Fire: Mesh;
+      Emoji_fire: Mesh;
+      Emoji_grinning_face: Mesh;
       Tile_Project: Group;
       Tile: Mesh;
     };

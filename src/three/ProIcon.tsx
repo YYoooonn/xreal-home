@@ -1,16 +1,16 @@
 import { useGLTF, useCursor, Text } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/three";
 import React, { useState } from "react";
-import { Mesh, DoubleSide, MeshStandardMaterial, Vector3 } from "three";
+import { Mesh, Vector3 } from "three";
 import { SCALE_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import positions from "./_data/positions";
 import {
   urlProjectTile,
-  urlProjectImoji,
   urlEmojiFire,
   urlEmojiGriningFace,
 } from "@/assets/models";
+import { invisibleMat, projectTextMat } from "@/assets/materials";
 
 type EmojiProps = {
   title: string;
@@ -18,16 +18,6 @@ type EmojiProps = {
   position: [x: number, y: number, z: number] | Vector3;
   handler?: () => void;
 };
-
-const InvisibleMat = new MeshStandardMaterial({
-  transparent: true,
-  opacity: 0,
-  side: DoubleSide,
-});
-const TextMat = new MeshStandardMaterial({
-  color: "#ffffff",
-  side: DoubleSide,
-});
 
 function ProjectIcon(props: EmojiProps) {
   const { status } = useStatus();
@@ -72,18 +62,27 @@ function ProjectIcon(props: EmojiProps) {
   );
 }
 
-// TODO 모델링 네이밍 변경 요청
 function Emoji(props: { name: string; hovered: boolean }) {
   const isFire = Math.random() > 0.5;
   const { nodes } = useGLTF(isFire ? urlEmojiFire : urlEmojiGriningFace);
+  // TODO emoji 추가 되면 수정 예정
+  const { geometry, material } = isFire
+    ? {
+        geometry: nodes.Emoji_fire.geometry,
+        material: nodes.Emoji_fire.material,
+      }
+    : {
+        geometry: nodes.Emoji_grinning_face.geometry,
+        material: nodes.Emoji_grinning_face.material,
+      };
 
   return (
     <mesh
       rotation-y={isFire ? -Math.PI / 4 : -Math.PI / 6}
       position={[0, 0.15, 0]}
       scale={1}
-      geometry={nodes.Emoji_Fire.geometry}
-      material={props.hovered ? InvisibleMat : nodes.Emoji_Fire.material}
+      geometry={geometry}
+      material={props.hovered ? invisibleMat : material}
     />
   );
 }
@@ -97,7 +96,7 @@ function ProjectText({ name, hovered }: { name: string; hovered: boolean }) {
       rotation-y={Math.PI / 4}
       fontSize={0.3}
       font={"/assets/fonts/IBMPlexSans-Bold.woff"}
-      material={hovered ? TextMat : InvisibleMat}
+      material={hovered ? projectTextMat : invisibleMat}
       outlineBlur={0.06}
       outlineWidth={0.06}
       outlineOpacity={0.25}

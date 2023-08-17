@@ -13,7 +13,7 @@ import {
 } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import pushHistory from "@/hooks/pushHistory";
-import { textMat, hoveredMaterial } from "@/assets/materials";
+import { textMat, hoveredMat } from "@/assets/materials";
 
 type Icon = {
   type: CAT;
@@ -151,7 +151,7 @@ function MeshIcon({
   return (
     <mesh
       geometry={nodes[modelName]?.geometry}
-      material={hovered ? hoveredMaterial : nodes[modelName]?.material}
+      material={hovered ? hoveredMat : nodes[modelName]?.material}
     />
   );
 }
