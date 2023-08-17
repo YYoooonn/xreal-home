@@ -1,25 +1,17 @@
 import React, { ReactElement } from "react";
 import { Instance, Instances, useGLTF } from "@react-three/drei";
-import { GLTF } from "three-stdlib";
-import { Color, Mesh } from "three";
 import { RotationWrapper } from "../components/spring/RotationWrapper";
 import CatIcon from "./CatIcon";
 import { CAT } from "@/constants/category";
+import { urlTile } from "@/assets/models";
 import * as utils from "@/three/utils/compute";
 
-const urlTile = "/assets/models/Tile.glb";
-useGLTF.preload(urlTile);
+type Position = [x: number, y: number, z: number];
 
 const TRANS_DIST = 15;
 const MAX_COLUMN = 30;
 const MAX_ROW = 30;
 
-type GLTFTile = GLTF & {
-  nodes: {
-    Tile: Mesh;
-  };
-};
-type Position = [number, number, number];
 type IconTileProps = {
   children: JSX.Element | JSX.Element[];
   position: Position;
@@ -30,8 +22,9 @@ type ItemTileProps = {
   position: Position;
 };
 
-const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
-  const { nodes } = useGLTF(urlTile) as GLTFTile;
+function Tile({ isWhite }: { isWhite: boolean }) {
+  const { nodes } = useGLTF(urlTile);
+
   return (
     <mesh
       rotation-x={isWhite ? Math.PI : 0}
@@ -39,7 +32,7 @@ const Tile = React.memo(({ isWhite }: { isWhite: boolean }) => {
       material={nodes.Tile.material}
     />
   );
-});
+}
 
 const IconTileWrapper = (props: IconTileProps): ReactElement => {
   return (
@@ -58,35 +51,33 @@ function IconTile({ position, type }: ItemTileProps) {
   );
 }
 
-const TileInstances = React.memo(
-  ({ isAdditional }: { isAdditional: boolean }) => {
-    const { nodes } = useGLTF(urlTile) as GLTFTile;
-    return (
-      <Instances
-        range={1000}
-        limit={1000}
-        geometry={nodes.Tile.geometry}
-        material={nodes.Tile.material}
-      >
-        {Array.from({ length: MAX_COLUMN }).map((_, i) =>
-          Array.from({ length: MAX_ROW }).map((_, j) => {
-            const { x, y } = { x: i - TRANS_DIST, y: j - TRANS_DIST };
-            const visible = isAdditional || utils.isEdgeOrCenter(x, y);
-            return (
-              visible && (
-                <TileInstance
-                  key={(i + 1) * (j + 1)}
-                  position={[x, 0, y]}
-                  isAdditional={isAdditional}
-                />
-              )
-            );
-          })
-        )}
-      </Instances>
-    );
-  }
-);
+function TileInstances({ isAdditional }: { isAdditional: boolean }) {
+  const { nodes } = useGLTF(urlTile);
+  return (
+    <Instances
+      range={1000}
+      limit={1000}
+      geometry={nodes.Tile.geometry}
+      material={nodes.Tile.material}
+    >
+      {Array.from({ length: MAX_COLUMN }).map((_, i) =>
+        Array.from({ length: MAX_ROW }).map((_, j) => {
+          const { x, y } = { x: i - TRANS_DIST, y: j - TRANS_DIST };
+          const visible = isAdditional || utils.isEdgeOrCenter(x, y);
+          return (
+            visible && (
+              <TileInstance
+                key={(i + 1) * (j + 1)}
+                position={[x, 0, y]}
+                isAdditional={isAdditional}
+              />
+            )
+          );
+        })
+      )}
+    </Instances>
+  );
+}
 
 function TileInstance({
   position,

@@ -29,7 +29,7 @@ function IconTiles({ removeButton }: { removeButton?: boolean }) {
   return (
     <group>
       <IconTile position={[-2, 0, 2]} type={CAT.Project} />
-      <IconTile position={[2, 0, 2]} type={CAT.Event} />
+      <IconTile position={[2, 0, 2]} type={CAT.Events} />
       <IconTile position={[2, 0, -2]} type={CAT.JoinUs} />
       <IconTile position={[-2, 0, -2]} type={CAT.MAGAZINE} />
       {Center}

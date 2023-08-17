@@ -5,7 +5,8 @@ import CommasIcon from "@/assets/icons/commas";
 import Chip from "./_components/Chip";
 
 export default function EventsPage() {
-  useEffect(useSideNav().collectData, []);
+  const { collectData } = useSideNav();
+  useEffect(() => collectData(), []);
 
   return (
     <div className={styles.pageContainer}>
