@@ -7,7 +7,6 @@ import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import positions from "./_data/positions";
 import {
   urlProjectTile,
-  urlProjectImoji,
   urlEmojiFire,
   urlEmojiGriningFace,
 } from "@/assets/models";
