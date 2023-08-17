@@ -2,8 +2,6 @@ import { useProgress } from "@react-three/drei";
 import * as styles from "./LoadingPage.css";
 import React from "react";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-import { progress } from "../pages/projects/ProgressBar.css";
-import Floor from "@/three/Floor";
 
 const pos = [
   [0, 0],

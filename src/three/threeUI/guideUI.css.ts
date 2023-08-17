@@ -2,7 +2,7 @@ import { style, globalStyle } from "@vanilla-extract/css";
 
 export const GuideUI = style({
   position: "absolute",
-  zIndex: "50",
+  zIndex: "1",
   top: "0",
   display: "flex",
   flexDirection: "column",
@@ -11,7 +11,7 @@ export const GuideUI = style({
   width: "100%",
   height: "100vh",
   border: "none",
-  backgroundColor: "rgba(0,0,0,40%)",
+  backgroundColor: "rgba(0,0,0,80%)",
 
   color: "white",
   textAlign: "center",
