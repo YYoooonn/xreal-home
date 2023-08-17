@@ -6,14 +6,22 @@ import { GLTF } from "three-stdlib";
 import React from "react";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import { DISPOSE_DELAY, SCALE_CONFIG } from "@/constants/springConfig";
+import useUrl from "@/hooks/useUrl";
 type GLTFButton = GLTF & {
   nodes: {
     Button001: Mesh;
   };
 };
+type GLTFArrow = GLTF & {
+  nodes: {
+    Arrow: Mesh;
+  };
+};
 
 const urlButton = "/assets/models/Button.glb";
+const urlArrow = "/assets/models/Arrow.glb";
 useGLTF.preload(urlButton);
+useGLTF.preload(urlArrow);
 
 // TODO 임의로 설정
 const hoveredMaterial = new MeshStandardMaterial();
@@ -24,16 +32,11 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
   const { nodes } = useGLTF(urlButton) as GLTFButton;
   const { status, setStatus } = useStatus();
   const isMain = status === StatusEnum.Main;
-  const newUrl = "cat";
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
     if (isMain) {
       setStatus(StatusEnum.Category);
       // XXX: url이동
-      window.history.pushState(
-        { ...window.history.state, as: newUrl, url: newUrl },
-        "",
-        "cat"
-      );
+      useUrl("category");
     }
   };
   // 호버 처리
@@ -44,7 +47,7 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
   // TODO 클릭된 경우 사라지게 만든 뒤 해당 조건 제거 필요
 
   const { scale } = useSpring({
-    scale: isMain ? 1 : 0, // 여기서 State를 읽어옴
+    scale: isMain ? 1 : 0,
     config: SCALE_CONFIG,
     delay: DISPOSE_DELAY,
   });
@@ -63,7 +66,24 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
     >
       <mesh
         geometry={nodes.Button001.geometry}
-        material={hovered ? hoveredMaterial : nodes.Button001.material}
+        material={nodes.Button001.material}
+      />
+      <Arrow hovered={hovered} />
+    </animated.group>
+  );
+}
+
+function Arrow(props: { hovered: boolean }) {
+  const ArrowGLTF = useGLTF(urlArrow) as GLTFArrow;
+  const { y } = useSpring({
+    y: props.hovered ? -0.4 : 0,
+    config: config.wobbly,
+  });
+  return (
+    <animated.group position-y={y}>
+      <mesh
+        geometry={ArrowGLTF.nodes.Arrow.geometry}
+        material={ArrowGLTF.nodes.Arrow.material}
       />
     </animated.group>
   );

@@ -1,13 +1,14 @@
 import React from "react";
-import { animated, useSpring, SpringConfig } from "@react-spring/three";
+import { animated, useSpring } from "@react-spring/three";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import { DELAY_RATIO, ROTATION_CONFIG } from "@/constants/springConfig";
+import * as utils from "@/three/utils/compute";
 
 type SpringProps = {
   children: JSX.Element | JSX.Element[];
   position: [x: number, y: number, z: number];
   delay: number;
-  isIcon: boolean;
+  rotateX: boolean;
   isActive: boolean;
   angle: number;
 };
@@ -18,43 +19,26 @@ type RotationProps = {
   isWhite: boolean;
   delay: number;
   status: StatusEnum;
-  isIcon: boolean;
+  rotateX: boolean;
 };
 
 type WrapperProps = {
   children: JSX.Element | JSX.Element[];
   position: [x: number, y: number, z: number];
   isWhite: boolean;
-  isIcon: boolean;
+  rotateX: boolean;
 };
-
-function computeDelay(position: [number, number, number], ratio: number) {
-  // 좌표 비율에 맞는 delay 생성
-  return (Math.abs(position[0]) + Math.abs(position[2])) * ratio + 10;
-}
-
-function computeRotation(angleDiff: number, isIcon?: boolean) {
-  //난수 생성, 임의의 방향으로 rotation 하도록
-  const rand = Math.floor(Math.random() * 4);
-  const angle = rand % 2 == 1 ? -angleDiff : angleDiff;
-  // icon들은 x방향으로만 돌도록, 뒤집힘 방지
-  if (rand < 1 || isIcon) {
-    return { x_angle: angle, z_angle: 0 };
-  } else {
-    return { x_angle: 0, z_angle: angle };
-  }
-}
 
 const ButtonRotationWrapper: React.FC<RotationProps> = (props) => {
   const angle = Math.PI;
-  const active = props.status !== StatusEnum.Main;
+  const active = props.status === StatusEnum.Category;
   return (
     <SpringRotationWrapper
       angle={angle}
       isActive={active}
       position={[0, 0, 0]}
       delay={props.delay}
-      isIcon={props.isIcon}
+      rotateX={props.rotateX}
     >
       {props.children}
     </SpringRotationWrapper>
@@ -62,7 +46,7 @@ const ButtonRotationWrapper: React.FC<RotationProps> = (props) => {
 };
 
 const ProjectRotationWrapper: React.FC<RotationProps> = (props) => {
-  const angle = props.isWhite ? Math.PI : 2 * Math.PI;
+  const angle = props.isWhite ? 2 * Math.PI : Math.PI;
   const active = props.status === StatusEnum.Project;
   return (
     <SpringRotationWrapper
@@ -70,7 +54,7 @@ const ProjectRotationWrapper: React.FC<RotationProps> = (props) => {
       isActive={active}
       position={props.position}
       delay={props.delay}
-      isIcon={props.isIcon}
+      rotateX={props.rotateX}
     >
       {props.children}
     </SpringRotationWrapper>
@@ -78,24 +62,19 @@ const ProjectRotationWrapper: React.FC<RotationProps> = (props) => {
 };
 
 const SpringRotationWrapper: React.FC<SpringProps> = (props) => {
-  const angleDiff = computeRotation(props.angle, props.isIcon);
+  const angle = utils.computeRotation(props.angle);
 
-  const { rotation_x } = useSpring({
-    rotation_x: props.isActive ? angleDiff.x_angle : 0,
+  const { rotation } = useSpring({
+    rotation: props.isActive ? angle : 0,
     delay: props.delay,
     config: ROTATION_CONFIG,
   });
 
-  const { rotation_z } = useSpring({
-    rotation_z: props.isActive ? angleDiff.z_angle : 0,
-    delay: props.delay,
-    config: ROTATION_CONFIG,
-  });
   return (
     <animated.group
       position={props.position}
-      rotation-x={rotation_x}
-      rotation-z={rotation_z}
+      rotation-x={props.rotateX ? rotation : undefined}
+      rotation-z={props.rotateX ? undefined : rotation}
     >
       {props.children}
     </animated.group>
@@ -104,7 +83,7 @@ const SpringRotationWrapper: React.FC<SpringProps> = (props) => {
 
 const RotationWrapper: React.FC<WrapperProps> = (props) => {
   const { status } = useStatus();
-  const delay = computeDelay(props.position, DELAY_RATIO);
+  const delay = utils.computeDelay(props.position, DELAY_RATIO);
   return (
     <ProjectRotationWrapper delay={delay} status={status} {...props}>
       <ButtonRotationWrapper delay={delay} status={status} {...props}>
