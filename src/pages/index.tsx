@@ -1,24 +1,18 @@
-import Floor from "@/three/Floor";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import Lights from "@/three/Lightings";
-import Camera from "@/three/Camera";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import LoadingPage from "@/components/loading/LoadingPage";
 
-export default function Home() {
+// XXX dynamic 내부 옵션의 loading 말고 suspense 내부에 넣어야 useProgress 반영됨, 나중에 체크
+const Scene = dynamic(() => import("@/three/Scene"), {
+  ssr: false,
+});
+
+export default function HomePage() {
   return (
-    <div className="canvas">
-      <Canvas shadows frameloop="demand">
-        <color attach="background" args={["#000000"]} />
-        <Lights />
-        <Floor cat={false} />
-        <Camera />
-        <OrbitControls
-          enablePan={false}
-          makeDefault={false}
-          enableRotate={false}
-          enableZoom={false}
-        />
-      </Canvas>
-    </div>
+    <Suspense fallback={<LoadingPage />}>
+      <div className="canvas">
+        <Scene />
+      </div>
+    </Suspense>
   );
 }

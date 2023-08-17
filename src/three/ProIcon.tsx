@@ -1,15 +1,18 @@
-import { useGLTF, useCursor, Text, Float } from "@react-three/drei";
+import { useGLTF, useCursor, Text } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/three";
 import React, { useState } from "react";
-import { Mesh, DoubleSide, MeshStandardMaterial, Group, Vector3 } from "three";
-import { GLTF } from "three-stdlib";
+import { Mesh, DoubleSide, MeshStandardMaterial, Vector3 } from "three";
 import { SCALE_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
-
 import positions from "./_data/positions";
-import { urlProjectTile, urlProjectImoji } from "@/assets/models";
+import {
+  urlProjectTile,
+  urlProjectImoji,
+  urlEmojiFire,
+  urlEmojiGriningFace,
+} from "@/assets/models";
 
-type Imoji = {
+type EmojiProps = {
   title: string;
   icon: string;
   position: [x: number, y: number, z: number] | Vector3;
@@ -26,7 +29,7 @@ const TextMat = new MeshStandardMaterial({
   side: DoubleSide,
 });
 
-function ProjectIcon(props: Imoji) {
+function ProjectIcon(props: EmojiProps) {
   const { status } = useStatus();
   const { nodes } = useGLTF(urlProjectTile);
 
@@ -52,7 +55,7 @@ function ProjectIcon(props: Imoji) {
           console.log("clicked");
         }}
       >
-        <Imoji name={props.icon} hovered={hovered} />
+        <Emoji name={props.icon} hovered={hovered} />
         <ProjectText name={"Project"} hovered={hovered} />
       </group>
       {nodes.Tile_Project.children.map((child, i) => {
@@ -69,17 +72,18 @@ function ProjectIcon(props: Imoji) {
   );
 }
 
-function Imoji({ name, hovered }: { name: string; hovered: boolean }) {
-  const { nodes } = useGLTF(urlProjectImoji);
+// TODO 모델링 네이밍 변경 요청
+function Emoji(props: { name: string; hovered: boolean }) {
+  const isFire = Math.random() > 0.5;
+  const { nodes } = useGLTF(isFire ? urlEmojiFire : urlEmojiGriningFace);
+
   return (
     <mesh
-      rotation-x={-Math.PI / 2}
-      rotation-y={Math.PI}
-      rotation-z={(2 * Math.PI) / 7}
-      position={[0.35, 0.2, -0.3]}
+      rotation-y={isFire ? -Math.PI / 4 : -Math.PI / 6}
+      position={[0, 0.15, 0]}
       scale={1}
       geometry={nodes.Emoji_Fire.geometry}
-      material={hovered ? InvisibleMat : nodes.Emoji_Fire.material}
+      material={props.hovered ? InvisibleMat : nodes.Emoji_Fire.material}
     />
   );
 }

@@ -5,6 +5,7 @@ import { ThreeEvent } from "@react-three/fiber";
 import React from "react";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import { DISPOSE_DELAY, SCALE_CONFIG } from "@/constants/springConfig";
+import pushHistory from "@/hooks/pushHistory";
 import { urlArrow, urlButton } from "@/assets/models";
 
 // TODO 임의로 설정
@@ -20,11 +21,7 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
     if (isMain) {
       setStatus(StatusEnum.Category);
       // XXX: url이동
-      history.pushState(
-        { ...history.state, as: "category", url: "category" },
-        "",
-        "category"
-      );
+      pushHistory("category");
     }
   };
   // 호버 처리

@@ -12,6 +12,7 @@ import {
   DISPOSE_DELAY,
 } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
+import pushHistory from "@/hooks/pushHistory";
 import { textMat, hoveredMaterial } from "@/assets/materials";
 
 type Icon = {
@@ -60,8 +61,12 @@ function CatIcon(props: Icon) {
   const { status, setStatus } = useStatus();
   const { open } = useModalControl();
   const handleClick = () => {
-    if (props.type == CAT.Project) setStatus(StatusEnum.Project);
-    else open(MainModal, { name: props.type });
+    if (props.type == CAT.Project) {
+      setStatus(StatusEnum.Project);
+      pushHistory("projects");
+    } else {
+      open(MainModal, { name: props.type });
+    }
   };
 
   // 뒤집힌 경우에만 hover 가능하도록

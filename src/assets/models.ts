@@ -11,6 +11,9 @@ export const urlArrow = "/assets/models/Arrow.glb";
 export const urlProjectTile = "/assets/models/projects/Tile_Project.glb";
 export const urlProjectImoji = "/assets/models/projects/Imoji_Fire.glb";
 export const urlTile = "/assets/models/Tile.glb";
+export const urlEmojiFire = "/assets/models/projects/Emoji_fire.glb";
+export const urlEmojiGriningFace =
+  "/assets/models/projects/Emoji_grinning_face.glb";
 useGLTF.preload(urlEvent);
 useGLTF.preload(urlJoinUs);
 useGLTF.preload(urlMagazine);
@@ -21,6 +24,8 @@ useGLTF.preload(urlArrow);
 useGLTF.preload(urlProjectImoji);
 useGLTF.preload(urlProjectTile);
 useGLTF.preload(urlTile);
+useGLTF.preload(urlEmojiFire);
+useGLTF.preload(urlEmojiGriningFace);
 
 declare module "three-stdlib" {
   interface GLTF {
@@ -34,7 +39,7 @@ declare module "three-stdlib" {
       Arrow: Mesh;
       Emoji_Fire: Mesh;
       Tile_Project: Group;
-      Tile: Group;
+      Tile: Mesh;
     };
   }
 }
