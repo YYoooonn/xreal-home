@@ -1,7 +1,6 @@
 import { useModalControl } from "@/modals/ModalControlProvider";
 import MainModal from "@/modals/BasePageModal";
-import React, { useRef } from "react";
-import { inter_plex_sans, pretendard_variable } from "@/assets/fonts";
+import React from "react";
 
 export default function ModalPage() {
   const { open, addEventListener, removeEventListener } = useModalControl();
@@ -19,7 +18,6 @@ export default function ModalPage() {
 
   return (
     <div
-      className={`${inter_plex_sans.variable} ${pretendard_variable.variable}`}
       style={{
         backgroundImage: "url(/assets/images/background.png)",
         height: "100vh",
