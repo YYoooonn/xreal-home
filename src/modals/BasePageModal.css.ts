@@ -1,9 +1,10 @@
+import { breakpoints } from "@/styles/breakpoints";
 import { style, globalStyle } from "@vanilla-extract/css";
 
 export const pageModalContainer = style({
   position: "fixed",
   inset: 0,
-  padding: `40px ${6 * 8}px`,
+  padding: `40px 48px`,
   pointerEvents: "auto",
   overflowY: "auto",
   selectors: {
@@ -13,6 +14,9 @@ export const pageModalContainer = style({
       inset: 0,
       pointerEvents: "none",
     },
+  },
+  "@media": {
+    [breakpoints.lowTablet]: { padding: 0 },
   },
 });
 
@@ -26,6 +30,9 @@ export const pageModalSidebar = style({
   backdropFilter: "blur(10px)",
   backgroundColor: "rgba(100%, 100%, 100%, 48%)",
   borderRadius: "33px 0 0 33px",
+  "@media": {
+    [breakpoints.lowTablet]: { borderRadius: "0 0 0 0", display: "none" },
+  },
 });
 
 export const pageModalSidebarInWrapper = style({
@@ -59,6 +66,9 @@ export const pageModalMain = style({
   display: "flex",
   flexDirection: "column",
   overflowY: "auto",
+  "@media": {
+    [breakpoints.lowTablet]: { borderRadius: "0 0 0 0" },
+  },
 });
 
 export const pageModalHeader = style({
@@ -69,7 +79,10 @@ export const pageModalHeader = style({
 
 export const pageModalBody = style({
   flex: 1,
-  padding: `0 ${8 * 8}px`,
+  padding: "0 48px",
+  "@media": {
+    [breakpoints.lowTablet]: { padding: 0 },
+  },
 });
 
 export const pageModalFooter = style({
@@ -80,7 +93,8 @@ export const pageModalFooter = style({
 
 export const pageModalFooterLinks = style({
   display: "flex",
-  gap: "100px",
+  flexWrap: "wrap",
+  gap: "10px 100px",
   fontWeight: "bold",
   color: "black",
 });

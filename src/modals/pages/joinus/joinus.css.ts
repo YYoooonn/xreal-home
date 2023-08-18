@@ -1,3 +1,4 @@
+import { breakpoints } from "@/styles/breakpoints";
 import { theme } from "@/styles/theme.css";
 import { createVar, keyframes, style } from "@vanilla-extract/css";
 
@@ -195,6 +196,7 @@ export const groupRecruitCardItem = style({
 
 export const eventList = style({
   display: "flex",
+  flexWrap: "wrap",
   gap: "40px",
   marginTop: "40px",
 });
@@ -204,6 +206,12 @@ export const eventContainer = style({
   flexDirection: "column",
   gap: "16px",
   width: "calc(50% - 20px)",
+
+  "@media": {
+    ["(" + breakpoints.tablet + ") or (" + breakpoints.lowTablet + ")"]: {
+      width: "100%",
+    },
+  },
 });
 
 export const eventImage = style({
@@ -222,14 +230,12 @@ const slideDown = keyframes({
   from: {
     height: 0,
   },
-  to: {
-    height: 70,
-  },
+  to: { height: "var(--radix-accordion-content-height)" },
 });
 
 const slideUp = keyframes({
   from: {
-    height: 70,
+    height: "var(--radix-accordion-content-height)",
   },
   to: {
     height: 0,
@@ -256,7 +262,6 @@ export const accordionTrigger = style({
   background: "none",
   border: "none",
 });
-
 export const accordionItem = style({
   borderRadius: "10px",
   ...theme.textStyle.body2,
@@ -272,7 +277,6 @@ export const accordionItem = style({
 
 export const accordionContent = style({
   overflow: "hidden",
-  height: 70,
   margin: "0px 24px",
   selectors: {
     "&[data-state='open']": {
@@ -286,7 +290,7 @@ export const accordionContent = style({
 
 export const accordionChevron = style({
   height: "30px",
-  width: "30px",
+  minWidth: "30px",
   margin: "24px 24px 0 0",
   transition: "all 300ms cubic-bezier(0.87, 0, 0.13, 1)",
   borderRadius: "50%",
