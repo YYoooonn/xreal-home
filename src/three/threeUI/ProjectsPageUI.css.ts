@@ -1,16 +1,8 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 
-export const projectsUI = style({
+export const leftBtn = style({
   position: "absolute",
   top: 0,
-  width: "100%",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "start",
-});
-
-export const leftBtn = style({
   marginTop: 3 * 8,
   marginLeft: 4 * 8,
   display: "flex",
@@ -34,6 +26,9 @@ export const backToPreviousPageButton = style({
 });
 
 export const category = style({
+  position: "absolute",
+  top: 0,
+  right: 0,
   margin: 32,
   display: "flex",
   flexDirection: "row",

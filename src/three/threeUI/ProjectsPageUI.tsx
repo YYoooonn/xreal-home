@@ -14,7 +14,7 @@ export default function ProjectsPageUI(props: any) {
   return (
     <>
       {/* <ProgressBar/> */}
-      <div className={styles.projectsUI}>
+      <div>
         <div className={styles.leftBtn}>
           <div className={styles.breadcrumbContainer}>{`home > projects`}</div>
           <IconButton
