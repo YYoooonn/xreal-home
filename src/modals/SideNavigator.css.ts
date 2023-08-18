@@ -7,6 +7,8 @@ export const sideNavigatorContainer = style({
   marginLeft: 3 * 8,
   gap: 8,
   textTransform: "uppercase",
+  width: "calc(100% - 48px)",
+  alignSelf: "end",
 });
 
 export const currentIndex = createVar();

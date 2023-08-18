@@ -22,8 +22,7 @@ export const pageModalInWrapper = style({
 
 export const pageModalSidebar = style({
   width: "300px",
-  padding: 3 * 8,
-  paddingRight: 0,
+  padding: "24px 0",
   backdropFilter: "blur(10px)",
   backgroundColor: "rgba(100%, 100%, 100%, 48%)",
   borderRadius: "33px 0 0 33px",
@@ -34,21 +33,22 @@ export const pageModalSidebarInWrapper = style({
   inset: 0,
   display: "flex",
   flexDirection: "column",
-  gap: 150 + 2 * 6 * 8,
+  alignItems: "center",
+  gap: 30,
+  marginTop: 2 * 8,
 });
 
 export const breadcrumbContainer = style({
   textTransform: "uppercase",
   fontWeight: "bold",
-  marginTop: 2 * 8,
-  marginLeft: 3 * 8,
   color: "white",
 });
 
 export const veryBigModelIcon = style({
-  position: "absolute",
-  width: 150,
-  height: 150,
+  position: "relative",
+  width: "150px",
+  height: "150px",
+  alignSelf: "center",
 });
 
 export const pageModalMain = style({

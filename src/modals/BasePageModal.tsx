@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import Image from "next/image";
 import { useModalControl, ModalProps } from "./ModalControlProvider";
 import IconButton from "@/components/IconButton";
 import ArrowUpIcon from "@/assets/icons/arrowUp";
@@ -63,7 +62,14 @@ export default function BasePageModal({
               <div
                 className={styles.breadcrumbContainer}
               >{`home > ${name}`}</div>
-              <div className={styles.veryBigModelIcon}></div>
+              <div className={styles.veryBigModelIcon}>
+                <Image
+                  src={`/assets/images/modalPages/${name}.png`}
+                  alt={`${name}'s icon`}
+                  fill
+                  sizes="10vw"
+                />
+              </div>
               <SideNavigator tabs={tabs} />
             </div>
           </aside>
