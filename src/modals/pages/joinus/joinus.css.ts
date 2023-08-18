@@ -75,7 +75,7 @@ export const memberFolderCommaIcon = style({
 
 export const memberFolderLabel = style({
   fontWeight: 700,
-  fontSize: "calc(var(--width) * 0.12)",
+  fontSize: "min(22px, calc(var(--width) * 0.12))",
   textAlign: "center",
 });
 
