@@ -1,5 +1,7 @@
 import Image from "next/image";
 import * as styles from "./Chip.css";
+import chipHoveredUrl from "@public/assets/images/chip_hovered.png";
+import chipUrl from "@public/assets/images/chip.png";
 
 export default function Chip({
   children,
@@ -8,20 +10,8 @@ export default function Chip({
 }: React.PropsWithElementProps<HTMLDivElement>) {
   return (
     <div className={styles.container + " " + className} {...props}>
-      <Image
-        src="/assets/images/chip_hovered.png"
-        alt=""
-        fill
-        sizes="192px"
-        className={styles.hoveredImage}
-      />
-      <Image
-        src="/assets/images/chip.png"
-        alt=""
-        fill
-        sizes="192px"
-        className={styles.image}
-      />
+      <Image src={chipHoveredUrl} alt="" fill className={styles.hoveredImage} />
+      <Image src={chipUrl} alt="" fill className={styles.image} />
       <div className={styles.overlay}>{children}</div>
     </div>
   );
