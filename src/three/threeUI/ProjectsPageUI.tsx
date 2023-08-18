@@ -1,8 +1,6 @@
-import { useState } from "react";
 import * as styles from "./ProjectsPageUI.css";
 import ArrowLeftIcon from "@/assets/icons/arrowLeft";
 import IconButton from "@/components/IconButton";
-import Link from "next/link";
 import ProgressBar from "./ProgressBar";
 
 export default function ProjectsPageUI(props: any) {

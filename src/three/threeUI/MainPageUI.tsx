@@ -1,8 +1,4 @@
-import { useState } from "react";
-import * as styles from "./ProjectsPageUI.css";
-import ArrowLeftIcon from "@/assets/icons/arrowLeft";
-import IconButton from "@/components/IconButton";
-import Link from "next/link";
+import * as styles from "./MainPageUI.css";
 import Image from "next/image";
 
 export default function MainPageUI() {
@@ -13,8 +9,9 @@ export default function MainPageUI() {
         alt="XREAL"
         width={190}
         height={40}
-        className="styles.logo"
+        className={styles.logo}
       />
+      <div className={styles.recruiting}>5th Recruiting</div>
     </>
   );
 }

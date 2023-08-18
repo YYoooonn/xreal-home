@@ -8,12 +8,20 @@ export default function ThreeUI() {
   const handleClick = () => {
     setStatus(StatusEnum.Category);
   };
+
+  const isCategory = status === StatusEnum.Category;
   const isProject = status === StatusEnum.Project;
-  return isProject ? (
-    <ProjectPageUI onClickHandler={handleClick} />
-  ) : (
-    <MainPageUI />
+  return (
+    <>
+      {isCategory && <MainPageUI />}
+      {isProject && <ProjectPageUI />}
+    </>
   );
+  // isProject ? (
+  //   <ProjectPageUI onClickHandler={handleClick} />
+  // ) : (
+  //   <MainPageUI />
+  // );
 }
 
 function ProjectPageUI(props: any) {
