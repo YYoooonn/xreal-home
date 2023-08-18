@@ -20,8 +20,8 @@ const pageTabMap = {
     Page: dynamic(() => import("./pages/events")),
   },
   joinus: {
-    tabs: ["members", "recruiting", "sponser"],
-    Page: dynamic(() => import("./pages/joinus")),
+    tabs: ["members", "sponser", "recruiting"],
+    Page: dynamic(() => import("./pages/joinus/joinus")),
   },
   magazine: {
     tabs: [

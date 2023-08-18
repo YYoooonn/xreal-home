@@ -17,6 +17,11 @@ const title = style({
   ...theme.textStyle.heading3,
 });
 
+const secondTitle = style({
+  ...theme.textStyle.heading4,
+  marginBottom: 8,
+});
+
 const subTitle = style({
   ...theme.textStyle.subtitle1,
   marginTop: 8,
@@ -30,6 +35,7 @@ const description = style({
 
 export const paragraph = {
   title,
+  secondTitle,
   subTitle,
   description,
 };
