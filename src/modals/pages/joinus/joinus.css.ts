@@ -121,6 +121,7 @@ export const recruitingLink = style({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
+  textDecoration: "none",
   gap: "24px",
   width: "100%",
   padding: "52px",
