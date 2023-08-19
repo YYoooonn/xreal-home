@@ -1,7 +1,7 @@
 import PressCard from "./_components/PressCard";
 import VisionCard from "./_components/VisionCard";
 import ReactFlow from "reactflow";
-import * as styles from "./xreal.css";
+import * as styles from "./page.css";
 import "reactflow/dist/base.css";
 import {
   curriculumEdges,

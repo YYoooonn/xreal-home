@@ -1,19 +1,11 @@
-import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/BasePageModal";
-import React from "react";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
 
 export default function ModalPage() {
-  const { open, addEventListener, removeEventListener } = useModalControl();
-
-  React.useEffect(() => {
-    const handleOpen = () => console.log("modal opened");
-    addEventListener("open", handleOpen);
-    return () => removeEventListener("open", handleOpen);
-  }, []);
+  const { push } = useModalRoute();
 
   const handleChange =
     (name: "xreal" | "events" | "joinus" | "magazine") => () => {
-      open(MainModal, { name });
+      push(name);
     };
 
   return (

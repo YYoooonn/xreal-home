@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import "@/styles/global.css";
 import { pretendard_variable, inter_plex_sans } from "@/assets/fonts";
 import Head from "next/head";
+import ModalRoutingProvider from "@/modals/ModalRoutingProvider";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,7 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
         `}</style>
       </Head>
       <ModalControlProvider>
-        <Component {...pageProps} />
+        <ModalRoutingProvider>
+          <Component {...pageProps} />
+        </ModalRoutingProvider>
       </ModalControlProvider>
     </>
   );
