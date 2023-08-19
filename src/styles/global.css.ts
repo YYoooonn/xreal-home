@@ -15,7 +15,6 @@ globalStyle("html, body, #__next", {
 
 globalStyle("a", {
   color: "inherit",
-  textDecoration: "none",
 });
 
 globalStyle("canvas", {
