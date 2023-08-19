@@ -1,7 +1,7 @@
 import { useSideNav } from "@/components/SideNavProvider";
 import { useEffect } from "react";
-import * as styles from "./_internal.css";
-import Chip from "./_components/Chip";
+import * as styles from "../_internal.css";
+import Chip from "../_components/Chip";
 
 export default function MagazinePage() {
   useEffect(useSideNav().collectData, []);

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { useSideNav } from "@/components/SideNavProvider";
 import { theme } from "@/styles/theme.css";
-import * as styles from "./joinus.css";
+import * as styles from "./page.css";
 import * as Accordion from "@radix-ui/react-accordion";
 
 import conferenceUrl from "@public/assets/images/conference.png";

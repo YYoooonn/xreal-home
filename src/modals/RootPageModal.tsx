@@ -1,16 +1,36 @@
+import Image from "next/image";
 import { useModalControl, ModalProps } from "./ModalControlProvider";
 import IconButton from "@/components/IconButton";
 import ArrowUpIcon from "@/assets/icons/arrowUp";
 import CloseIcon from "@/assets/icons/close";
+import SideNavigator from "./SideNavigator";
 
 import * as styles from "./BasePageModal.css";
 import SideNavProvider from "@/components/SideNavProvider";
 
-export default function BasePageModal({
+const pageTabMap: Record<rootPages, string[]> = {
+  xreal: ["vision", "organization", "curriculum", "press"],
+  events: ["methathon", "xmc", "activity"],
+  joinus: ["members", "sponser", "recruiting"],
+  magazine: [
+    "NEWSLETTER",
+    "XREAL'S GLOBAL MAGAZINE",
+    "XREAL'S DEEP DIVE",
+    "ENCYCLOPEDIA OF METAVERSE",
+  ],
+};
+
+export interface RootPageModalProps extends ModalProps {
+  name: rootPages;
+}
+
+export default function RootPageModal({
+  name,
   id,
   children,
-}: React.PropsWithChildren<ModalProps>) {
+}: React.PropsWithChildren<RootPageModalProps>) {
   const { close } = useModalControl();
+  const tabs = pageTabMap[name];
 
   const handleClose = () => {
     close(id);
@@ -25,6 +45,22 @@ export default function BasePageModal({
     <SideNavProvider>
       <div id="page-modal" className={styles.pageModalContainer}>
         <div className={styles.pageModalInWrapper}>
+          <aside className={styles.pageModalSidebar}>
+            <div className={styles.pageModalSidebarInWrapper}>
+              <div
+                className={styles.breadcrumbContainer}
+              >{`home > ${name}`}</div>
+              <div className={styles.veryBigModelIcon}>
+                <Image
+                  src={`/assets/images/modalPages/${name}.png`}
+                  alt={`${name}'s icon`}
+                  fill
+                  sizes="10vw"
+                />
+              </div>
+              <SideNavigator tabs={tabs} />
+            </div>
+          </aside>
           <div className={styles.pageModalMain}>
             <header className={styles.pageModalHeader}>
               <IconButton onClick={handleClose}>

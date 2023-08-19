@@ -1,8 +1,8 @@
 import { useSideNav } from "@/components/SideNavProvider";
 import { useEffect } from "react";
-import * as styles from "./_internal.css";
+import * as styles from "../_internal.css";
 import CommasIcon from "@/assets/icons/commas";
-import Chip from "./_components/Chip";
+import Chip from "../_components/Chip";
 
 export default function EventsPage() {
   const { collectData } = useSideNav();

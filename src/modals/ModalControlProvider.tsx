@@ -78,21 +78,19 @@ export default function ModalControlProvider({
     });
 
   return (
-    <>
-      <ModalControlContext.Provider
-        value={{
-          addEventListener,
-          removeEventListener,
-          open,
-          close,
-        }}
-      >
-        {children}
-        <NoSSR>
-          <ModalRenderer modals={modals} />
-        </NoSSR>
-      </ModalControlContext.Provider>
-    </>
+    <ModalControlContext.Provider
+      value={{
+        addEventListener,
+        removeEventListener,
+        open,
+        close,
+      }}
+    >
+      {children}
+      <NoSSR>
+        <ModalRenderer modals={modals} />
+      </NoSSR>
+    </ModalControlContext.Provider>
   );
 }
 
