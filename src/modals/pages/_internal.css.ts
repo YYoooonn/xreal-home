@@ -9,6 +9,7 @@ export const pageContainer = style({
 
 export const cardListContainer = style({
   display: "flex",
+  flexWrap: "wrap",
   gap: "48px",
   margin: "40px 0",
 });

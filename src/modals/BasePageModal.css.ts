@@ -89,12 +89,16 @@ export const pageModalFooter = style({
   display: "flex",
   justifyContent: "space-between",
   marginTop: "64px",
+  padding: "0 48px",
+  "@media": {
+    [breakpoints.lowTablet]: { padding: 0 },
+  },
 });
 
 export const pageModalFooterLinks = style({
   display: "flex",
   flexWrap: "wrap",
-  gap: "10px 100px",
+  gap: "10px 64px",
   fontWeight: "bold",
   color: "black",
 });
@@ -109,9 +113,6 @@ globalStyle(`${pageModalFooterLinks} a`, {
 });
 
 export const pageModalFooterScrollUpButton = style({
-  position: "fixed",
-  right: "95px",
-  bottom: "80px",
   background: "lightgray",
   padding: 10,
 });
