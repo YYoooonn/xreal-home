@@ -9,15 +9,17 @@ export const container = style({
   position: "relative",
 });
 export const hoveredImage = style({
-  display: "none",
+  transition: "opacity 300ms",
+  opacity: 0,
   selectors: {
-    [`${container}:hover &`]: { display: "block" },
+    [`${container}:hover &`]: { opacity: 1 },
   },
 });
 export const image = style({
-  display: "block",
+  transition: "opacity 300ms",
+  opacity: 1,
   selectors: {
-    [`${container}:hover &`]: { display: "none" },
+    [`${container}:hover &`]: { opacity: 0 },
   },
 });
 
