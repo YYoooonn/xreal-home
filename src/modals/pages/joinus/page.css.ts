@@ -254,6 +254,10 @@ export const accordionHeader = style({
 });
 
 export const accordionTrigger = style({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "12px",
   fontWeight: 500,
   padding: "24px",
   fontSize: "16px",
@@ -292,7 +296,6 @@ export const accordionContent = style({
 export const accordionChevron = style({
   height: "30px",
   minWidth: "30px",
-  margin: "24px 24px 0 0",
   transition: "all 300ms cubic-bezier(0.87, 0, 0.13, 1)",
   borderRadius: "50%",
   backgroundColor: "black",

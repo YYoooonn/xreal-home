@@ -259,10 +259,10 @@ export default function JoinusPage() {
               <Accordion.Header className={styles.accordionHeader}>
                 <Accordion.Trigger className={styles.accordionTrigger}>
                   {Q}
+                  <div className={styles.accordionChevron} aria-hidden>
+                    <CrampArrowUpIcon />
+                  </div>
                 </Accordion.Trigger>
-                <div className={styles.accordionChevron} aria-hidden>
-                  <CrampArrowUpIcon />
-                </div>
               </Accordion.Header>
               <Accordion.Content className={styles.accordionContent}>
                 <div className={styles.accordionContentText}>
