@@ -3,10 +3,13 @@ import { useEffect } from "react";
 import * as styles from "../_internal.css";
 import CommasIcon from "@/assets/icons/commas";
 import Chip from "../_components/Chip";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
 
 export default function EventsPage() {
   const { collectData } = useSideNav();
   useEffect(() => collectData(), []);
+
+  const { push } = useModalRoute();
 
   return (
     <div className={styles.pageContainer}>
@@ -25,7 +28,7 @@ export default function EventsPage() {
         </p>
         <div className={styles.cardListContainer}>
           {Array.from({ length: 4 }, (_, i) => (
-            <Chip key={i}>
+            <Chip key={i} onClick={() => push(`events/metathon/4th`)}>
               <CommasIcon />
               <p>{4 - i}기</p>
             </Chip>

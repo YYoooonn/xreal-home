@@ -1,6 +1,7 @@
 import NoSSR from "@/components/NoSSR";
 import React from "react";
 import { createPortal } from "react-dom";
+import ModalRoutingProvider from "./ModalRoutingProvider";
 
 interface ModalControllable {
   open: <MP extends ModalProps>(
@@ -51,17 +52,17 @@ export default function ModalControlProvider({
     props: Omit<MP, "id">
   ) => {
     listeners.open.forEach((l) => l());
-
+    const newID = totalCount + 1;
     setModals((rest) => ({
-      [totalCount]: <Modal {...(props as unknown as MP)} id={totalCount} />,
+      [newID]: <Modal {...(props as unknown as MP)} id={newID} />,
       ...rest,
     }));
-    setTotalCount((prev) => prev + 1);
-    return totalCount + 1;
+    setTotalCount(newID);
+    return newID;
   };
   const close = (id: number) => {
+    if (id == -1) return;
     listeners.close.forEach((l) => l());
-
     setModals(({ [id]: _, ...rest }) => rest);
   };
 
@@ -87,9 +88,11 @@ export default function ModalControlProvider({
       }}
     >
       {children}
-      <NoSSR>
-        <ModalRenderer modals={modals} />
-      </NoSSR>
+      <ModalRoutingProvider>
+        <NoSSR>
+          <ModalRenderer modals={modals} />
+        </NoSSR>
+      </ModalRoutingProvider>
     </ModalControlContext.Provider>
   );
 }

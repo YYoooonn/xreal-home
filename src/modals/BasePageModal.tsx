@@ -31,7 +31,6 @@ export default function BasePageModal({
                 <CloseIcon />
               </IconButton>
             </header>
-
             <main className={styles.pageModalBody}>{children}</main>
             <footer className={styles.pageModalFooter}>
               <div className={styles.pageModalFooterLinks}>

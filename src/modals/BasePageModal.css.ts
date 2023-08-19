@@ -21,6 +21,7 @@ export const pageModalContainer = style({
 });
 
 export const pageModalInWrapper = style({
+  minHeight: "100vh",
   display: "flex",
 });
 

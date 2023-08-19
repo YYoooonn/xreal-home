@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useModalControl, ModalProps } from "./ModalControlProvider";
+import type { ModalProps } from "./ModalControlProvider";
 import IconButton from "@/components/IconButton";
 import ArrowUpIcon from "@/assets/icons/arrowUp";
 import CloseIcon from "@/assets/icons/close";
@@ -7,6 +7,7 @@ import SideNavigator from "./SideNavigator";
 
 import * as styles from "./BasePageModal.css";
 import SideNavProvider from "@/components/SideNavProvider";
+import { useModalRoute } from "./ModalRoutingProvider";
 
 const pageTabMap: Record<rootPages, string[]> = {
   xreal: ["vision", "organization", "curriculum", "press"],
@@ -29,11 +30,11 @@ export default function RootPageModal({
   id,
   children,
 }: React.PropsWithChildren<RootPageModalProps>) {
-  const { close } = useModalControl();
+  const { close } = useModalRoute();
   const tabs = pageTabMap[name];
 
   const handleClose = () => {
-    close(id);
+    close();
   };
 
   const handleScrollup = () =>
