@@ -3,7 +3,6 @@ import SubPageModal from "@/modals/SubPageModal";
 import { useModalControl } from "@/modals/ModalControlProvider";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import type { ParsedUrlQuery } from "querystring";
 import React, { createContext, useContext, useEffect } from "react";
 
 const pageRoute = ["xreal", "events", "joinus", "magazine"];
@@ -17,8 +16,7 @@ const modalRoutingContext = createContext<ModalRoutingContext>({
   push: () => {},
 });
 
-function validatePath(path: ParsedUrlQuery[string]): path is modalPathType {
-  if (typeof path !== "string") return false;
+function validatePath(path: string): path is modalPathType {
   return pageRoute.includes(path);
 }
 
@@ -29,7 +27,13 @@ export default function ModalRoutingProvider({
   const router = useRouter();
 
   useEffect(() => {
-    const modalpath = router.query["modalpath"];
+    const { modalpath } = Object.fromEntries(
+      (router.asPath
+        .split("?")[1]
+        ?.split("&")
+        ?.map((query) => query.split("=")) ?? []) as [string, string][]
+    );
+
     if (!validatePath(modalpath)) return;
     push(modalpath);
   }, []);
