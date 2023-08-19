@@ -89,14 +89,26 @@ export default function BasePageModal({
                 <div>
                   <p>Contact us.</p>
                   <div>
-                    <a href={""}>contact@xreal.info</a>
+                    <a href="mailto:contact@xreal.info" target="_blank">
+                      contact@xreal.info
+                    </a>
                   </div>
                 </div>
                 <div>
                   <p>Follow us.</p>
                   <div>
-                    <a href={""}>Instagram</a>
-                    <a href={""}>Linkedin</a>
+                    <a
+                      href="https://www.instagram.com/xreal_snu/"
+                      target="_blank"
+                    >
+                      Instagram
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/company/xrealsnu/"
+                      target="_blank"
+                    >
+                      Linkedin
+                    </a>
                   </div>
                 </div>
               </div>
