@@ -7,8 +7,8 @@ import * as styles from "./page.css";
 import * as Accordion from "@radix-ui/react-accordion";
 
 import conferenceUrl from "@public/assets/images/conference.png";
-import kapehorn1Url from "@public/assets/images/kapehorn1.png";
-import kapehorn2Url from "@public/assets/images/kapehorn2.png";
+import kapehornUrl from "@public/assets/images/kapehorn.png";
+import unnotedUrl from "@public/assets/images/unnoted.png";
 import hackthonUrl from "@public/assets/images/hackthon.png";
 import folderUrl from "@public/assets/images/folder.png";
 import folderBlurUrl from "@public/assets/images/folderBlur.png";
@@ -68,13 +68,13 @@ export default function JoinusPage() {
         </p>
         <div className={styles.sponsorImageList}>
           <Image
-            src={kapehorn1Url}
-            alt="kapehorn1"
+            src={kapehornUrl}
+            alt="kapehorn"
             className={styles.sponsorImage}
           />
           <Image
-            src={kapehorn2Url}
-            alt="kapehorn2"
+            src={unnotedUrl}
+            alt="unnoted"
             className={styles.sponsorImage}
           />
         </div>
