@@ -4,16 +4,16 @@ import { globalStyle, style } from "@vanilla-extract/css";
 export * from "../_internal.css";
 export const visionList = style({
   marginTop: "40px",
+  overflowX: "scroll",
   display: "flex",
-  flexWrap: "wrap",
   justifyContent: "space-evenly",
-  gap: "100px",
+  gap: "24px",
 });
 
 export const pressListContainer = style({
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  gap: "32px 16px",
   margin: "0 auto",
 });
 

@@ -1,7 +1,7 @@
-import { inter_plex_sans, pretendard_variable } from "@/assets/fonts";
 import NoSSR from "@/components/NoSSR";
 import React from "react";
 import { createPortal } from "react-dom";
+import ModalRoutingProvider from "./ModalRoutingProvider";
 
 interface ModalControllable {
   open: <MP extends ModalProps>(
@@ -17,10 +17,7 @@ export interface ModalProps {
 
 function ModalRenderer({ modals }: { modals: Record<number, JSX.Element> }) {
   return createPortal(
-    <div
-      id="modals"
-      className={`${inter_plex_sans.variable} ${pretendard_variable.variable}`}
-    >
+    <div id="modals">
       {Object.entries(modals).map(([id, elem]) => (
         <React.Fragment key={id}>{elem}</React.Fragment>
       ))}
@@ -55,17 +52,17 @@ export default function ModalControlProvider({
     props: Omit<MP, "id">
   ) => {
     listeners.open.forEach((l) => l());
-
+    const newID = totalCount + 1;
     setModals((rest) => ({
-      [totalCount]: <Modal {...(props as unknown as MP)} id={totalCount} />,
+      [newID]: <Modal {...(props as unknown as MP)} id={newID} />,
       ...rest,
     }));
-    setTotalCount((prev) => prev + 1);
-    return totalCount + 1;
+    setTotalCount(newID);
+    return newID;
   };
   const close = (id: number) => {
+    if (id == -1) return;
     listeners.close.forEach((l) => l());
-
     setModals(({ [id]: _, ...rest }) => rest);
   };
 
@@ -82,21 +79,21 @@ export default function ModalControlProvider({
     });
 
   return (
-    <>
-      <ModalControlContext.Provider
-        value={{
-          addEventListener,
-          removeEventListener,
-          open,
-          close,
-        }}
-      >
-        {children}
+    <ModalControlContext.Provider
+      value={{
+        addEventListener,
+        removeEventListener,
+        open,
+        close,
+      }}
+    >
+      {children}
+      <ModalRoutingProvider>
         <NoSSR>
           <ModalRenderer modals={modals} />
         </NoSSR>
-      </ModalControlContext.Provider>
-    </>
+      </ModalRoutingProvider>
+    </ModalControlContext.Provider>
   );
 }
 

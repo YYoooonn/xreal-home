@@ -5,7 +5,8 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@public/*": ["./public/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
