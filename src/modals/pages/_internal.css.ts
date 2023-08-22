@@ -9,12 +9,18 @@ export const pageContainer = style({
 
 export const cardListContainer = style({
   display: "flex",
+  flexWrap: "wrap",
   gap: "48px",
-  marginTop: "40px",
+  margin: "40px 0",
 });
 
 const title = style({
   ...theme.textStyle.heading3,
+});
+
+const secondTitle = style({
+  ...theme.textStyle.heading4,
+  marginBottom: 8,
 });
 
 const subTitle = style({
@@ -30,6 +36,7 @@ const description = style({
 
 export const paragraph = {
   title,
+  secondTitle,
   subTitle,
   description,
 };

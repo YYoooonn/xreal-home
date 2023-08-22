@@ -63,7 +63,6 @@ const ProjectRotationWrapper: React.FC<RotationProps> = (props) => {
 
 const SpringRotationWrapper: React.FC<SpringProps> = (props) => {
   const angle = utils.computeRotation(props.angle);
-
   const { rotation } = useSpring({
     rotation: props.isActive ? angle : 0,
     delay: props.delay,
@@ -73,8 +72,8 @@ const SpringRotationWrapper: React.FC<SpringProps> = (props) => {
   return (
     <animated.group
       position={props.position}
-      rotation-x={props.rotateX ? rotation : undefined}
-      rotation-z={props.rotateX ? undefined : rotation}
+      rotation-x={props.rotateX ? rotation : 0}
+      rotation-z={props.rotateX ? 0 : rotation}
     >
       {props.children}
     </animated.group>

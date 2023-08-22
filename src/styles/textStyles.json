@@ -18,8 +18,9 @@
   },
   "heading4": {
     "fontFamily": "var(--font-inter-plex-sans)",
-    "fontWeight": "24px",
-    "fontSize": "28px"
+    "fontWeight": "600",
+    "fontSize": "24px",
+    "lineHeight": "28px"
   },
   "body1": {
     "fontWeight": "400",

@@ -1,8 +1,8 @@
 import { Edge, MarkerType, Node } from "reactflow";
 import "reactflow/dist/base.css";
 import flowchartDataset from "./flowchartDataset.json";
-import { reactflow } from "../xreal.css";
 import CurriculumEdge from "../_components/CurriculumEdge";
+import { reactflow } from "../page.css";
 
 const NODE_WIDTH = 135;
 const NODE_GAB = 60;

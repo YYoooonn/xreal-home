@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { MeshStandardMaterial } from "three";
 import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
-import { useModalControl } from "@/modals/ModalControlProvider";
-import MainModal from "@/modals/BasePageModal";
 import {
   SCALE_RATIO,
   SCALE_CONFIG,
@@ -14,6 +12,7 @@ import {
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import pushHistory from "@/hooks/pushHistory";
 import { textMat, hoveredMat } from "@/assets/materials";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
 
 type Icon = {
   type: CAT;
@@ -59,13 +58,13 @@ const map: Record<
 
 function CatIcon(props: Icon) {
   const { status, setStatus } = useStatus();
-  const { open } = useModalControl();
+  const { push } = useModalRoute();
   const handleClick = () => {
     if (props.type == CAT.Project) {
       setStatus(StatusEnum.Project);
       pushHistory("projects");
     } else {
-      open(MainModal, { name: props.type });
+      push(props.type);
     }
   };
 

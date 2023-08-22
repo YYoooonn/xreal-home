@@ -1,5 +1,4 @@
 import { globalStyle } from "@vanilla-extract/css";
-import { theme } from "./theme.css";
 
 globalStyle("*", {
   fontFamily: "var(--font-pretendard-variable)",
@@ -16,7 +15,6 @@ globalStyle("html, body, #__next", {
 
 globalStyle("a", {
   color: "inherit",
-  textDecoration: "none",
 });
 
 globalStyle("canvas", {
