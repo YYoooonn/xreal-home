@@ -35,8 +35,7 @@ declare module "three-stdlib" {
       Cate_XREAL_Model?: Mesh;
       Button001: Mesh;
       Arrow: Mesh;
-      Emoji_fire: Mesh;
-      Emoji_grinning_face: Mesh;
+      Emoji: Mesh;
       Tile_Project: Group;
       Tile: Mesh;
     };

@@ -53,6 +53,13 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
         geometry={nodes.Button001.geometry}
         material={nodes.Button001.material}
       />
+      <pointLight
+        castShadow
+        position={[0.5, 1, 0.5]}
+        distance={20}
+        intensity={1}
+        color={"#7FFFD4"}
+      />
       <Arrow hovered={hovered} />
     </animated.group>
   );

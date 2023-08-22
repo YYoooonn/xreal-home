@@ -65,24 +65,14 @@ function ProjectIcon(props: EmojiProps) {
 function Emoji(props: { name: string; hovered: boolean }) {
   const isFire = Math.random() > 0.5;
   const { nodes } = useGLTF(isFire ? urlEmojiFire : urlEmojiGriningFace);
-  // TODO emoji 추가 되면 수정 예정
-  const { geometry, material } = isFire
-    ? {
-        geometry: nodes.Emoji_fire.geometry,
-        material: nodes.Emoji_fire.material,
-      }
-    : {
-        geometry: nodes.Emoji_grinning_face.geometry,
-        material: nodes.Emoji_grinning_face.material,
-      };
 
   return (
     <mesh
       rotation-y={isFire ? -Math.PI / 4 : -Math.PI / 6}
       position={[0, 0.15, 0]}
       scale={1}
-      geometry={geometry}
-      material={props.hovered ? invisibleMat : material}
+      geometry={nodes.Emoji.geometry}
+      material={props.hovered ? invisibleMat : nodes.Emoji.material}
     />
   );
 }

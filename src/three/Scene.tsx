@@ -11,7 +11,7 @@ export default function Scene() {
       <Canvas shadows frameloop="demand">
         <color attach="background" args={["#000000"]} />
         <Lights />
-        <Floor removeButton={false} />
+        <Floor />
         <Camera />
         <OrbitControls
           enablePan={false}

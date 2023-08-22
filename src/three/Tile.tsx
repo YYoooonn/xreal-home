@@ -51,33 +51,36 @@ function IconTile({ position, type }: ItemTileProps) {
   );
 }
 
-function TileInstances({ isAdditional }: { isAdditional: boolean }) {
-  const { nodes } = useGLTF(urlTile);
-  return (
-    <Instances
-      range={1000}
-      limit={1000}
-      geometry={nodes.Tile.geometry}
-      material={nodes.Tile.material}
-    >
-      {Array.from({ length: MAX_COLUMN }).map((_, i) =>
-        Array.from({ length: MAX_ROW }).map((_, j) => {
-          const { x, y } = { x: i - TRANS_DIST, y: j - TRANS_DIST };
-          const visible = isAdditional || utils.isEdgeOrCenter(x, y);
-          return (
-            visible && (
-              <TileInstance
-                key={(i + 1) * (j + 1)}
-                position={[x, 0, y]}
-                isAdditional={isAdditional}
-              />
-            )
-          );
-        })
-      )}
-    </Instances>
-  );
-}
+const TileInstances = React.memo(
+  ({ isAdditional }: { isAdditional: boolean }) => {
+    const { nodes } = useGLTF(urlTile);
+    return (
+      <Instances
+        range={1000}
+        limit={1000}
+        geometry={nodes.Tile.geometry}
+        material={nodes.Tile.material}
+      >
+        {Array.from({ length: MAX_COLUMN }).map((_, i) =>
+          Array.from({ length: MAX_ROW }).map((_, j) => {
+            const { x, y } = { x: i - TRANS_DIST, y: j - TRANS_DIST };
+            const visible = isAdditional || utils.isEdgeOrCenter(x, y);
+            return (
+              visible && (
+                <TileInstance
+                  key={(i + 1) * (j + 1)}
+                  position={[x, 0, y]}
+                  isAdditional={isAdditional}
+                />
+              )
+            );
+          })
+        )}
+      </Instances>
+    );
+  }
+);
+TileInstances.displayName = "TileInstances";
 
 function TileInstance({
   position,

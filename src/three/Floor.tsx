@@ -5,6 +5,7 @@ import CatIcon from "./CatIcon";
 import Button from "./Button";
 import ProIcons from "./ProIcon";
 import { StatusEnum, useStatus } from "@/hooks/useStatus";
+import React from "react";
 
 Globals.assign({ frameLoop: "always" });
 /* TODO
@@ -20,7 +21,7 @@ function ButtonTile() {
   );
 }
 
-function IconTiles({ removeButton }: { removeButton?: boolean }) {
+const IconTiles = React.memo(({ removeButton }: { removeButton?: boolean }) => {
   const Center = removeButton ? (
     <IconTile position={[0, 0, 0]} type={CAT.Xreal} />
   ) : (
@@ -35,7 +36,8 @@ function IconTiles({ removeButton }: { removeButton?: boolean }) {
       {Center}
     </group>
   );
-}
+});
+IconTiles.displayName = "IconTiles";
 
 function AdditionalTiles() {
   const { status } = useStatus();

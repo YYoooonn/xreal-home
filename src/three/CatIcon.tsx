@@ -1,4 +1,4 @@
-import { useGLTF, useCursor, Text } from "@react-three/drei";
+import { useGLTF, useCursor, Text, SpotLight } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/three";
 import React, { useState } from "react";
 import { MeshStandardMaterial } from "three";
@@ -32,19 +32,23 @@ const map: Record<
       | "Cate_XREAL_Model"
       | "Cate_Project_Model"
     >;
+    lightPos?: [number, number, number];
   }
 > = {
   [CAT.Events]: {
     name: "Events",
     modelName: "Cate_Event_Model",
+    lightPos: [-0.2, 0.1, 0],
   },
   [CAT.JoinUs]: {
     name: "Join Us",
     modelName: "Cate_Joinus_Model",
+    lightPos: [0, 0.1, 0],
   },
   [CAT.MAGAZINE]: {
     name: "Magazine",
     modelName: "Cate_Magazine_Model",
+    lightPos: [0, 0, 0],
   },
   [CAT.Xreal]: {
     name: "XREAL",
@@ -53,6 +57,7 @@ const map: Record<
   [CAT.Project]: {
     name: "Projects",
     modelName: "Cate_Project_Model",
+    lightPos: [0, 0, 0],
   },
 };
 
@@ -68,6 +73,7 @@ function CatIcon(props: Icon) {
     }
   };
 
+  const visible = status === StatusEnum.Category;
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
   useCursor(hovered && status === StatusEnum.Category);
@@ -77,12 +83,12 @@ function CatIcon(props: Icon) {
     config: SCALE_CONFIG,
   });
   const { scale_dispose } = useSpring({
-    scale_dispose: status !== StatusEnum.Category ? 0 : 1,
+    scale_dispose: visible ? 1 : 0,
     config: SCALE_CONFIG,
     delay: DISPOSE_DELAY,
   });
 
-  const { name, modelName } = map[props.type];
+  const { name, modelName, lightPos } = map[props.type];
 
   return (
     <animated.group rotation-x={Math.PI} scale={scale_dispose}>
@@ -99,8 +105,21 @@ function CatIcon(props: Icon) {
       >
         <MeshIcon hovered={hovered} modelName={modelName} />
       </animated.group>
+      {lightPos && <Light position={lightPos} />}
       <CatText name={name} position={props.position} />
     </animated.group>
+  );
+}
+
+function Light({ position }: { position: [number, number, number] }) {
+  return (
+    <pointLight
+      position={position}
+      intensity={3}
+      color={"#7FFFD4"}
+      castShadow
+      distance={20}
+    />
   );
 }
 
