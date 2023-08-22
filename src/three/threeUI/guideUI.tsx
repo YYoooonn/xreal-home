@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import * as styles from "./guideUI.css";
-import scrollGuideUrl from "@public/assets/images/scrollGuide.png";
+import { StatusEnum, useStatus } from "@/hooks/useStatus";
 
 export default function GuideUI() {
   const [visible, setVisible] = useState(true);
 
   const removeElement = () => {
     setVisible((prev) => !prev);
-    console.log("remove");
   };
 
   return (
@@ -16,9 +15,11 @@ export default function GuideUI() {
       {visible && (
         <div className={styles.GuideUI} onWheel={removeElement}>
           <Image
-            src={scrollGuideUrl}
+            src="/assets/images/scrollGuide.png"
             alt="scroll"
             className={styles.GuideImg}
+            width={100}
+            height={330}
           />
           <p>scroll to move</p>
         </div>

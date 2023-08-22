@@ -1,11 +1,9 @@
-import { useState } from "react";
 import * as styles from "./ProjectsPageUI.css";
 import ArrowLeftIcon from "@/assets/icons/arrowLeft";
 import IconButton from "@/components/IconButton";
-import Link from "next/link";
-// import ProgressBar from "./ProgressBar";
+import ProgressBar from "./ProgressBar";
 
-export default function ProjectsPageUI() {
+export default function ProjectsPageUI(props: any) {
   // TODO: Catagory Button 의 category를 projects data와 연결해야합니다.
 
   // const [otherCategory, setOtherCategory] = useState(false);
@@ -16,14 +14,16 @@ export default function ProjectsPageUI() {
   return (
     <>
       {/* <ProgressBar/> */}
-      <div className={styles.projectsUI}>
+      <div>
         <div className={styles.leftBtn}>
           <div className={styles.breadcrumbContainer}>{`home > projects`}</div>
-          <Link href={"/"}>
-            <IconButton className={styles.backToPreviousPageButton}>
-              <ArrowLeftIcon />
-            </IconButton>
-          </Link>
+          <IconButton
+            className={styles.backToPreviousPageButton}
+            // TODO: category로 setStatus
+            // onClick={props.onClickHandler}
+          >
+            <ArrowLeftIcon />
+          </IconButton>
         </div>
 
         <div className={styles.category}>

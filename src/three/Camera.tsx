@@ -4,9 +4,11 @@ import {
   OrthographicCamera,
   useScroll,
   ScrollControls,
+  Html,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
+import ProgressBar from "@/three/threeUI/ProgressBar";
 
 const RATIO_WIDTH = 8;
 const RATIO_HEIGHT = 7;
@@ -24,6 +26,10 @@ function Camera() {
       enabled={enableScroll}
       damping={0.2}
     >
+      <Html style={{ position: "fixed", left: 0 }}>
+        {/* TODO: scroll bar design
+        {enableScroll && <ProgressBar />} */}
+      </Html>
       <ResponsiveCam enabled={enableScroll} />
     </ScrollControls>
   );
