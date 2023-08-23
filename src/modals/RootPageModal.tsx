@@ -13,12 +13,7 @@ const pageTabMap: Record<rootPages, string[]> = {
   xreal: ["vision", "organization", "curriculum", "press"],
   events: ["methathon", "xmc", "activity"],
   joinus: ["members", "sponser", "recruiting"],
-  newmedia: [
-    "NEWSLETTER",
-    "XREAL'S GLOBAL MAGAZINE",
-    "XREAL'S DEEP DIVE",
-    "ENCYCLOPEDIA OF METAVERSE",
-  ],
+  newmedia: ["NEWSLETTER"],
 };
 
 export interface RootPageModalProps extends ModalProps {

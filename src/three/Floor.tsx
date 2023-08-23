@@ -32,7 +32,7 @@ const IconTiles = React.memo(({ removeButton }: { removeButton?: boolean }) => {
       <IconTile position={[-2, 0, 2]} type={CAT.Project} />
       <IconTile position={[2, 0, 2]} type={CAT.Events} />
       <IconTile position={[2, 0, -2]} type={CAT.JoinUs} />
-      <IconTile position={[-2, 0, -2]} type={CAT.MAGAZINE} />
+      <IconTile position={[-2, 0, -2]} type={CAT.NEWMEDIA} />
       {Center}
     </group>
   );
