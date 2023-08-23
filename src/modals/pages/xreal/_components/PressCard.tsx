@@ -1,11 +1,7 @@
 import Image from "next/image";
 import * as styles from "./PressCard.css";
 
-export interface PressCardProps {
-  title: string;
-  description: string;
-  thumbnailSrc: string;
-}
+export interface PressCardProps extends Press {}
 export default function PressCard({
   title,
   description,
