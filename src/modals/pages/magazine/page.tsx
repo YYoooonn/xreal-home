@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import * as styles from "../_internal.css";
 import Chip from "../_components/Chip";
 
-export default function MagazinePage() {
+export default function NewMediaPage() {
   useEffect(useSideNav().collectData, []);
 
   return (
@@ -16,7 +16,7 @@ export default function MagazinePage() {
         <div className={styles.cardListContainer}>
           {[
             "NEWSLETTER",
-            "Global\nMagazine",
+            "Global\nNewMedia",
             "DEEP\nDIVE",
             "Encyclopedia\nof\nmetaverse",
           ].map((label, i) => (

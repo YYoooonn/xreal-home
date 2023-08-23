@@ -4,7 +4,7 @@ export default function ModalPage() {
   const { push } = useModalRoute();
 
   const handleChange =
-    (name: "xreal" | "events" | "joinus" | "magazine") => () => {
+    (name: "xreal" | "events" | "joinus" | "newmedia") => () => {
       push(name);
     };
 
@@ -15,7 +15,7 @@ export default function ModalPage() {
         height: "100vh",
       }}
     >
-      {(["xreal", "events", "joinus", "magazine"] as const).map((v) => (
+      {(["xreal", "events", "joinus", "newmedia"] as const).map((v) => (
         <button key={v} onClick={handleChange(v)}>
           {v}
         </button>

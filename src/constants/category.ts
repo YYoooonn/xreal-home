@@ -1,6 +1,6 @@
 export const CAT = {
   Project: "project",
-  MAGAZINE: "magazine",
+  MAGAZINE: "newmedia",
   Events: "events",
   JoinUs: "joinus",
   Xreal: "xreal",
