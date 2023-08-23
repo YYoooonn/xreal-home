@@ -67,6 +67,7 @@ export default function XrealPage() {
         <section style={{ margin: "32px 0", width: "100%", height: "551px" }}>
           <ReactFlow
             fitView
+            style={{ pointerEvents: "none" }}
             preventScrolling={false}
             zoomOnScroll={false}
             zoomOnDoubleClick={false}
@@ -95,6 +96,7 @@ export default function XrealPage() {
         <section style={{ margin: "32px 0", width: "100%", height: "222px" }}>
           <ReactFlow
             fitView
+            style={{ pointerEvents: "none" }}
             preventScrolling={false}
             zoomOnScroll={false}
             zoomOnDoubleClick={false}
