@@ -45,7 +45,7 @@ const map: Record<
     modelName: "Cate_Joinus_Model",
     lightPos: [0, 0.1, 0],
   },
-  [CAT.MAGAZINE]: {
+  [CAT.NEWMEDIA]: {
     name: "NewMedia",
     modelName: "Cate_NewMedia_Model",
   },

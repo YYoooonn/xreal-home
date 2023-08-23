@@ -125,7 +125,7 @@ export default function XrealPage() {
             image="/assets/images/curriculum-branding.png"
           />
           <VisionCard
-            name="MAGAZINE"
+            name="NEWMEDIA"
             description="메타버스에 대해 탐구하여 미디움 등에 칼럼 기고 600명 이상이 읽는 뉴스레터를 운영"
             image="/assets/images/curriculum-newmedia.png"
           />
