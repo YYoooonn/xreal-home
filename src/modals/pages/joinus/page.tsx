@@ -179,19 +179,6 @@ export default function JoinusPage() {
         </div>
       </section>
       <section>
-        <h3 className={styles.paragraph.secondTitle}>XREAL 활동</h3>
-        <p className={styles.paragraph.description}>
-          XREAL에서 한 기수동안 진행되는 활동입니다. 아래 링크에서 지난
-          커리큘럼과 프로젝트를 확인할 수 있습니다.
-          <br />
-          <br />
-          <ul>
-            <li>커리큘럼 : https://www.링크를 여따가~</li>
-            <li>프로젝트 : https://www.링크를 여따가~</li>
-          </ul>
-        </p>
-      </section>
-      <section>
         <h3 className={styles.paragraph.secondTitle}>산학 협력</h3>
         <p className={styles.paragraph.description}>
           3기에서는 Unity, 서울대학교 병원, 넵튠, 버그시티, Microsoft 등의 국내
