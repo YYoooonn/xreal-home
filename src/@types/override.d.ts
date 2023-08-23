@@ -9,4 +9,13 @@ declare module "react" {
     (E extends HTMLElement ? React.HTMLAttributes<E> : React.ComponentProps<E>);
 }
 
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      NEXT_PUBLIC_GOOGLE_ANALYTICS: string;
+      NOTION_WORKSPACE: string;
+    }
+  }
+}
+
 export {};
