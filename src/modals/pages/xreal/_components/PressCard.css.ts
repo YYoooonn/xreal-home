@@ -37,8 +37,8 @@ export const description = style({
 
 export const imageContainer = style({
   flex: 1,
-  position: "relative",
   minWidth: "min(100%, 200px)",
+  objectFit: "cover",
   height: "120px",
   backgroundColor: theme.color.gray2,
 });

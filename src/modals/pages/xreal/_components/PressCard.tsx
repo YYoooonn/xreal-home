@@ -16,9 +16,11 @@ export default function PressCard({
         <p className={styles.description}>{description}</p>
       </div>
 
-      <div className={styles.imageContainer}>
-        <Image src={thumbnailSrc} alt="thumbnail image" fill sizes="25vw" />
-      </div>
+      <img
+        src={thumbnailSrc}
+        alt="thumbnail image"
+        className={styles.imageContainer}
+      />
     </article>
   );
 }

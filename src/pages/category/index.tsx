@@ -1,20 +1,10 @@
 import useFlipped from "@/hooks/useFlipped";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import LoadingPage from "@/components/loading/LoadingPage";
+import RootProviders from "@/components/RootProviders";
 
-const Scene = dynamic(() => import("@/three/Scene"), {
-  ssr: false,
-});
-
-export default function CategoryPage() {
+export default function CategoryPage(
+  props: React.ComponentProps<typeof RootProviders>
+) {
   useFlipped();
 
-  return (
-    <Suspense fallback={<LoadingPage />}>
-      <div className="canvas">
-        <Scene />
-      </div>
-    </Suspense>
-  );
+  return <RootProviders {...props} />;
 }

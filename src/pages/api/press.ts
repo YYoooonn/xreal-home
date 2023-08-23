@@ -17,7 +17,13 @@ export async function getPresses() {
       },
       method: "POST",
     }
-  ).then<DatabaseQueryEndpoint.Response>((res) => res.json());
+  )
+    .then<DatabaseQueryEndpoint.Response>((res) => res.json())
+    .catch((err) => {
+      console.error(err);
+      return { results: [] };
+    });
+  console.log(pages);
 
   const presses: Press[] = pages.results.map((page) => {
     const props = page.properties as PressPageProperties;

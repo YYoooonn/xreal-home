@@ -16,11 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         `}</style>
       </Head>
-      <ModalControlProvider>
-        <ModalRoutingProvider>
-          <Component {...pageProps} />
-        </ModalRoutingProvider>
-      </ModalControlProvider>
+      <Component {...pageProps} />
     </>
   );
 }

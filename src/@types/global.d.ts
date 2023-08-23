@@ -37,4 +37,8 @@ interface Press {
   thumbnailSrc: string;
 }
 
+interface CMSData {
+  presses: Press[];
+}
+
 type rootPages = "xreal" | "events" | "joinus" | "newmedia";
