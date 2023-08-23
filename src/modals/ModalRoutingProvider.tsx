@@ -10,7 +10,7 @@ const pageRoute = [
   "events",
   "events/metathon/4th",
   "joinus",
-  "magazine",
+  "newmedia",
 ] as const;
 
 // TODO: 임시용

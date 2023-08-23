@@ -3,7 +3,7 @@ import type { Group, Mesh } from "three";
 
 export const urlEvent = "/assets/models/Cate_Event_Model.glb";
 export const urlJoinUs = "/assets/models/Cate_Joinus_Model.glb";
-export const urlMagazine = "/assets/models/Cate_Magazine_Model.glb";
+export const urlNewMedia = "/assets/models/Cate_NewMedia_Model.glb";
 export const urlProject = "/assets/models/Cate_Project_Model.glb";
 export const urlXreal = "/assets/models/Cate_XREAL_Model.glb";
 export const urlButton = "/assets/models/Button.glb";
@@ -15,7 +15,7 @@ export const urlEmojiGriningFace =
   "/assets/models/projects/Emoji_grinning_face.glb";
 useGLTF.preload(urlEvent);
 useGLTF.preload(urlJoinUs);
-useGLTF.preload(urlMagazine);
+useGLTF.preload(urlNewMedia);
 useGLTF.preload(urlProject);
 useGLTF.preload(urlXreal);
 useGLTF.preload(urlButton);
@@ -30,7 +30,7 @@ declare module "three-stdlib" {
     nodes: {
       Cate_Event_Model?: Mesh;
       Cate_Joinus_Model?: Mesh;
-      Cate_Magazine_Model?: Mesh;
+      Cate_NewMedia_Model?: Mesh;
       Cate_Project_Model?: Mesh;
       Cate_XREAL_Model?: Mesh;
       Button001: Mesh;

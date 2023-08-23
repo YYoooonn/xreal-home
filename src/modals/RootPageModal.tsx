@@ -13,7 +13,7 @@ const pageTabMap: Record<rootPages, string[]> = {
   xreal: ["vision", "organization", "curriculum", "press"],
   events: ["methathon", "xmc", "activity"],
   joinus: ["members", "sponser", "recruiting"],
-  magazine: [
+  newmedia: [
     "NEWSLETTER",
     "XREAL'S GLOBAL MAGAZINE",
     "XREAL'S DEEP DIVE",

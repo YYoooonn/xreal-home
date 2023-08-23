@@ -5,4 +5,4 @@ interface ProjectData {
   period: string; //n기
 }
 
-type rootPages = "xreal" | "events" | "joinus" | "magazine";
+type rootPages = "xreal" | "events" | "joinus" | "newmedia";

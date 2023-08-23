@@ -28,7 +28,7 @@ const map: Record<
       keyof GLTF["nodes"],
       | "Cate_Event_Model"
       | "Cate_Joinus_Model"
-      | "Cate_Magazine_Model"
+      | "Cate_NewMedia_Model"
       | "Cate_XREAL_Model"
       | "Cate_Project_Model"
     >;
@@ -46,9 +46,8 @@ const map: Record<
     lightPos: [0, 0.1, 0],
   },
   [CAT.MAGAZINE]: {
-    name: "Magazine",
-    modelName: "Cate_Magazine_Model",
-    lightPos: [0, 0, 0],
+    name: "NewMedia",
+    modelName: "Cate_NewMedia_Model",
   },
   [CAT.Xreal]: {
     name: "XREAL",
