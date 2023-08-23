@@ -1,7 +1,12 @@
 import type * as DatabaseQueryEndpoint from "notion-api-types/endpoints/databases/query";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PageProperties } from "notion-api-types/responses";
+import { Files, PageProperties } from "notion-api-types/responses";
 
+type PressPageProperties = {
+  title: PageProperties.Title;
+  description: PageProperties.RichText;
+  thumbnail: PageProperties.Files;
+};
 export async function getPresses() {
   const pages = await fetch(
     `https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_PRESS}/query`,
@@ -21,18 +26,13 @@ export async function getPresses() {
       description: props.description.rich_text
         .map((text) => text.plain_text)
         .join("\n"),
-      thumbnailSrc: props.thumbnail.url || "",
+      thumbnailSrc: (props.thumbnail.files[0] as Files.External).external.url,
     };
   });
 
   return presses;
 }
 
-type PressPageProperties = {
-  title: PageProperties.Title;
-  description: PageProperties.RichText;
-  thumbnail: PageProperties.Url;
-};
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
