@@ -20,7 +20,10 @@ const dummyPress = Array<{ title: string; description: string }>(10).fill({
     "XR/메타버스 산업계 리더, 중소기업, 대학생 대상 네으퉈킹의 장 마련 서울산업진흥원 (SBA, 대표이사 김현우)은 오는 8월 27일(토) ‘XR로 확장하는 메타버스’를 주제로 컨퍼런스 ",
 });
 
-export default function XrealPage() {
+interface XrealPageProps {
+  presses: Press[];
+}
+export default function XrealPage({ presses = [] }: XrealPageProps) {
   useEffect(useSideNav().collectData, []);
 
   return (
@@ -137,12 +140,12 @@ export default function XrealPage() {
         <h2 className={styles.paragraph.title}>Press</h2>
         <h3 className={styles.paragraph.subTitle}>XREAL 기사</h3>
         <div className={styles.pressListContainer}>
-          {dummyPress.map(({ title, description }, i) => (
+          {presses.map(({ title, description, thumbnailSrc }, i) => (
             <PressCard
               key={i}
               title={title}
               description={description}
-              thumbnailSrc="/assets/images/dummyImage.png"
+              thumbnailSrc={thumbnailSrc}
             />
           ))}
         </div>

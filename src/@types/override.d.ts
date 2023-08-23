@@ -13,6 +13,9 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NEXT_PUBLIC_GOOGLE_ANALYTICS: string;
+      NOTION_DATABASE_PRESS: string;
+      NOTION_DATABASE_PROJECT: string;
+      NOTION_DATABASE_MEMBER: string;
       NOTION_WORKSPACE: string;
     }
   }

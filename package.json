@@ -38,6 +38,7 @@
     "eslint-config-next": "13.4.16",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.3",
+    "notion-api-types": "^1.0.0",
     "prettier": "^2.8.7",
     "typescript": "5.0.4"
   },
