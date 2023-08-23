@@ -10,8 +10,6 @@ import conferenceUrl from "@public/assets/images/conference.png";
 import kapehornUrl from "@public/assets/images/kapehorn.png";
 import unnotedUrl from "@public/assets/images/unnoted.png";
 import hackthonUrl from "@public/assets/images/hackthon.png";
-import folderUrl from "@public/assets/images/folder.png";
-import folderBlurUrl from "@public/assets/images/folderBlur.png";
 import SarifArrowLeftIcon from "@/assets/icons/sarifArrowLeft";
 import CrampArrowUpIcon from "@/assets/icons/crampASrrowUp";
 import CommasIcon from "@/assets/icons/commas";
@@ -36,14 +34,22 @@ export default function JoinusPage() {
         <div className={styles.memberFolderList}>
           {Array.from({ length: 4 }, (_, i) => (
             <div key={i} className={styles.memberFolderContainer}>
-              <Image src={folderUrl} alt="" fill />
-              <p className={styles.memberFolderNumberic}>{4 - i}</p>
-              <Image
-                src={folderBlurUrl}
-                alt=""
-                fill
-                className={styles.memberFolderBlurLayer}
-              />
+              <div className={styles.memberImageLayer}>
+                <Image
+                  src={`/assets/images/Members-${i + 1}.png`}
+                  alt=""
+                  fill
+                />
+              </div>
+              <div style={{ position: "absolute" }}>
+                <div className={styles.memberImageBlurLayer}>
+                  <Image
+                    src={`/assets/images/Members-${i + 1}-blur.png`}
+                    alt=""
+                    fill
+                  />
+                </div>
+              </div>
               <div className={styles.memberFolderBody}>
                 <CommasIcon className={styles.memberFolderCommaIcon} />
                 <p className={styles.memberFolderLabel}>

@@ -22,32 +22,28 @@ export const memberFolderContainer = style({
   position: "relative",
 });
 
-export const memberFolderBlurLayer = style({
-  width: "var(--width)",
-  height: "calc(var(--width) * 0.71)",
+export const memberImageLayer = style({
+  minWidth: "var(--width)",
+  minHeight: "calc(var(--width) * 0.71)",
   transition: "all 300ms",
-  opacity: 0,
+  position: "relative",
+  opacity: 1,
   selectors: {
     [`${memberFolderContainer}:hover &`]: {
-      opacity: 1,
+      opacity: 0,
     },
   },
 });
 
-export const memberFolderNumberic = style({
-  WebkitTextStroke: "1px white",
-  color: "rgba(0, 0, 0, 0.15)",
-  textAlign: "center",
-  fontFamily: "Inter",
-  fontSize: "calc(var(--width) * 0.85)",
-  fontStyle: "italic",
-  fontWeight: 900,
-  transform: "translateY(5px)",
-  position: "absolute",
+export const memberImageBlurLayer = style({
+  minWidth: "var(--width)",
+  minHeight: "calc(var(--width) * 0.71)",
   transition: "all 300ms",
+  position: "relative",
+  opacity: 0,
   selectors: {
     [`${memberFolderContainer}:hover &`]: {
-      color: theme.color.green,
+      opacity: 1,
     },
   },
 });
