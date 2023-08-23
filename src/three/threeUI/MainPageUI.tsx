@@ -24,33 +24,39 @@ export default function MainPageUI() {
             />
           </button>
           <div id="DropdownCategories" className={styles.dropupContent}>
-            <button className={styles.dropupCategoryButton}>
-              <Image
-                src="/assets/images/instagram.png"
-                alt="contact us"
-                width={40}
-                height={40}
-              />
-              Instagram
-            </button>
-            <button className={styles.dropupCategoryButton}>
-              <Image
-                src="/assets/images/youtube.png"
-                alt="contact us"
-                width={40}
-                height={40}
-              />
-              Youtube
-            </button>
-            <button className={styles.dropupCategoryButton}>
-              <Image
-                src="/assets/images/email.png"
-                alt="contact us"
-                width={40}
-                height={40}
-              />
-              Email
-            </button>
+            <a href="https://www.instagram.com/xreal_snu/" target="_blank">
+              <button className={styles.dropupCategoryButton}>
+                <Image
+                  src="/assets/images/instagram.png"
+                  alt="contact us"
+                  width={40}
+                  height={40}
+                />
+                Instagram
+              </button>
+            </a>
+            <a href="https://youtube.com/@xreal2021" target="_blank">
+              <button className={styles.dropupCategoryButton}>
+                <Image
+                  src="/assets/images/youtube.png"
+                  alt="contact us"
+                  width={40}
+                  height={40}
+                />
+                Youtube
+              </button>
+            </a>
+            <a href="mailto:contact@xreal.info" target="_blank">
+              <button className={styles.dropupCategoryButton}>
+                <Image
+                  src="/assets/images/email.png"
+                  alt="contact us"
+                  width={40}
+                  height={40}
+                />
+                Email
+              </button>
+            </a>
           </div>
         </div>
       </div>
