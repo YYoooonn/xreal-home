@@ -168,22 +168,30 @@ export const groupRecuritCard = style({
   padding: "56px 28px",
   minWidth: "calc(20ch + 28px * 2)",
   borderRadius: "10px",
-  background: `linear-gradient(0deg, 
-    color-mix(in srgb, ${groupRecuritCardColor} 8%, white) 0%, 
-    color-mix(in srgb, ${groupRecuritCardColor} 8%, white) 100%
-  ), #F3F3F3`,
+  background: `linear-gradient(236deg, 
+    color-mix(in srgb, ${groupRecuritCardColor} 18%, white) 0%, 
+    #FFF 100%
+  )`,
 });
 
 export const groupRecuritCardHeading = style({
   fontWeight: "700",
   fontSize: "26px",
   lineHeight: "24px",
-  color: groupRecuritCardColor,
+  color: theme.color.gray5,
   marginBottom: "16px",
   textAlign: "center",
 });
 
 export const groupRecruitCardItem = style({
+  color: "#222222",
+  fontFamily: "Inter",
+  fontSize: "14px",
+  fontWeight: 400,
+  textAlign: "center",
+  lineHeight: "150%",
+  width: "fit-content",
+  margin: "0 auto",
   selectors: {
     "&::marker": {
       content: "✓ ",
