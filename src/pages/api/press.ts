@@ -23,7 +23,6 @@ export async function getPresses() {
       console.error(err);
       return { results: [] };
     });
-  console.log(pages);
 
   const presses: Press[] = pages.results.map((page) => {
     const props = page.properties as PressPageProperties;
