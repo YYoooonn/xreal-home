@@ -1,8 +1,6 @@
-import { useGLTF, useCursor, Text, SpotLight } from "@react-three/drei";
+import { useCursor, Text } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/three";
 import React, { useState } from "react";
-import { MeshStandardMaterial } from "three";
-import { GLTF } from "three-stdlib";
 import { CAT } from "@/constants/category";
 import {
   SCALE_RATIO,
@@ -13,6 +11,7 @@ import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import pushHistory from "@/hooks/pushHistory";
 import { textMat, hoveredMat } from "@/assets/materials";
 import { useModalRoute } from "@/modals/ModalRoutingProvider";
+import { Model } from "@/assets/models/category";
 
 type Icon = {
   type: CAT;
@@ -24,38 +23,26 @@ const map: Record<
   CAT,
   {
     name: string;
-    modelName: Extract<
-      keyof GLTF["nodes"],
-      | "Cate_Event_Model"
-      | "Cate_Joinus_Model"
-      | "Cate_NewMedia_Model"
-      | "Cate_XREAL_Model"
-      | "Cate_Project_Model"
-    >;
     lightPos?: [number, number, number];
   }
 > = {
   [CAT.Events]: {
     name: "Events",
-    modelName: "Cate_Event_Model",
     lightPos: [-0.2, 0.1, 0],
   },
   [CAT.JoinUs]: {
     name: "Join Us",
-    modelName: "Cate_Joinus_Model",
     lightPos: [0, 0.1, 0],
   },
   [CAT.NEWMEDIA]: {
     name: "NewMedia",
-    modelName: "Cate_NewMedia_Model",
+    lightPos: [0, 0, 0],
   },
   [CAT.Xreal]: {
     name: "XREAL",
-    modelName: "Cate_XREAL_Model",
   },
   [CAT.Project]: {
     name: "Projects",
-    modelName: "Cate_Project_Model",
     lightPos: [0, 0, 0],
   },
 };
@@ -87,7 +74,7 @@ function CatIcon(props: Icon) {
     delay: DISPOSE_DELAY,
   });
 
-  const { name, modelName, lightPos } = map[props.type];
+  const { name, lightPos } = map[props.type];
 
   return (
     <animated.group rotation-x={Math.PI} scale={scale_dispose}>
@@ -102,7 +89,7 @@ function CatIcon(props: Icon) {
         }}
         onClick={handleClick}
       >
-        <MeshIcon hovered={hovered} modelName={modelName} />
+        <MeshIcon hovered={hovered} type={props.type} />
       </animated.group>
       {lightPos && <Light position={lightPos} />}
       <CatText name={name} position={props.position} />
@@ -148,28 +135,11 @@ function CatText({
   );
 }
 
-function MeshIcon({
-  hovered,
-  modelName,
-}: {
-  hovered: boolean;
-  modelName: (typeof map)[CAT]["modelName"];
-}) {
-  const { nodes } = useGLTF(`/assets/models/${modelName}.glb`);
-
-  // transparent true로 변경, 알파맵 적용을 위함
-  if (
-    nodes.Cate_XREAL_Model?.material instanceof MeshStandardMaterial &&
-    !nodes.Cate_XREAL_Model?.material.transparent
-  ) {
-    nodes.Cate_XREAL_Model?.material.setValues({ transparent: true });
-  }
+function MeshIcon({ hovered, type }: { hovered: boolean; type: CAT }) {
+  const { geometry, material } = Model(type);
 
   return (
-    <mesh
-      geometry={nodes[modelName]?.geometry}
-      material={hovered ? hoveredMat : nodes[modelName]?.material}
-    />
+    <mesh geometry={geometry} material={hovered ? hoveredMat : material} />
   );
 }
 

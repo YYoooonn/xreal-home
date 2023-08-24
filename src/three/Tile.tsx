@@ -3,7 +3,7 @@ import { Instance, Instances, useGLTF } from "@react-three/drei";
 import { RotationWrapper } from "../components/spring/RotationWrapper";
 import CatIcon from "./CatIcon";
 import { CAT } from "@/constants/category";
-import { urlTile } from "@/assets/models";
+import { urlTile } from "@/assets/models/models";
 import * as utils from "@/three/utils/compute";
 
 type Position = [x: number, y: number, z: number];

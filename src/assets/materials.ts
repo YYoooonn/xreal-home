@@ -1,11 +1,13 @@
 import { MeshStandardMaterial, DoubleSide, MeshNormalMaterial } from "three";
 
-// TODO 임의로 설정
-export const hoveredMat = new MeshStandardMaterial();
-hoveredMat.color.set("hotpink");
-hoveredMat.side = DoubleSide;
+export const hoveredMat = new MeshStandardMaterial({
+  emissive: "#7AF7B5",
+  emissiveIntensity: 1,
+  side: DoubleSide,
+});
 
-export const textMat = new MeshNormalMaterial();
+// TODO 임의로 설정
+export const textMat = new MeshStandardMaterial({ color: "FFFFFF" });
 
 export const invisibleMat = new MeshStandardMaterial({
   transparent: true,
