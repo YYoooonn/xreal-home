@@ -13,6 +13,10 @@ export const recruiting = style({
   left: 72,
   color: "white",
   fontSize: 20,
+  display: "flex",
+  alignItems: "center",
+  justifyItems: "center",
+  cursor: "pointer",
 });
 
 export const contactUs = style({

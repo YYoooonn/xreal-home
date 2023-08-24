@@ -1,3 +1,4 @@
+import SarifArrowLeftIcon from "@/assets/icons/sarifArrowLeft";
 import * as styles from "./MainPageUI.css";
 import Image from "next/image";
 
@@ -11,7 +12,10 @@ export default function MainPageUI() {
         height={40}
         className={styles.logo}
       />
-      <div className={styles.recruiting}>5th Recruiting</div>
+      <div className={styles.recruiting}>
+        5th Recruiting &nbsp;
+        <SarifArrowLeftIcon style={{ width: 20, height: 20 }} />
+      </div>
 
       <div className={styles.contactUs}>
         <div className={styles.dropUp}>
