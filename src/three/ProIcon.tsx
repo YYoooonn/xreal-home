@@ -5,12 +5,10 @@ import { Mesh, Vector3 } from "three";
 import { SCALE_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import positions from "./_data/positions";
-import {
-  urlProjectTile,
-  urlEmojiFire,
-  urlEmojiGriningFace,
-} from "@/assets/models";
+import { urlProjectTile } from "@/assets/models/models";
 import { invisibleMat, projectTextMat } from "@/assets/materials";
+import { Model } from "@/assets/models/project";
+import { PRO } from "@/constants/project";
 
 type EmojiProps = {
   title: string;
@@ -63,16 +61,16 @@ function ProjectIcon(props: EmojiProps) {
 }
 
 function Emoji(props: { name: string; hovered: boolean }) {
-  const isFire = Math.random() > 0.5;
-  const { nodes } = useGLTF(isFire ? urlEmojiFire : urlEmojiGriningFace);
-
+  // TODO 지금 일단 랜덤
+  const type = Math.random() > 0.5 ? PRO.Fire : PRO.GrinningFace;
+  const { geometry, material } = Model(type);
   return (
     <mesh
-      rotation-y={isFire ? -Math.PI / 4 : -Math.PI / 6}
+      rotation-y={type === PRO.Fire ? -Math.PI / 4 : -Math.PI / 6}
       position={[0, 0.15, 0]}
       scale={1}
-      geometry={nodes.Emoji.geometry}
-      material={props.hovered ? invisibleMat : nodes.Emoji.material}
+      geometry={geometry}
+      material={props.hovered ? invisibleMat : material}
     />
   );
 }
