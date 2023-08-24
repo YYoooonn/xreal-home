@@ -4,9 +4,10 @@ interface Project {
   logo: string; // 3d 씬에서 보여줄 아이콘 로고 모델
   profileSrc: string; // 프로젝트 페이지에서 보여줄 프로필 사진
   tags: string[];
+  leader: string;
   members: string[];
-  category: "xr" | "web3" | "study" | "other"; //
-  period: string; // 기수
+  category: string[];
+  period: string[]; // 기수
   contents: {
     intro: string; // 프로젝트 소개
     purpose: string; // 프로젝트 목적
@@ -39,6 +40,7 @@ interface Press {
 
 interface CMSData {
   presses: Press[];
+  projects: Project[];
 }
 
 type rootPages = "xreal" | "events" | "joinus" | "newmedia";

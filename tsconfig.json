@@ -23,7 +23,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "types": ["notion-api-types"]
   },
   "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
