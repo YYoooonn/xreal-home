@@ -1,6 +1,9 @@
-import type * as NotionEndpoints from "notion-api-types/endpoints";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PageProperties } from "notion-api-types/responses";
+
+import type * as NotionEndpoints from "notion-api-types/endpoints";
+import type { Block, PageProperties } from "notion-api-types/responses";
+import type { Page } from "notion-api-types/responses";
+
 import resolveNotionImage from "@/utils/resolveNotionImage";
 import notionRequest from "@/utils/notion/notionRequest";
 
@@ -17,30 +20,37 @@ interface ProjectPageProperties {
   태그: PageProperties.MultiSelect;
 }
 export async function getProjects() {
-  const pages = await notionRequest<NotionEndpoints.Databases.Query.Response>(
-    `databases/${process.env.NOTION_DATABASE_PROJECT}/query`,
-    "POST"
-  );
+  const pages: Page[] =
+    await notionRequest<NotionEndpoints.Databases.Query.Response>(
+      `databases/${process.env.NOTION_DATABASE_PROJECT}/query`,
+      "POST"
+    )
+      .then((result) => result.results ?? [])
+      .catch(() => []);
 
   const projects: Project[] = await Promise.all(
-    pages.results.map(async (page) => {
-      const pages =
+    pages.map(async (page) => {
+      const blocks: Block[] =
         await notionRequest<NotionEndpoints.Blocks.Children.Retrieve.Response>(
           `blocks/${page.id}/children`
-        );
+        )
+          .then((result) => result.results ?? [])
+          .catch(() => []);
 
       const items = [];
-      for await (const block of pages.results) {
+      for await (const block of blocks) {
         if (!block.has_children) {
           items.push("");
           continue;
         }
-        const contents =
+        const contents: Block[] =
           await notionRequest<NotionEndpoints.Blocks.Children.Retrieve.Response>(
             `blocks/${block.id}/children`
-          );
+          )
+            .then((result) => result.results ?? [])
+            .catch(() => []);
 
-        const paragraph = contents.results
+        const paragraph = contents
           .map((result) =>
             result.type == "paragraph"
               ? result.paragraph.rich_text.map((text) => text.plain_text)
