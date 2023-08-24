@@ -26,9 +26,9 @@ interface Member {
   contents: {
     intro: string; // 자기소개
     metaverseForMe: string; // 나에게 메타버스란
-    nextPlan?: string;
-    todo?: string;
-    lastSay?: string;
+    nextPlan: string;
+    todo: string;
+    lastSay: string;
   };
 }
 
@@ -40,6 +40,7 @@ interface Press {
 
 interface CMSData {
   presses: Press[];
+  members: Member[];
   projects: Project[];
 }
 

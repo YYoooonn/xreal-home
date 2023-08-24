@@ -17,7 +17,7 @@ export async function getPresses() {
   const presses: Press[] = pages.results.map((page) => {
     const props = page.properties as unknown as PressPageProperties;
     return {
-      title: props.title.title[0].plain_text,
+      title: props.title.title[0]?.plain_text,
       description: props.description.rich_text
         .map((text) => text.plain_text)
         .join("\n"),

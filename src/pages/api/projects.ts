@@ -54,7 +54,7 @@ export async function getProjects() {
       const [intro, purpose, activite, resources, showMore] = items;
       const props = page.properties as unknown as ProjectPageProperties;
       return {
-        title: props.Team.title[0].plain_text,
+        title: props.Team.title[0]?.plain_text ?? "",
         subtitle: props.Subtitle.rich_text
           .map((text) => text.plain_text)
           .join("\n"),
