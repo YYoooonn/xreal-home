@@ -1,37 +1,27 @@
-import type * as DatabaseQueryEndpoint from "notion-api-types/endpoints/databases/query";
+import type * as NotionEndpoints from "notion-api-types/endpoints";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Files, PageProperties } from "notion-api-types/responses";
+import notionRequest from "@/utils/notion/notionRequest";
+import resolveNotionImage from "@/utils/resolveNotionImage";
 
-type PressPageProperties = {
+interface PressPageProperties {
   title: PageProperties.Title;
   description: PageProperties.RichText;
   thumbnail: PageProperties.Files;
-};
+}
 export async function getPresses() {
-  const pages = await fetch(
-    `https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_PRESS}/query`,
-    {
-      headers: {
-        Authorization: process.env.NOTION_WORKSPACE,
-        "Notion-Version": "2022-06-28",
-      },
-      method: "POST",
-    }
-  )
-    .then<DatabaseQueryEndpoint.Response>((res) => res.json())
-    .catch((err) => {
-      console.error(err);
-      return { results: [] };
-    });
-
+  const pages = await notionRequest<NotionEndpoints.Databases.Query.Response>(
+    `databases/${process.env.NOTION_DATABASE_PRESS}/query`,
+    "POST"
+  );
   const presses: Press[] = pages.results.map((page) => {
-    const props = page.properties as PressPageProperties;
+    const props = page.properties as unknown as PressPageProperties;
     return {
       title: props.title.title[0].plain_text,
       description: props.description.rich_text
         .map((text) => text.plain_text)
         .join("\n"),
-      thumbnailSrc: (props.thumbnail.files[0] as Files.External).external.url,
+      thumbnailSrc: resolveNotionImage(props.thumbnail.files[0]),
     };
   });
 
