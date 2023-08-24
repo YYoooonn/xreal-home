@@ -12,6 +12,7 @@ import {
 } from "./_data/flowchartNodeEdges";
 import { useSideNav } from "@/components/SideNavProvider";
 import { useEffect } from "react";
+import { useCMSData } from "@/components/CMSDataProvider";
 
 const dummyPress = Array<{ title: string; description: string }>(10).fill({
   title:
@@ -21,6 +22,7 @@ const dummyPress = Array<{ title: string; description: string }>(10).fill({
 });
 
 export default function XrealPage() {
+  const { presses } = useCMSData();
   useEffect(useSideNav().collectData, []);
 
   return (
@@ -137,14 +139,15 @@ export default function XrealPage() {
         <h2 className={styles.paragraph.title}>Press</h2>
         <h3 className={styles.paragraph.subTitle}>XREAL 기사</h3>
         <div className={styles.pressListContainer}>
-          {dummyPress.map(({ title, description }, i) => (
-            <PressCard
-              key={i}
-              title={title}
-              description={description}
-              thumbnailSrc="/assets/images/dummyImage.png"
-            />
-          ))}
+          {presses &&
+            presses.map(({ title, description, thumbnailSrc }, i) => (
+              <PressCard
+                key={i}
+                title={title}
+                description={description}
+                thumbnailSrc={thumbnailSrc}
+              />
+            ))}
         </div>
       </section>
     </div>
