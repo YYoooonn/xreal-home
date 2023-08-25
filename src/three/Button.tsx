@@ -6,7 +6,7 @@ import React from "react";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import { DISPOSE_DELAY, SCALE_CONFIG } from "@/constants/springConfig";
 import pushHistory from "@/hooks/pushHistory";
-import { urlArrow, urlButton } from "@/assets/models";
+import { urlArrow, urlButton } from "@/assets/models/models";
 
 // TODO 임의로 설정
 const hoveredMaterial = new MeshStandardMaterial();

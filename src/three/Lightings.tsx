@@ -40,6 +40,7 @@ function AdditionalLights() {
           color={"#FFFFFF"}
           position={[0, -87, 0]}
           angle={0.5}
+          castShadow
         />
       </animated.group>
       <animated.group scale={scale_category} position={[0, -1, 0]}>
@@ -50,6 +51,7 @@ function AdditionalLights() {
             color={"#FFFFFF"}
             position={[0, -91, 0]}
             angle={0.5}
+            castShadow
           />
         </group>
         <PointLihgtwithHelper
@@ -57,18 +59,21 @@ function AdditionalLights() {
           intensity={1}
           color={"#7FFFD4"}
           distance={20}
+          castShadow
         />
         <PointLihgtwithHelper
           position={[-2.5, 2, 2]}
           intensity={1}
           color={"#7FFFD4"}
           distance={20}
+          castShadow
         />
         <PointLihgtwithHelper
           position={[2, 2, -3]}
           intensity={1}
           color={"#7FFFD4"}
           distance={20}
+          castShadow
         />
       </animated.group>
     </group>

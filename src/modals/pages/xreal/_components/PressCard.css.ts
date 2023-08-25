@@ -8,7 +8,6 @@ export const container = style({
   gap: "8px",
   width: "100%",
   maxWidth: "960px",
-  margin: "0 auto",
 });
 
 export const bodyContainer = style({
@@ -37,8 +36,8 @@ export const description = style({
 
 export const imageContainer = style({
   flex: 1,
-  position: "relative",
   minWidth: "min(100%, 200px)",
+  objectFit: "cover",
   height: "120px",
   backgroundColor: theme.color.gray2,
 });

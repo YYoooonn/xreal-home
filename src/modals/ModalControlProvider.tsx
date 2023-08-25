@@ -2,6 +2,7 @@ import NoSSR from "@/components/NoSSR";
 import React from "react";
 import { createPortal } from "react-dom";
 import ModalRoutingProvider from "./ModalRoutingProvider";
+import CMSDataProvider, { useCMSData } from "@/components/CMSDataProvider";
 
 interface ModalControllable {
   open: <MP extends ModalProps>(
