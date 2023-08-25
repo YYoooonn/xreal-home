@@ -1,8 +1,8 @@
 import { style } from "@vanilla-extract/css";
 
 export const container = style({
-  width: "192px",
-  height: "192px",
+  minWidth: "192px",
+  minHeight: "192px",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
