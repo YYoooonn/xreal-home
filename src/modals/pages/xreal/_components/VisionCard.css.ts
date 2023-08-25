@@ -7,6 +7,7 @@ export const container = style({
   textAlign: "center",
   gap: "24px",
   padding: "0px 24px",
+  margin: "0 auto",
 });
 
 export const imageContainer = style({
