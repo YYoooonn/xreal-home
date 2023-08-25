@@ -4,7 +4,8 @@ import * as styles from "../_internal.css";
 import Chip from "../_components/Chip";
 
 export default function NewMediaPage() {
-  useEffect(useSideNav().collectData, []);
+  const { collectData } = useSideNav();
+  useEffect(() => collectData(), []);
 
   return (
     <div className={styles.pageContainer}>

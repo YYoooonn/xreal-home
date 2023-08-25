@@ -18,11 +18,17 @@ export default function SideNavProvider({ children }: React.PropsWithChildren) {
   const scrollAnchorPointsRef = useRef<number[]>([]);
 
   const collectData = () => {
-    const anchorPoints = Array.from(
-      document.querySelectorAll<HTMLDivElement>(
-        "section[data-modal-section] > h2"
-      ),
+    const pagemodal = document.getElementById("page-modal")!;
+    const offsets = Array.from(
+      document.querySelectorAll<HTMLDivElement>("section[data-modal-section]"),
       (section) => section.offsetTop
+    );
+    const total = offsets.reduce((a, e) => a + e, 0);
+    const ratio = offsets.map((offset) => offset / total);
+    const anchorPoints = ratio.map((rat, i) =>
+      offsets[i] - 40 + pagemodal.offsetHeight <= pagemodal.scrollHeight
+        ? offsets[i] - 40
+        : rat * (pagemodal.scrollHeight - pagemodal.offsetHeight)
     );
     scrollAnchorPointsRef.current = anchorPoints;
 
@@ -47,7 +53,7 @@ export default function SideNavProvider({ children }: React.PropsWithChildren) {
     if (!pageModalRef.current) return;
 
     pageModalRef.current.scrollTo({
-      top: scrollAnchorPointsRef.current[index] - 40,
+      top: scrollAnchorPointsRef.current[index],
       behavior: "smooth",
     });
   };

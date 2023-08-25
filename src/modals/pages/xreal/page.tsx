@@ -21,7 +21,8 @@ const dummyPress = Array<{ title: string; description: string }>(10).fill({
 });
 
 export default function XrealPage() {
-  useEffect(useSideNav().collectData, []);
+  const { collectData } = useSideNav();
+  useEffect(() => collectData(), []);
 
   return (
     <div className={styles.pageContainer}>
