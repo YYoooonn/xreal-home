@@ -14,15 +14,9 @@ import { useSideNav } from "@/components/SideNavProvider";
 import { useEffect } from "react";
 import { useCMSData } from "@/components/CMSDataProvider";
 
-const dummyPress = Array<{ title: string; description: string }>(10).fill({
-  title:
-    "서울산업진흥원, 오는 27일 ‘XR로 확장하는 메타버스’ 주제로 컨퍼런스으으으으으으으",
-  description:
-    "XR/메타버스 산업계 리더, 중소기업, 대학생 대상 네으퉈킹의 장 마련 서울산업진흥원 (SBA, 대표이사 김현우)은 오는 8월 27일(토) ‘XR로 확장하는 메타버스’를 주제로 컨퍼런스 ",
-});
-
 export default function XrealPage() {
   const { presses } = useCMSData();
+  const { collectData } = useSideNav();
   useEffect(useSideNav().collectData, []);
 
   return (
