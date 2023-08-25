@@ -12,6 +12,8 @@ const sideNavContext = createContext<SideNavContext>({
   collectData: () => () => {},
 });
 
+const SCROLL_PADDING = 40;
+
 export default function SideNavProvider({ children }: React.PropsWithChildren) {
   const [nearestIndex, setNearestIndex] = useState(0);
   const pageModalRef = useRef<HTMLElement>();
@@ -26,8 +28,9 @@ export default function SideNavProvider({ children }: React.PropsWithChildren) {
     const total = offsets.reduce((a, e) => a + e, 0);
     const ratio = offsets.map((offset) => offset / total);
     const anchorPoints = ratio.map((rat, i) =>
-      offsets[i] - 40 + pagemodal.offsetHeight <= pagemodal.scrollHeight
-        ? offsets[i] - 40
+      offsets[i] - SCROLL_PADDING + pagemodal.offsetHeight <=
+      pagemodal.scrollHeight
+        ? offsets[i] - SCROLL_PADDING
         : rat * (pagemodal.scrollHeight - pagemodal.offsetHeight)
     );
     scrollAnchorPointsRef.current = anchorPoints;
