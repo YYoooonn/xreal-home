@@ -28,8 +28,10 @@ export default function SideNavProvider({ children }: React.PropsWithChildren) {
     const total = offsets.reduce((a, e) => a + e, 0);
     const ratio = offsets.map((offset) => offset / total);
     const anchorPoints = ratio.map((rat, i) =>
-      offsets[i] - SCROLL_PADDING + pagemodal.offsetHeight <=
-      pagemodal.scrollHeight
+      i == ratio.length - 1
+        ? pagemodal.scrollHeight - pagemodal.offsetHeight
+        : offsets[i] - SCROLL_PADDING + pagemodal.offsetHeight <=
+          pagemodal.scrollHeight
         ? offsets[i] - SCROLL_PADDING
         : rat * (pagemodal.scrollHeight - pagemodal.offsetHeight)
     );
