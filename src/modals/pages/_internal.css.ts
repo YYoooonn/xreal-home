@@ -9,9 +9,9 @@ export const pageContainer = style({
 
 export const cardListContainer = style({
   display: "flex",
-  flexWrap: "wrap",
-  gap: "48px",
+  gap: "24px",
   margin: "40px 0",
+  overflowX: "scroll",
 });
 
 const title = style({
