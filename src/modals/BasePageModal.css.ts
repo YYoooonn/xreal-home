@@ -114,6 +114,9 @@ globalStyle(`${pageModalFooterLinks} a`, {
 });
 
 export const pageModalFooterScrollUpButton = style({
+  position: "fixed",
+  right: 90,
+  bottom: 70,
   background: "lightgray",
   padding: 10,
 });
