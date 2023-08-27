@@ -9,12 +9,11 @@ import { urlProjectTile } from "@/assets/models/models";
 import { invisibleMat, projectTextMat } from "@/assets/materials";
 import { Model } from "@/assets/models/project";
 import { PRO } from "@/constants/project";
+import { useCMSData } from "@/components/CMSDataProvider";
 
 type EmojiProps = {
-  title: string;
-  icon: string;
+  projectData: Project;
   position: [x: number, y: number, z: number] | Vector3;
-  handler?: () => void;
 };
 
 function ProjectIcon(props: EmojiProps) {
@@ -39,11 +38,11 @@ function ProjectIcon(props: EmojiProps) {
           setHovered(false);
         }}
         onClick={() => {
-          console.log("clicked");
+          console.log(props.projectData.subtitle);
         }}
       >
-        <Emoji name={props.icon} hovered={hovered} />
-        <ProjectText name={"Project"} hovered={hovered} />
+        <Emoji logo={props.projectData.logo} hovered={hovered} />
+        <ProjectText name={props.projectData.title} hovered={hovered} />
       </group>
       <ProjectTile />
     </animated.group>
@@ -69,8 +68,8 @@ const ProjectTile = React.memo(() => {
 });
 ProjectTile.displayName = "ProjectTile";
 
-function Emoji(props: { name: string; hovered: boolean }) {
-  // TODO 지금 일단 랜덤
+function Emoji(props: { logo: string; hovered: boolean }) {
+  // TODO logo to url
   const type = Math.random() > 0.5 ? PRO.Fire : PRO.GrinningFace;
   const { geometry, material } = React.useMemo(() => Model(type), []);
   return (
@@ -92,7 +91,7 @@ function ProjectText({ name, hovered }: { name: string; hovered: boolean }) {
       anchorY={"middle"}
       rotation-y={Math.PI / 4}
       fontSize={0.3}
-      font={"/assets/fonts/IBMPlexSans-Bold.woff"}
+      font={"/assets/fonts/IBMPlexSansKR-Bold.woff"}
       material={hovered ? projectTextMat : invisibleMat}
       outlineBlur={0.06}
       outlineWidth={0.06}
@@ -104,16 +103,30 @@ function ProjectText({ name, hovered }: { name: string; hovered: boolean }) {
   );
 }
 
-function ProIcons() {
+const ProIcons = React.memo(() => {
+  const { projects } = useCMSData();
+  // TODO 일단 4기만 뜨도록
+  const filtered = projects.filter((project) => project.period === 4);
+  const zipped = Array.from(
+    Array(Math.min(filtered.length, positions.length)),
+    (_, i) => {
+      return { project: filtered[i], position: positions[i] };
+    }
+  );
   return (
     <group>
-      {positions.map((vector, index) => {
+      {zipped.map((zip, index) => {
         return (
-          <ProjectIcon key={index} title="project" icon="" position={vector} />
+          <ProjectIcon
+            key={index}
+            projectData={zip.project}
+            position={zip.position}
+          />
         );
       })}
     </group>
   );
-}
+});
+ProIcons.displayName = "ProjectIcons";
 
 export default ProIcons;
