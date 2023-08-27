@@ -309,7 +309,7 @@ export const accordionChevron = style({
   selectors: {
     [`${accordionItem}:has(${accordionContent}[data-state='open']) &`]: {
       transform: "rotate(180deg)",
-      backgroundColor: theme.color.blue,
+      backgroundColor: "#7AF7B5",
     },
   },
 });
