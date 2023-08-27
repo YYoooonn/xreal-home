@@ -63,6 +63,10 @@ export async function getProjects() {
       }
       const [intro, purpose, activite, resources, showMore] = items;
       const props = page.properties as unknown as ProjectPageProperties;
+      // 운영 기수 숫자로 변환
+      const periods = props.운영기수.multi_select.map((select) =>
+        periodToNum(select.name)
+      );
       return {
         title: props.Team.title[0]?.plain_text ?? "",
         subtitle: props.Subtitle.rich_text
@@ -72,7 +76,8 @@ export async function getProjects() {
         profileSrc: resolveNotionImage(props["프로필 이미지"].files[0]),
         tags: props.태그.multi_select.map((select) => select.name),
         category: props.카테고리.multi_select.map((select) => select.name),
-        period: props.운영기수.multi_select.map((select) => select.name),
+        periods: periods,
+        period: Math.max(...periods),
         leader: props.Leader.rich_text
           .map((text) => text.plain_text)
           .join("\n"),
@@ -101,4 +106,8 @@ export default async function handler(
 
   res.revalidate("/");
   res.status(200).json(reponseBody);
+}
+
+function periodToNum(str: string) {
+  return parseInt(str.replace("기", ""));
 }

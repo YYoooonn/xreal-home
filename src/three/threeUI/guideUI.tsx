@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import * as styles from "./guideUI.css";
-import { StatusEnum, useStatus } from "@/hooks/useStatus";
 
 export default function GuideUI() {
   const [visible, setVisible] = useState(true);
-
+  // XXX 개선 필요
   const removeElement = () => {
     setVisible((prev) => !prev);
   };

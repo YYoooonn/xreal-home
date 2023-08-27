@@ -8,7 +8,6 @@ export const container = style({
   gap: "8px",
   width: "100%",
   maxWidth: "960px",
-  margin: "0 auto",
 });
 
 export const bodyContainer = style({

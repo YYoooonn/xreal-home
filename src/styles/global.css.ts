@@ -17,11 +17,6 @@ globalStyle("a", {
   color: "inherit",
 });
 
-globalStyle("canvas", {
-  width: "100vw",
-  height: "100vh",
-});
-
 globalStyle("#modals", {
   position: "absolute",
   inset: 0,

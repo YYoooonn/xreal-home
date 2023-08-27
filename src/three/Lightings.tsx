@@ -18,7 +18,7 @@ function Lights() {
 
 function AdditionalLights() {
   // spring의 animate 사용하여 생성되도록, 끊김 현상 방지
-  const { status } = useStatus();
+  const status = useStatus((state) => state.status);
   const isMain = status === StatusEnum.Main;
   const { scale_main } = useSpring({
     scale_main: isMain ? 1 : 0,

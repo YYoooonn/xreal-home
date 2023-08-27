@@ -15,7 +15,7 @@
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
     "@react-spring/three": "9.6.1",
-    "@react-three/drei": "9.57.3",
+    "@react-three/drei": "^9.80.6",
     "@react-three/fiber": "^8.13.0",
     "@vanilla-extract/css": "^1.11.0",
     "@vanilla-extract/dynamic": "^2.0.3",
@@ -26,7 +26,7 @@
     "react-dom": "^18.2.0",
     "reactflow": "^11.8.1",
     "three": "^0.154.0",
-    "three-stdlib": "^2.21.10",
+    "three-stdlib": "^2.25.0",
     "zustand": "^4.3.9"
   },
   "devDependencies": {

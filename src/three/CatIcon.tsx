@@ -122,7 +122,7 @@ function CatText({
       color="#FFFFFF"
       position={[x, 0.08, z + 0.55]}
       fontSize={0.2}
-      font="/assets/fonts/IBMPlexSans-Bold.woff"
+      font="/assets/fonts/IBMPlexSansKR-Bold.woff"
       rotation-x={Math.PI / 2}
       rotation-z={Math.PI}
       rotation-y={Math.PI}

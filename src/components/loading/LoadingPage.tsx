@@ -1,7 +1,6 @@
 import { useProgress } from "@react-three/drei";
 import * as styles from "./LoadingPage.css";
 import React from "react";
-import { assignInlineVars } from "@vanilla-extract/dynamic";
 
 const pos = [
   [0, 0],
@@ -59,27 +58,17 @@ const pos = [
 ];
 
 export default function LoadingPage() {
-  const { progress } = useProgress();
-  // console.log(progress);
-  // TODO Spans 미리 만들어 주는 방법은?
   return (
     <section className={styles.loadingSection}>
-      <div className={styles.logo}>
-        <Spans />
-      </div>
-      <div
-        className={styles.progressBar}
-        // style={{ backgroundSize: `${Math.floor(progress)}%` }}
-        style={assignInlineVars({ [styles.progress]: progress.toString() })}
-      />
+      <Logo />
+      <ProgressBar />
     </section>
   );
 }
 
-function Spans() {
-  // console.log("spans called");
+function Logo() {
   return (
-    <>
+    <div className={styles.logo}>
       {Array.from({ length: 51 }, (_, i) => (
         <span
           key={i}
@@ -90,6 +79,18 @@ function Spans() {
           }}
         />
       ))}
-    </>
+    </div>
+  );
+}
+
+function ProgressBar() {
+  const { progress } = useProgress();
+  return (
+    <div
+      className={styles.progressBar}
+      style={{ backgroundSize: `${Math.floor(progress)}%` }}
+      // XXX 체크
+      // style={assignInlineVars({ [styles.progress]: progress})}
+    />
   );
 }

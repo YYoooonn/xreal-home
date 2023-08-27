@@ -9,7 +9,7 @@ export const memberFolderList = style({
   flexWrap: "wrap",
   gap: "calc(var(--width) * 0.2)",
   vars: {
-    "--width": "clamp(11.5vw, 120px, 240px)",
+    "--width": "clamp(120px, 11.5vw, 240px)",
   },
 });
 
@@ -84,7 +84,7 @@ export const sponsorImageList = style({
 });
 
 export const sponsorImage = style({
-  width: "calc(50% - 30px)",
+  width: "min(350px, calc(50% - 30px))",
   height: "fit-content",
   objectFit: "contain",
 });
@@ -210,7 +210,7 @@ export const eventContainer = style({
   display: "flex",
   flexDirection: "column",
   gap: "16px",
-  width: "calc(50% - 20px)",
+  width: "min(500px, calc(50% - 20px))",
 
   "@media": {
     ["(" + breakpoints.tablet + ") or (" + breakpoints.lowTablet + ")"]: {

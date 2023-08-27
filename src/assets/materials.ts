@@ -7,7 +7,7 @@ export const hoveredMat = new MeshStandardMaterial({
 });
 
 // TODO 임의로 설정
-export const textMat = new MeshStandardMaterial({ color: "FFFFFF" });
+export const textMat = new MeshStandardMaterial({ color: "#FFFFFF" });
 
 export const invisibleMat = new MeshStandardMaterial({
   transparent: true,

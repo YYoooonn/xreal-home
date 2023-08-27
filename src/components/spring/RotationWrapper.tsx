@@ -81,7 +81,7 @@ const SpringRotationWrapper: React.FC<SpringProps> = (props) => {
 };
 
 const RotationWrapper: React.FC<WrapperProps> = (props) => {
-  const { status } = useStatus();
+  const status = useStatus((state) => state.status);
   const delay = utils.computeDelay(props.position, DELAY_RATIO);
   return (
     <ProjectRotationWrapper delay={delay} status={status} {...props}>

@@ -21,9 +21,7 @@ export default function RootProviders({
       <ModalControlProvider>
         <ModalRoutingProvider>
           <Suspense fallback={<LoadingPage />}>
-            <div className="canvas">
-              <Scene />
-            </div>
+            <Scene />
           </Suspense>
         </ModalRoutingProvider>
       </ModalControlProvider>

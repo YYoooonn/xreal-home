@@ -20,7 +20,6 @@ export async function getInitialProps() {
         .then((data) => (props[key] = data))
     )
   );
-  console.log(props);
   return props;
 }
 
@@ -31,7 +30,6 @@ export async function getStaticProps() {
     getPresses().then((presses) => (props.presses = presses)),
     getProjects().then((presses) => (props.projects = presses)),
   ]);
-  console.log(props.members);
   return {
     props,
     revalidate: 60,

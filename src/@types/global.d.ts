@@ -7,7 +7,8 @@ interface Project {
   leader: string;
   members: string[];
   category: string[];
-  period: string[]; // 기수
+  period: number; // 최종 기수
+  periods: number[]; // 총 기수
   contents: {
     intro: string; // 프로젝트 소개
     purpose: string; // 프로젝트 목적
