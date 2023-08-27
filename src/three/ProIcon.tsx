@@ -18,17 +18,16 @@ type EmojiProps = {
 };
 
 function ProjectIcon(props: EmojiProps) {
-  const { status } = useStatus();
-  const { nodes } = useGLTF(urlProjectTile);
-
+  const status = useStatus((state) => state.status);
+  const isProject = status === StatusEnum.Project;
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
-  useCursor(hovered && status === StatusEnum.Project);
-
+  useCursor(hovered && isProject);
   const { scale } = useSpring({
-    scale: status !== StatusEnum.Project ? 0 : 1,
+    scale: isProject ? 1 : 0,
     config: SCALE_CONFIG,
-    delay: 1000,
+    // TODO delay 설정
+    delay: isProject ? 1000 : 100,
   });
   return (
     <animated.group position={props.position} scale={scale}>
@@ -46,6 +45,15 @@ function ProjectIcon(props: EmojiProps) {
         <Emoji name={props.icon} hovered={hovered} />
         <ProjectText name={"Project"} hovered={hovered} />
       </group>
+      <ProjectTile />
+    </animated.group>
+  );
+}
+
+const ProjectTile = React.memo(() => {
+  const { nodes } = useGLTF(urlProjectTile);
+  return (
+    <>
       {nodes.Tile_Project.children.map((child, i) => {
         if (child instanceof Mesh) {
           return (
@@ -56,14 +64,15 @@ function ProjectIcon(props: EmojiProps) {
           );
         }
       })}
-    </animated.group>
+    </>
   );
-}
+});
+ProjectTile.displayName = "ProjectTile";
 
 function Emoji(props: { name: string; hovered: boolean }) {
   // TODO 지금 일단 랜덤
   const type = Math.random() > 0.5 ? PRO.Fire : PRO.GrinningFace;
-  const { geometry, material } = Model(type);
+  const { geometry, material } = React.useMemo(() => Model(type), []);
   return (
     <mesh
       rotation-y={type === PRO.Fire ? -Math.PI / 4 : -Math.PI / 6}

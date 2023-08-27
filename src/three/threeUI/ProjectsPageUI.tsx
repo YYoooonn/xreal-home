@@ -2,6 +2,8 @@ import * as styles from "./ProjectsPageUI.css";
 import ArrowLeftIcon from "@/assets/icons/arrowLeft";
 import IconButton from "@/components/IconButton";
 import ProgressBar from "./ProgressBar";
+import { StatusEnum, useStatus } from "@/hooks/useStatus";
+import pushHistory from "@/hooks/pushHistory";
 
 export default function ProjectsPageUI(props: any) {
   // TODO: Catagory Button 의 category를 projects data와 연결해야합니다.
@@ -11,6 +13,7 @@ export default function ProjectsPageUI(props: any) {
   //   setOtherCategory(!otherCategory);
   // };
 
+  const { setStatus } = useStatus();
   return (
     <>
       {/* <ProgressBar/> */}
@@ -19,8 +22,10 @@ export default function ProjectsPageUI(props: any) {
           <div className={styles.breadcrumbContainer}>{`home > projects`}</div>
           <IconButton
             className={styles.backToPreviousPageButton}
-            // TODO: category로 setStatus
-            // onClick={props.onClickHandler}
+            onClick={() => {
+              setStatus(StatusEnum.Category);
+              pushHistory("category");
+            }}
           >
             <ArrowLeftIcon />
           </IconButton>

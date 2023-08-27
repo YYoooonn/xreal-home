@@ -8,7 +8,6 @@ import {
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
-import ProgressBar from "@/three/threeUI/ProgressBar";
 
 const RATIO_WIDTH = 8;
 const RATIO_HEIGHT = 7;
@@ -18,7 +17,14 @@ const DAMP = 3;
 const TARGET = new THREE.Vector3(0, 0, 0);
 
 function Camera() {
-  const { status } = useStatus();
+  // const {isMobile} = useDeviceDetect()
+  // console.log(`is mobile : ${isMobile}`)
+  // const DefaultCamera = isMobile? DragableCamera: ScrollableCamera
+  return <ScrollableCamera />;
+}
+
+function ScrollableCamera() {
+  const status = useStatus((state) => state.status);
   const enableScroll = status === StatusEnum.Project;
   return (
     <ScrollControls
@@ -78,6 +84,7 @@ const ResponsiveCam = ({ enabled }: { enabled: boolean }) => {
     <OrthographicCamera
       ref={camRef}
       makeDefault
+      manual
       castShadow
       position={[100, 80, 100]}
       near={0.001}
@@ -86,5 +93,27 @@ const ResponsiveCam = ({ enabled }: { enabled: boolean }) => {
     />
   );
 };
+
+/* 
+TODO 모바일 환경에서의 스크롤 반영하는 카메라 이동 
+r3f canvas 기본적으로 touch 이벤트 반영하지 않아서 직접 구현해야함
+*/
+// function DragableCamera(){
+
+// const mouse = useThree((state) => state.mouse)
+// const handler = () => {
+//   console.log(mouse)
+//   mouse.y
+// }
+
+// useEffect(() => {
+//   document.addEventListener("touchmove", handler);
+//   return () => {
+//     document.removeEventListener("touchmove", handler);
+//   };
+// }, []);
+
+//   return ;
+// }
 
 export default Camera;

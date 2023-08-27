@@ -40,7 +40,7 @@ const IconTiles = React.memo(({ removeButton }: { removeButton?: boolean }) => {
 IconTiles.displayName = "IconTiles";
 
 function AdditionalTiles() {
-  const { status } = useStatus();
+  const status = useStatus((state) => state.status);
   return (
     <>
       {status === StatusEnum.Project && <TileInstances isAdditional={true} />}

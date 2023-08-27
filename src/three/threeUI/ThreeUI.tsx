@@ -4,31 +4,21 @@ import ProjectsPageUI from "./ProjectsPageUI";
 import GuideUI from "./guideUI";
 
 export default function ThreeUI() {
-  const { status, setStatus } = useStatus();
-  const handleClick = () => {
-    setStatus(StatusEnum.Category);
-  };
-
-  const isCategory = status === StatusEnum.Category;
-  const isProject = status === StatusEnum.Project;
-  return (
-    <>
-      {isCategory && <MainPageUI />}
-      {isProject && <ProjectPageUI />}
-    </>
+  const status = useStatus((state) => state.status);
+  return status === StatusEnum.Project ? (
+    <ProjecGuideUI />
+  ) : status === StatusEnum.Category ? (
+    <MainPageUI />
+  ) : (
+    <></>
   );
-  // isProject ? (
-  //   <ProjectPageUI onClickHandler={handleClick} />
-  // ) : (
-  //   <MainPageUI />
-  // );
 }
 
-function ProjectPageUI(props: any) {
+function ProjecGuideUI() {
   return (
     <>
       <GuideUI />
-      <ProjectsPageUI {...props} />
+      <ProjectsPageUI />
     </>
   );
 }

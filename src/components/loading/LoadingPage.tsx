@@ -1,7 +1,6 @@
 import { useProgress } from "@react-three/drei";
 import * as styles from "./LoadingPage.css";
 import React from "react";
-import { assignInlineVars } from "@vanilla-extract/dynamic";
 
 const pos = [
   [0, 0],
@@ -86,8 +85,6 @@ function Logo() {
 
 function ProgressBar() {
   const { progress } = useProgress();
-  // XXX 콘솔 나중에 삭제
-  console.log(progress);
   return (
     <div
       className={styles.progressBar}
