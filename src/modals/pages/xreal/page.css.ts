@@ -6,7 +6,7 @@ export const visionList = style({
   marginTop: "40px",
   overflowX: "scroll",
   display: "flex",
-  justifyContent: "space-evenly",
+  justifyContent: "start",
   gap: "24px",
 });
 
