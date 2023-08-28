@@ -12,10 +12,11 @@ export default function MainPageUI() {
         height={40}
         className={styles.logo}
       />
-      <div className={styles.recruiting}>
+      {/* TODO : recruiting page 연결 */}
+      <a className={styles.recruiting} href="" target="_blank">
         5th Recruiting &nbsp;
         <SarifArrowLeftIcon style={{ width: 20, height: 20 }} />
-      </div>
+      </a>
 
       <div className={styles.contactUs}>
         <div className={styles.dropUp}>
