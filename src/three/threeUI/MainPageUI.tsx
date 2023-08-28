@@ -1,3 +1,4 @@
+import SarifArrowLeftIcon from "@/assets/icons/sarifArrowLeft";
 import * as styles from "./MainPageUI.css";
 import Image from "next/image";
 
@@ -11,7 +12,11 @@ export default function MainPageUI() {
         height={40}
         className={styles.logo}
       />
-      <div className={styles.recruiting}>5th Recruiting</div>
+      {/* TODO : recruiting page 연결 */}
+      <a className={styles.recruiting} href="" target="_blank">
+        5th Recruiting &nbsp;
+        <SarifArrowLeftIcon style={{ width: 20, height: 20 }} />
+      </a>
 
       <div className={styles.contactUs}>
         <div className={styles.dropUp}>
@@ -24,33 +29,39 @@ export default function MainPageUI() {
             />
           </button>
           <div id="DropdownCategories" className={styles.dropupContent}>
-            <button className={styles.dropupCategoryButton}>
-              <Image
-                src="/assets/images/instagram.png"
-                alt="contact us"
-                width={40}
-                height={40}
-              />
-              Instagram
-            </button>
-            <button className={styles.dropupCategoryButton}>
-              <Image
-                src="/assets/images/youtube.png"
-                alt="contact us"
-                width={40}
-                height={40}
-              />
-              Youtube
-            </button>
-            <button className={styles.dropupCategoryButton}>
-              <Image
-                src="/assets/images/email.png"
-                alt="contact us"
-                width={40}
-                height={40}
-              />
-              Email
-            </button>
+            <a href="https://www.instagram.com/xreal_snu/" target="_blank">
+              <button className={styles.dropupCategoryButton}>
+                <Image
+                  src="/assets/images/instagram.png"
+                  alt="contact us"
+                  width={40}
+                  height={40}
+                />
+                Instagram
+              </button>
+            </a>
+            <a href="https://youtube.com/@xreal2021" target="_blank">
+              <button className={styles.dropupCategoryButton}>
+                <Image
+                  src="/assets/images/youtube.png"
+                  alt="contact us"
+                  width={40}
+                  height={40}
+                />
+                Youtube
+              </button>
+            </a>
+            <a href="mailto:contact@xreal.info" target="_blank">
+              <button className={styles.dropupCategoryButton}>
+                <Image
+                  src="/assets/images/email.png"
+                  alt="contact us"
+                  width={40}
+                  height={40}
+                />
+                Email
+              </button>
+            </a>
           </div>
         </div>
       </div>
