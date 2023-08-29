@@ -1,19 +1,11 @@
-import RootPageModal from "@/modals/RootPageModal";
-import SubPageModal from "@/modals/SubPageModal";
+import RootPageModal from "@/modals/layout/RootPageModal";
+import SubPageModal from "@/modals/layout/SubPageModal";
 import { useModalControl } from "@/modals/ModalControlProvider";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect } from "react";
+import { PageProps, pageRoute } from "./route";
 
-const pageRoute = [
-  "xreal",
-  "events",
-  "events/metathon/4th",
-  "joinus",
-  "newmedia",
-] as const;
-
-// TODO: 임시용
 type modalPathType = (typeof pageRoute)[number];
 interface ModalRoutingContext {
   push(path: modalPathType): void;
@@ -31,10 +23,29 @@ function validatePath(path: string): path is modalPathType {
 }
 
 function isRoot(path: modalPathType): path is rootPages {
-  return !path.includes("/");
+  return (
+    path == "xreal" ||
+    path == "events" ||
+    path == "newmedia" ||
+    path == "joinus"
+  );
 }
 
-const pathQueue: modalPathType[] = [];
+function queryToString(obj: object) {
+  const entries = Object.entries(obj);
+  let resString = "";
+  for (const [key, value] of entries) {
+    resString += `${key}=${value}&`;
+  }
+  return resString;
+}
+const pathQueue: Array<
+  modalPathType extends infer T
+    ? T extends modalPathType
+      ? { path: T; props: PageProps[T] }
+      : never
+    : never
+> = [];
 let latestModalID = -1;
 export default function ModalRoutingProvider({
   children,
@@ -43,7 +54,7 @@ export default function ModalRoutingProvider({
   const router = useRouter();
 
   useEffect(() => {
-    const { modalpath } = Object.fromEntries(
+    const { modalpath, projectName } = Object.fromEntries(
       (router.asPath
         .split("?")[1]
         ?.split("&")
@@ -53,16 +64,20 @@ export default function ModalRoutingProvider({
     if (!validatePath(modalpath)) return;
     pathQueue.length = 0;
     latestModalID = -1;
-    push(modalpath);
+    if (modalpath == "project") push(modalpath, { projectName });
+    else push(modalpath);
   }, []);
 
-  const openModalPage = (path: modalPathType) => {
+  const openModalPage = <T extends modalPathType>(
+    path: T,
+    props: PageProps[T]
+  ) => {
     const Component = dynamic(() => import(`@/modals/pages/${path}/page`));
 
     close(latestModalID);
     latestModalID = isRoot(path)
-      ? open(RootPageModal, { children: <Component />, name: path })
-      : open(SubPageModal, { children: <Component /> });
+      ? open(RootPageModal, { children: <Component />, name: path, ...props })
+      : open(SubPageModal, { children: <Component />, path, ...props });
   };
 
   const closeModalPage = () => {
@@ -72,18 +87,34 @@ export default function ModalRoutingProvider({
     latestModalID = -1;
   };
 
-  const push = (path: modalPathType) => {
-    openModalPage(path);
-    pathQueue.push(path);
-    router.push(`${router.basePath}/?modalpath=${path}`);
-  };
+  function push<T extends modalPathType>(
+    path: Record<string, object> extends PageProps[T] ? never : T,
+    props: PageProps[T]
+  ): void;
+  function push<T extends modalPathType>(
+    path: Record<string, object> extends PageProps[T] ? T : never
+  ): void;
+  function push<T extends modalPathType>(
+    path: T,
+    ...[props = {}]: object extends PageProps[T] ? [object?] : [PageProps[T]]
+  ): void {
+    openModalPage(path, props);
+    pathQueue.push({ path, props: props as any });
+    router.push(
+      `${router.basePath}/?modalpath=${path}&${queryToString(props)}`
+    );
+  }
 
   const back = () => {
     pathQueue.pop();
-    const path = pathQueue[pathQueue.length - 1];
-    if (!path) return;
-    openModalPage(path);
-    router.push(`${router.basePath}/?modalpath=${path}`);
+    const lastPathData = pathQueue[pathQueue.length - 1];
+    if (!lastPathData) return;
+    openModalPage(lastPathData.path, lastPathData.props);
+    router.push(
+      `${router.basePath}/?modalpath=${lastPathData.path}&${queryToString(
+        lastPathData.props
+      )}`
+    );
   };
 
   return (

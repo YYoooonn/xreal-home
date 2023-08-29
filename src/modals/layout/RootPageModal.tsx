@@ -1,18 +1,36 @@
-import type { ModalProps } from "./ModalControlProvider";
+import Image from "next/image";
+import type { ModalProps } from "../ModalControlProvider";
 import IconButton from "@/components/IconButton";
 import ArrowUpIcon from "@/assets/icons/arrowUp";
 import CloseIcon from "@/assets/icons/close";
+import SideNavigator from "./SideNavigator";
+
 import * as styles from "./BasePageModal.css";
 import SideNavProvider from "@/components/SideNavProvider";
-import { useModalRoute } from "./ModalRoutingProvider";
+import { useModalRoute } from "../ModalRoutingProvider";
 
-export interface SubPageModalProps extends ModalProps {}
+const pageTabMap: Record<rootPages, string[]> = {
+  xreal: ["vision", "organization", "curriculum", "press"],
+  events: ["methathon", "xmc", "activity"],
+  joinus: ["members", "sponser", "recruiting"],
+  newmedia: ["NEWSLETTER"],
+};
 
-export default function SubPageModal({
+export interface RootPageModalProps extends ModalProps {
+  name: rootPages;
+}
+
+export default function RootPageModal({
+  name,
   id,
   children,
-}: React.PropsWithChildren<SubPageModalProps>) {
-  const { close, back } = useModalRoute();
+}: React.PropsWithChildren<RootPageModalProps>) {
+  const { close } = useModalRoute();
+  const tabs = pageTabMap[name];
+
+  const handleClose = () => {
+    close();
+  };
 
   const handleScrollup = () =>
     document
@@ -23,16 +41,30 @@ export default function SubPageModal({
     <SideNavProvider>
       <div id="page-modal" className={styles.pageModalContainer}>
         <div className={styles.pageModalInWrapper}>
+          <aside className={styles.pageModalSidebar}>
+            <div className={styles.pageModalSidebarInWrapper}>
+              <div className={styles.breadcrumbContainer}>
+                {`home > ${name}`}
+              </div>
+              <div className={styles.veryBigModelIcon}>
+                <Image
+                  src={`/assets/images/modalPages/${name}.png`}
+                  alt={`${name}'s icon`}
+                  fill
+                  sizes="10vw"
+                />
+              </div>
+              <SideNavigator tabs={tabs} />
+            </div>
+          </aside>
           <div className={styles.pageModalMain}>
             <header className={styles.pageModalHeader}>
-              <IconButton onClick={close}>
+              <IconButton onClick={handleClose} style={{ marginLeft: "auto" }}>
                 <CloseIcon />
               </IconButton>
             </header>
-            <main className={styles.pageModalBody}>
-              <button onClick={back}>back</button>
-              {children}
-            </main>
+
+            <main className={styles.pageModalBody}>{children}</main>
             <footer className={styles.pageModalFooter}>
               <div className={styles.pageModalFooterLinks}>
                 <p>© XREAL all rights reserved.</p>
