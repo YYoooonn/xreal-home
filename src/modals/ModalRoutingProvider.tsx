@@ -1,5 +1,5 @@
-import RootPageModal from "@/modals/RootPageModal";
-import SubPageModal from "@/modals/SubPageModal";
+import RootPageModal from "@/modals/layout/RootPageModal";
+import SubPageModal from "@/modals/layout/SubPageModal";
 import { useModalControl } from "@/modals/ModalControlProvider";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -77,7 +77,7 @@ export default function ModalRoutingProvider({
     close(latestModalID);
     latestModalID = isRoot(path)
       ? open(RootPageModal, { children: <Component />, name: path, ...props })
-      : open(SubPageModal, { children: <Component />, ...props });
+      : open(SubPageModal, { children: <Component />, path, ...props });
   };
 
   const closeModalPage = () => {

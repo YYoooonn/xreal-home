@@ -74,7 +74,7 @@ export const pageModalMain = style({
 
 export const pageModalHeader = style({
   display: "flex",
-  justifyContent: "end",
+  justifyContent: "space-between",
   alignItems: "center",
 });
 
