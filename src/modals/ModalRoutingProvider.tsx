@@ -72,12 +72,20 @@ export default function ModalRoutingProvider({
     path: T,
     props: PageProps[T]
   ) => {
-    const Component = dynamic(() => import(`@/modals/pages/${path}/page`));
+    const Component = dynamic(
+      () => import(`@/modals/pages/${path}/page`)
+    ) as React.ComponentType & { getName: (props?: PageProps[T]) => string };
 
+    console.log(Component.getName);
     close(latestModalID);
     latestModalID = isRoot(path)
       ? open(RootPageModal, { children: <Component />, name: path, ...props })
-      : open(SubPageModal, { children: <Component />, path, ...props });
+      : open(SubPageModal, {
+          children: <Component />,
+          name: Component.getName ? Component.getName(props) : "",
+          path,
+          ...props,
+        });
   };
 
   const closeModalPage = () => {

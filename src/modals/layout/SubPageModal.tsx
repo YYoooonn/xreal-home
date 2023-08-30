@@ -4,15 +4,15 @@ import ArrowUpIcon from "@/assets/icons/arrowUp";
 import CloseIcon from "@/assets/icons/close";
 import * as styles from "./SubPageModal.css";
 import { useModalRoute } from "../ModalRoutingProvider";
-import { inter_plex_sans } from "@/assets/fonts";
 
 export interface SubPageModalProps extends ModalProps {
   path: string;
+  name: string;
 }
 
 export default function SubPageModal({
-  id,
   path,
+  name,
   children,
 }: React.PropsWithChildren<SubPageModalProps>) {
   const { close, back } = useModalRoute();
@@ -33,7 +33,9 @@ export default function SubPageModal({
                 " " +
                 styles.subPageBreadcrumbContainer
               }
-            >{`home > ${path}`}</div>
+            >
+              {`home > ${path}` + (name ? " > " + name : "")}
+            </div>
             <IconButton onClick={close}>
               <CloseIcon />
             </IconButton>
