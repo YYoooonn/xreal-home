@@ -19,7 +19,7 @@ function ProjecGuideUI() {
   return (
     <>
       <GuideUI />
-      {/* <MobileGuide/> */}
+      <MobileGuide />
       <ProjectsPageUI />
     </>
   );

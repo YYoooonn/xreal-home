@@ -15,6 +15,6 @@ export const MobileGuide = style({
 
   color: "white",
   textAlign: "center",
-  fontSize: "24px",
-  fontWeight: "bold",
+  fontSize: "18px",
+  fontWeight: "medium",
 });

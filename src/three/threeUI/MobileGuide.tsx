@@ -1,17 +1,17 @@
 import { useState } from "react";
 import * as styles from "./MobileGuide.css";
+import useDeviceDetect from "@/hooks/useDeviceDetect";
 
 export default function MobileGuide() {
-  const [visible, setVisible] = useState(true);
-  const removeElement = () => {
-    setVisible((prev) => !prev);
-  };
+  const isMobile = useDeviceDetect();
 
   return (
     <>
-      {visible && (
+      {!isMobile && (
         <div className={styles.MobileGuide}>
-          This page is currently available only on PC
+          This page is currently
+          <br />
+          available only on PC
         </div>
       )}
     </>
