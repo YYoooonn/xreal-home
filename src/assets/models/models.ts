@@ -3,7 +3,7 @@ import type { Group, Mesh } from "three";
 
 export const urlButton = "/assets/models/Button.glb";
 export const urlArrow = "/assets/models/Arrow.glb";
-export const urlProjectTile = "/assets/models/projects/Tile_Project.glb";
+export const urlProjectTile = "/assets/models/Tile_Project.glb";
 export const urlTile = "/assets/models/Tile.glb";
 useGLTF.preload(urlButton);
 useGLTF.preload(urlArrow);

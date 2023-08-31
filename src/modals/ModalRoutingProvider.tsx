@@ -8,7 +8,8 @@ import { PageProps, pageRoute } from "./route";
 
 type modalPathType = (typeof pageRoute)[number];
 interface ModalRoutingContext {
-  push(path: modalPathType): void;
+  // TODO any 변경 필요
+  push(path: modalPathType, props?: any): void;
   back(): void;
   close(): void;
 }

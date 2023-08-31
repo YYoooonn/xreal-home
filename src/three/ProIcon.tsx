@@ -6,10 +6,10 @@ import { SCALE_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
 import positions from "./_data/positions";
 import { urlProjectTile } from "@/assets/models/models";
-import { invisibleMat, projectTextMat } from "@/assets/materials";
+import { projectTextMat } from "@/assets/materials";
 import { Model } from "@/assets/models/project";
-import { PRO } from "@/constants/project";
 import { useCMSData } from "@/components/CMSDataProvider";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
 
 type EmojiProps = {
   projectData: Project;
@@ -18,6 +18,7 @@ type EmojiProps = {
 
 function ProjectIcon(props: EmojiProps) {
   const status = useStatus((state) => state.status);
+  const { push } = useModalRoute();
   const isProject = status === StatusEnum.Project;
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
@@ -38,7 +39,7 @@ function ProjectIcon(props: EmojiProps) {
           setHovered(false);
         }}
         onClick={() => {
-          console.log(props.projectData.subtitle);
+          push("project", { projectName: props.projectData.title });
         }}
       >
         <Emoji logo={props.projectData.logo} hovered={hovered} />
@@ -68,17 +69,17 @@ const ProjectTile = React.memo(() => {
 });
 ProjectTile.displayName = "ProjectTile";
 
-function Emoji(props: { logo: string; hovered: boolean }) {
+function Emoji({ logo, hovered }: { logo: string; hovered: boolean }) {
   // TODO logo to url
-  const type = Math.random() > 0.5 ? PRO.Fire : PRO.GrinningFace;
-  const { geometry, material } = React.useMemo(() => Model(type), []);
+  const { geometry, material } = React.useMemo(() => Model(logo), []);
   return (
     <mesh
-      rotation-y={type === PRO.Fire ? -Math.PI / 4 : -Math.PI / 6}
+      visible={!hovered}
+      rotation-y={-Math.PI / 4}
       position={[0, 0.15, 0]}
       scale={1}
       geometry={geometry}
-      material={props.hovered ? invisibleMat : material}
+      material={material}
     />
   );
 }
@@ -86,13 +87,14 @@ function Emoji(props: { logo: string; hovered: boolean }) {
 function ProjectText({ name, hovered }: { name: string; hovered: boolean }) {
   return (
     <Text
+      visible={hovered}
       position={[0, 0.5, 0]}
       anchorX={"center"}
       anchorY={"middle"}
       rotation-y={Math.PI / 4}
       fontSize={0.3}
       font={"/assets/fonts/IBMPlexSansKR-Bold.woff"}
-      material={hovered ? projectTextMat : invisibleMat}
+      material={projectTextMat}
       outlineBlur={0.06}
       outlineWidth={0.06}
       outlineOpacity={0.25}

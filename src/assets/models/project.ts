@@ -1,29 +1,34 @@
-import { PRO } from "@/constants/project";
 import { useGLTF } from "@react-three/drei";
 
-export const urlEmojiFire = "/assets/models/projects/Emoji_fire.glb";
-export const urlEmojiGriningFace =
-  "/assets/models/projects/Emoji_grinning_face.glb";
+const urlDefault = "/assets/models/projects/Emoji_fire.glb";
 
-useGLTF.preload(urlEmojiFire);
-useGLTF.preload(urlEmojiGriningFace);
+const names = [
+  "Emoji_building_construction",
+  "Emoji_crystal_ball",
+  "Emoji_fire_heart",
+  "Emoji_fire",
+  "Emoji_frame",
+  "Emoji_globe_with_meridians",
+  "Emoji_grinning_face",
+  "Emoji_guitar",
+  "Emoji_joystick",
+  "Emoji_puzzle_piece",
+  "Emoji_rainbow",
+  "Emoji_teddy_bear",
+  "Emoji_thinking_face",
+  "Emoji_video_game",
+];
 
-const map: Record<
-  PRO,
-  {
-    url: string;
-  }
-> = {
-  [PRO.Fire]: {
-    url: urlEmojiFire,
-  },
-  [PRO.GrinningFace]: {
-    url: urlEmojiGriningFace,
-  },
-};
+const map = new Map(
+  names.map((name) => {
+    const url = `/assets/models/projects/${name}.glb`;
+    useGLTF.preload(url);
+    return [name, `/assets/models/projects/${name}.glb`];
+  })
+);
 
-export const Model = (type: PRO) => {
-  const { url } = map[type];
-  const { nodes } = useGLTF(url);
+export const Model = (name: string) => {
+  const url = map.get(name);
+  const { nodes } = useGLTF(url ? url : urlDefault);
   return { geometry: nodes.Emoji.geometry, material: nodes.Emoji.material };
 };
