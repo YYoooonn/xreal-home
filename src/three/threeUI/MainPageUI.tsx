@@ -14,7 +14,7 @@ export default function MainPageUI() {
       />
       {/* TODO : recruiting page 연결 */}
       <a className={styles.recruiting} href="" target="_blank">
-        5th Recruiting &nbsp;
+        6th Recruiting 알림 받기&nbsp;
         <SarifArrowLeftIcon style={{ width: 20, height: 20 }} />
       </a>
 

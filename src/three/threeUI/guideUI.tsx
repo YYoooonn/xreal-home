@@ -17,8 +17,8 @@ export default function GuideUI() {
             src="/assets/images/scrollGuide.png"
             alt="scroll"
             className={styles.GuideImg}
-            width={100}
-            height={330}
+            width={64}
+            height={232}
           />
           <p>scroll to move</p>
         </div>
