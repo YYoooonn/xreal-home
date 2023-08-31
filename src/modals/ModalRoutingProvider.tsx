@@ -54,18 +54,19 @@ export default function ModalRoutingProvider({
   const router = useRouter();
 
   useEffect(() => {
-    const { modalpath, projectName } = Object.fromEntries(
+    const { modalpath, ...props } = Object.fromEntries(
       (router.asPath
         .split("?")[1]
         ?.split("&")
         ?.map((query) => query.split("=")) ?? []) as [string, string][]
     );
+    console.log(props);
 
     if (!validatePath(modalpath)) return;
     pathQueue.length = 0;
     latestModalID = -1;
-    if (modalpath == "project") push(modalpath, { projectName });
-    else push(modalpath);
+    //@ts-ignore
+    push(modalpath, props ?? {});
   }, []);
 
   const openModalPage = <T extends modalPathType>(
@@ -74,17 +75,17 @@ export default function ModalRoutingProvider({
   ) => {
     const Component = dynamic(
       () => import(`@/modals/pages/${path}/page`)
-    ) as React.ComponentType & { getName: (props?: PageProps[T]) => string };
+    ) as React.ComponentType<PageProps[T]> & {
+      getName: (props?: PageProps[T]) => string;
+    };
 
-    console.log(Component.getName);
     close(latestModalID);
     latestModalID = isRoot(path)
-      ? open(RootPageModal, { children: <Component />, name: path, ...props })
+      ? open(RootPageModal, { children: <Component {...props} />, name: path })
       : open(SubPageModal, {
-          children: <Component />,
+          children: <Component {...props} />,
           name: Component.getName ? Component.getName(props) : "",
           path,
-          ...props,
         });
   };
 
