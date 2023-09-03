@@ -2,14 +2,15 @@ import { useGLTF, useCursor, Text } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/three";
 import React, { useState } from "react";
 import { Mesh, Vector3 } from "three";
-import { SCALE_CONFIG } from "@/constants/springConfig";
+import { SCALE_CONFIG, FILTER_CONFIG } from "@/constants/springConfig";
 import { useStatus, StatusEnum } from "@/hooks/useStatus";
-import positions from "./_data/positions";
+import { projects4, projects3 } from "./_data/positions";
 import { urlProjectTile } from "@/assets/models/models";
 import { projectTextMat } from "@/assets/materials";
 import { Model } from "@/assets/models/project";
 import { useCMSData } from "@/components/CMSDataProvider";
 import { useModalRoute } from "@/modals/ModalRoutingProvider";
+import { filterType, useFilter } from "@/hooks/useFilter";
 
 type EmojiProps = {
   projectData: Project;
@@ -18,8 +19,14 @@ type EmojiProps = {
 
 function ProjectIcon(props: EmojiProps) {
   const status = useStatus((state) => state.status);
-  const { push } = useModalRoute();
   const isProject = status === StatusEnum.Project;
+
+  const projectFilter = useFilter((state) => state.projectFilter);
+  const isSelected = props.projectData.category
+    .map((category) => filterType[category])
+    .includes(projectFilter);
+
+  const { push } = useModalRoute();
   // 뒤집힌 경우에만 hover 가능하도록
   const [hovered, setHovered] = useState(false);
   useCursor(hovered && isProject);
@@ -27,7 +34,16 @@ function ProjectIcon(props: EmojiProps) {
     scale: isProject ? 1 : 0,
     config: SCALE_CONFIG,
     // TODO delay 설정
-    delay: isProject ? 1000 : 100,
+    delay: isProject ? 500 : 100,
+  });
+
+  const { scale_filtered } = useSpring({
+    scale_filtered: isSelected ? 1.3 : 1,
+    config: SCALE_CONFIG,
+  });
+  const { rotation_filtered } = useSpring({
+    rotation_filtered: isSelected ? 2 * Math.PI : 0,
+    config: FILTER_CONFIG,
   });
   return (
     <animated.group position={props.position} scale={scale}>
@@ -42,8 +58,10 @@ function ProjectIcon(props: EmojiProps) {
           push("project", { projectName: props.projectData.title });
         }}
       >
-        <Emoji logo={props.projectData.logo} hovered={hovered} />
-        <ProjectText name={props.projectData.title} hovered={hovered} />
+        <animated.group scale={scale_filtered} rotation-y={rotation_filtered}>
+          <Emoji logo={props.projectData.logo} hovered={hovered} />
+          <ProjectText name={props.projectData.title} hovered={hovered} />
+        </animated.group>
       </group>
       <ProjectTile />
     </animated.group>
@@ -76,7 +94,7 @@ function Emoji({ logo, hovered }: { logo: string; hovered: boolean }) {
     <mesh
       visible={!hovered}
       rotation-y={-Math.PI / 3}
-      position={[0, 0.15, 0]}
+      position={[0, 0.2, 0]}
       scale={1}
       geometry={geometry}
       material={material}
@@ -107,17 +125,37 @@ function ProjectText({ name, hovered }: { name: string; hovered: boolean }) {
 
 const ProIcons = React.memo(() => {
   const { projects } = useCMSData();
-  // TODO 일단 4기만 뜨도록
-  const filtered = projects.filter((project) => project.period === 4);
-  const zipped = Array.from(
-    Array(Math.min(filtered.length, positions.length)),
-    (_, i) => {
-      return { project: filtered[i], position: positions[i] };
+  // XXX 더 나은 방법?
+  const period3 = new Set<Project>();
+  const period4 = new Set<Project>();
+  projects.map((project) => {
+    if (project.periods.includes(3)) {
+      period3.add(project);
     }
-  );
+    if (project.periods.includes(4)) {
+      period4.add(project);
+    }
+  });
+  // console.log(period4)
+
+  const zipped4 = Array.from(period4, (p, i) => {
+    return { project: p, position: projects4[i] };
+  });
+  const zipped3 = Array.from(period3, (p, i) => {
+    return { project: p, position: projects3[i] };
+  });
   return (
     <group>
-      {zipped.map((zip, index) => {
+      {zipped4.map((zip, index) => {
+        return (
+          <ProjectIcon
+            key={index}
+            projectData={zip.project}
+            position={zip.position}
+          />
+        );
+      })}
+      {zipped3.map((zip, index) => {
         return (
           <ProjectIcon
             key={index}

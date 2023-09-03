@@ -33,6 +33,7 @@ export default function ProjectsPageUI() {
             className={styles.backToPreviousPageButton}
             onClick={() => {
               setStatus(StatusEnum.Category);
+              setProjectFilter(FILTER.DEFAULT);
               pushHistory("category");
             }}
           >

@@ -19,11 +19,7 @@ export default function Scene() {
       >
         <color attach="background" args={["#000000"]} />
         <Lights />
-        <ScrollControls
-          pages={isProject ? 4 : 0}
-          enabled={isProject}
-          damping={0.2}
-        >
+        <ScrollControls pages={isProject ? 5 : 0} damping={0.5}>
           <Floor enabled={isProject} />
         </ScrollControls>
         <Camera />
