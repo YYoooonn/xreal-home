@@ -12,6 +12,7 @@ import pushHistory from "@/hooks/pushHistory";
 import { textMat, hoveredMat } from "@/assets/materials";
 import { useModalRoute } from "@/modals/ModalRoutingProvider";
 import { Model } from "@/assets/models/category";
+import { PointLightProps } from "@react-three/fiber";
 
 type Icon = {
   type: CAT;
@@ -23,27 +24,39 @@ const map: Record<
   CAT,
   {
     name: string;
-    lightPos?: [number, number, number];
+    lightProps?: PointLightProps;
   }
 > = {
   [CAT.Events]: {
     name: "Events",
-    lightPos: [-0.2, 0.1, 0],
+    lightProps: {
+      position: [0.1, 0.1, 0],
+      intensity: 4,
+    },
   },
   [CAT.JoinUs]: {
     name: "Join Us",
-    lightPos: [0, 0.1, 0],
+    lightProps: {
+      position: [0, 0.1, 0],
+      intensity: 3,
+    },
   },
   [CAT.NEWMEDIA]: {
     name: "NewMedia",
-    lightPos: [0, 0, 0],
+    lightProps: {
+      position: [0, 0, 0],
+      intensity: 3,
+    },
   },
   [CAT.Xreal]: {
     name: "XREAL",
   },
   [CAT.Project]: {
     name: "Projects",
-    lightPos: [0, 0, 0],
+    lightProps: {
+      position: [0, 0, 0],
+      intensity: 3,
+    },
   },
 };
 
@@ -73,35 +86,50 @@ function CatIcon(props: Icon) {
     config: SCALE_CONFIG,
     delay: DISPOSE_DELAY,
   });
+  const { y } = useSpring({
+    y: visible ? 0 : 30,
+    config: SCALE_CONFIG,
+    delay: DISPOSE_DELAY,
+  });
 
-  const { name, lightPos } = map[props.type];
+  const { name, lightProps } = map[props.type];
 
   return (
-    <animated.group rotation-x={Math.PI} scale={scale_dispose}>
-      <animated.group
-        position={props.position}
-        scale={scale}
-        onPointerOver={() => {
-          setHovered(true);
-        }}
-        onPointerLeave={() => {
-          setHovered(false);
-        }}
-        onClick={handleClick}
-      >
-        <MeshIcon hovered={hovered} type={props.type} />
+    <group>
+      <animated.group rotation-x={Math.PI} scale={scale_dispose}>
+        <animated.group
+          position={props.position}
+          scale={scale}
+          onPointerOver={() => {
+            setHovered(true);
+          }}
+          onPointerLeave={() => {
+            setHovered(false);
+          }}
+          onClick={handleClick}
+        >
+          <MeshIcon hovered={hovered} type={props.type} />
+        </animated.group>
+        <CatText name={name} position={props.position} />
       </animated.group>
-      {lightPos && <Light position={lightPos} />}
-      <CatText name={name} position={props.position} />
-    </animated.group>
+      <animated.group position-y={y}>
+        {lightProps && <Light visible={visible} props={lightProps} />}
+      </animated.group>
+    </group>
   );
 }
 
-function Light({ position }: { position: [number, number, number] }) {
+function Light({
+  visible,
+  props,
+}: {
+  visible: boolean;
+  props: PointLightProps;
+}) {
   return (
     <pointLight
-      position={position}
-      intensity={3}
+      position={props.position}
+      intensity={props.intensity}
       color={"#7FFFD4"}
       castShadow
       distance={20}

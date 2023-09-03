@@ -75,7 +75,7 @@ function Emoji({ logo, hovered }: { logo: string; hovered: boolean }) {
   return (
     <mesh
       visible={!hovered}
-      rotation-y={-Math.PI / 4}
+      rotation-y={-Math.PI / 3}
       position={[0, 0.15, 0]}
       scale={1}
       geometry={geometry}

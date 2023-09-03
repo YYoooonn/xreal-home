@@ -6,6 +6,12 @@ import Button from "./Button";
 import ProIcons from "./ProIcon";
 import { StatusEnum, useStatus } from "@/hooks/useStatus";
 import React from "react";
+import { useScroll } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+
+const STEP = -20;
+const DAMP = 3;
 
 Globals.assign({ frameLoop: "always" });
 /* TODO
@@ -21,19 +27,14 @@ function ButtonTile() {
   );
 }
 
-const IconTiles = React.memo(({ removeButton }: { removeButton?: boolean }) => {
-  const Center = removeButton ? (
-    <IconTile position={[0, 0, 0]} type={CAT.Xreal} />
-  ) : (
-    <ButtonTile />
-  );
+const IconTiles = React.memo(() => {
   return (
     <group>
       <IconTile position={[-2, 0, 2]} type={CAT.Project} />
       <IconTile position={[2, 0, 2]} type={CAT.Events} />
       <IconTile position={[2, 0, -2]} type={CAT.JoinUs} />
       <IconTile position={[-2, 0, -2]} type={CAT.NEWMEDIA} />
-      {Center}
+      <ButtonTile />
     </group>
   );
 });
@@ -48,14 +49,35 @@ function AdditionalTiles() {
   );
 }
 
-function Floor(props: { removeButton?: boolean }) {
+function Floor({ enabled }: { enabled?: boolean }) {
+  const scroll = useScroll();
+  const groupRef = React.useRef<THREE.Group>(null!);
+  useFrame((_, delta) => {
+    if (enabled) {
+      // project
+      groupRef.current.position.x = THREE.MathUtils.damp(
+        groupRef.current.position.x,
+        STEP * scroll.offset,
+        DAMP,
+        delta
+      );
+    } else {
+      // else
+      groupRef.current.position.x = THREE.MathUtils.damp(
+        groupRef.current.position.x,
+        0,
+        DAMP,
+        delta
+      );
+    }
+  });
   return (
-    <>
+    <group ref={groupRef}>
       <TileInstances isAdditional={false} />
       <ProIcons />
-      <IconTiles {...props} />
+      <IconTiles />
       <AdditionalTiles />
-    </>
+    </group>
   );
 }
 

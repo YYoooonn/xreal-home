@@ -5,3 +5,5 @@ export const SCALE_CONFIG = { tension: 180, friction: 12 };
 export const SCALE_RATIO = 1.3;
 export const DELAY_RATIO = 100;
 export const DISPOSE_DELAY = 400;
+
+export const LIGHT_EXPOSE_CONFIG = { tension: 200, friction: 30 };
