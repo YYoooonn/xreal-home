@@ -1,12 +1,14 @@
 import Floor from "@/three/Floor";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, ScrollControls } from "@react-three/drei";
 import Lights from "@/three/Lightings";
 import Camera from "@/three/Camera";
 import ThreeUI from "./threeUI/ThreeUI";
 import * as styles from "./canvas.css";
+import { StatusEnum, useStatus } from "@/hooks/useStatus";
 
 export default function Scene() {
+  const isProject = useStatus((state) => state.status) === StatusEnum.Project;
   return (
     <div className={styles.canvas} key={"canvas"}>
       <Canvas
@@ -17,7 +19,9 @@ export default function Scene() {
       >
         <color attach="background" args={["#000000"]} />
         <Lights />
-        <Floor />
+        <ScrollControls pages={isProject ? 5 : 0} damping={0.5}>
+          <Floor enabled={isProject} />
+        </ScrollControls>
         <Camera />
         <OrbitControls
           enabled={false}

@@ -1,4 +1,4 @@
-import { MeshStandardMaterial, DoubleSide, MeshNormalMaterial } from "three";
+import { MeshStandardMaterial, DoubleSide } from "three";
 
 export const hoveredMat = new MeshStandardMaterial({
   emissive: "#7AF7B5",
@@ -17,5 +17,10 @@ export const invisibleMat = new MeshStandardMaterial({
 
 export const projectTextMat = new MeshStandardMaterial({
   color: "#ffffff",
+  side: DoubleSide,
+});
+
+export const borderMat = new MeshStandardMaterial({
+  color: "#1C2F27",
   side: DoubleSide,
 });

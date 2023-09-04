@@ -1,11 +1,18 @@
-import { Globals } from "@react-spring/three";
-import { IconTile, IconTileWrapper, TileInstances } from "./Tile";
+import { Globals, useSpring, animated } from "@react-spring/three";
+import { IconTile, IconTileWrapper, TileInstances, Border } from "./Tile";
 import { CAT } from "@/constants/category";
 import CatIcon from "./CatIcon";
 import Button from "./Button";
 import ProIcons from "./ProIcon";
-import { StatusEnum, useStatus } from "@/hooks/useStatus";
 import React from "react";
+import { Image, useScroll } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { borderX } from "./_data/positions";
+import { SCALE_CONFIG } from "@/constants/springConfig";
+
+const STEP = -30;
+const DAMP = 5;
 
 Globals.assign({ frameLoop: "always" });
 /* TODO
@@ -21,41 +28,89 @@ function ButtonTile() {
   );
 }
 
-const IconTiles = React.memo(({ removeButton }: { removeButton?: boolean }) => {
-  const Center = removeButton ? (
-    <IconTile position={[0, 0, 0]} type={CAT.Xreal} />
-  ) : (
-    <ButtonTile />
-  );
+const IconTiles = React.memo(() => {
   return (
     <group>
       <IconTile position={[-2, 0, 2]} type={CAT.Project} />
       <IconTile position={[2, 0, 2]} type={CAT.Events} />
       <IconTile position={[2, 0, -2]} type={CAT.JoinUs} />
       <IconTile position={[-2, 0, -2]} type={CAT.NEWMEDIA} />
-      {Center}
+      <ButtonTile />
     </group>
   );
 });
 IconTiles.displayName = "IconTiles";
 
-function AdditionalTiles() {
-  const status = useStatus((state) => state.status);
+function AdditionalTiles({ enabled }: { enabled: boolean }) {
+  return <>{enabled && <TileInstances isAdditional={true} />}</>;
+}
+
+const BorderTiles = React.memo(() => {
   return (
-    <>
-      {status === StatusEnum.Project && <TileInstances isAdditional={true} />}
-    </>
+    <group>
+      {borderX.map((positionX, index) => (
+        <Border key={index} x={positionX} />
+      ))}
+    </group>
+  );
+});
+BorderTiles.displayName = "BorderTiles";
+
+function BorderTexts({ visible }: { visible: boolean }) {
+  const { y } = useSpring({
+    y: visible ? 0.1 : -1,
+    config: SCALE_CONFIG,
+  });
+  return (
+    <animated.group position-y={y}>
+      <Image
+        scale={0.8}
+        position={[-4, 0.08, 1]}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+        url="/assets/textures/4.png"
+        transparent
+      />
+      <Image
+        scale={0.8}
+        position={[15, 0.08, 2]}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+        url="/assets/textures/3.png"
+        transparent
+      />
+      {/* 
+      <Image position={[-5,0.1,1]} rotation={[-Math.PI/2,0,Math.PI/2]} url="/assets/textures/1.png" transparent/>
+      <Image position={[-5,0.1,1]} rotation={[-Math.PI/2,0,Math.PI/2]} url="/assets/textures/1.png" transparent/>
+       */}
+    </animated.group>
   );
 }
 
-function Floor(props: { removeButton?: boolean }) {
+function Floor({ enabled }: { enabled: boolean }) {
+  const scroll = useScroll();
+  const groupRef = React.useRef<THREE.Group>(null!);
+  useFrame((_, delta) => {
+    if (enabled) {
+      // project
+      groupRef.current.position.x = STEP * scroll.offset;
+    } else {
+      // else
+      groupRef.current.position.x = THREE.MathUtils.damp(
+        groupRef.current.position.x,
+        0,
+        DAMP,
+        delta
+      );
+    }
+  });
   return (
-    <>
+    <group ref={groupRef}>
       <TileInstances isAdditional={false} />
       <ProIcons />
-      <IconTiles {...props} />
-      <AdditionalTiles />
-    </>
+      <IconTiles />
+      <BorderTiles />
+      <AdditionalTiles enabled={enabled} />
+      <BorderTexts visible={enabled} />
+    </group>
   );
 }
 

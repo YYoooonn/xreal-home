@@ -1,3 +1,5 @@
+import { borderX } from "../_data/positions";
+
 type Position = [number, number, number];
 
 export function computeDelay(position: Position, ratio: number) {
@@ -20,5 +22,9 @@ export function isWhite(position: Position) {
 }
 
 export function isEdgeOrCenter(x: number, y: number) {
-  return !(((x == -2 || x == 2) && (y == 2 || y == -2)) || (x == 0 && y == 0));
+  return ((x == -2 || x == 2) && (y == 2 || y == -2)) || (x == 0 && y == 0);
+}
+
+export function isBorder(x: number) {
+  return borderX.includes(x);
 }

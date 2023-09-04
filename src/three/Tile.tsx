@@ -1,17 +1,18 @@
 import React, { ReactElement } from "react";
 import { Instance, Instances, useGLTF } from "@react-three/drei";
 import { RotationWrapper } from "../components/spring/RotationWrapper";
+import { StatusEnum, useStatus } from "@/hooks/useStatus";
 import CatIcon from "./CatIcon";
 import { CAT } from "@/constants/category";
 import { urlTile } from "@/assets/models/models";
 import * as utils from "@/three/utils/compute";
-
-type Position = [x: number, y: number, z: number];
+import { borderMat } from "@/assets/materials";
 
 const TRANS_DIST = 15;
 const MAX_COLUMN = 30;
 const MAX_ROW = 30;
 
+type Position = [x: number, y: number, z: number];
 type IconTileProps = {
   children: JSX.Element | JSX.Element[];
   position: Position;
@@ -24,13 +25,43 @@ type ItemTileProps = {
 
 function Tile({ isWhite }: { isWhite: boolean }) {
   const { nodes } = useGLTF(urlTile);
-
   return (
     <mesh
       rotation-x={isWhite ? Math.PI : 0}
       geometry={nodes.Tile.geometry}
       material={nodes.Tile.material}
     />
+  );
+}
+
+function BorderTile() {
+  const { nodes } = useGLTF(urlTile);
+  const status = useStatus((state) => state.status);
+  return (
+    <mesh
+      geometry={nodes.Tile.geometry}
+      material={status === StatusEnum.Project ? borderMat : nodes.Tile.material}
+      rotation-x={Math.PI}
+    />
+  );
+}
+
+function Border({ x }: { x: number }) {
+  return (
+    <>
+      {Array.from({ length: MAX_ROW }).map((_, i) => {
+        return (
+          <RotationWrapper
+            key={i}
+            position={[x, 0, i - TRANS_DIST]}
+            rotateX={true}
+            isWhite={false}
+          >
+            <BorderTile />
+          </RotationWrapper>
+        );
+      })}
+    </>
   );
 }
 
@@ -63,15 +94,14 @@ const TileInstances = React.memo(
       >
         {Array.from({ length: MAX_COLUMN }).map((_, i) =>
           Array.from({ length: MAX_ROW }).map((_, j) => {
-            const { x, y } = { x: i - TRANS_DIST, y: j - TRANS_DIST };
-            const visible = isAdditional || utils.isEdgeOrCenter(x, y);
+            const { x, y } = {
+              x: isAdditional ? i - TRANS_DIST + MAX_COLUMN : i - TRANS_DIST,
+              y: j - TRANS_DIST,
+            };
+            const visible = !utils.isEdgeOrCenter(x, y) && !utils.isBorder(x);
             return (
               visible && (
-                <TileInstance
-                  key={(i + 1) * (j + 1)}
-                  position={[x, 0, y]}
-                  isAdditional={isAdditional}
-                />
+                <TileInstance key={(i + 1) * (j + 1)} position={[x, 0, y]} />
               )
             );
           })
@@ -80,26 +110,17 @@ const TileInstances = React.memo(
     );
   }
 );
+
 TileInstances.displayName = "TileInstances";
 
-function TileInstance({
-  position,
-  isAdditional,
-}: {
-  position: Position;
-  isAdditional: boolean;
-}) {
-  if (isAdditional) {
-    return <Instance position={[position[0] + MAX_COLUMN, 0, position[2]]} />;
-  } else {
-    const rotateX = Math.random() > 0.5;
-    const isWhite = utils.isWhite(position);
-    return (
-      <RotationWrapper position={position} isWhite={isWhite} rotateX={rotateX}>
-        <Instance rotation-x={isWhite ? 0 : Math.PI} />
-      </RotationWrapper>
-    );
-  }
+function TileInstance({ position }: { position: Position }) {
+  const rotateX = Math.random() > 0.5;
+  const isWhite = utils.isWhite(position);
+  return (
+    <RotationWrapper position={position} isWhite={isWhite} rotateX={rotateX}>
+      <Instance rotation-x={isWhite ? 0 : Math.PI} />
+    </RotationWrapper>
+  );
 }
 
-export { IconTile, IconTileWrapper, TileInstances };
+export { IconTile, IconTileWrapper, TileInstances, Border };

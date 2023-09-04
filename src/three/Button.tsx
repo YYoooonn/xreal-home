@@ -56,8 +56,8 @@ function Button(props: { position: [x: number, y: number, z: number] }) {
       <pointLight
         castShadow
         position={[0.5, 1, 0.5]}
-        distance={20}
-        intensity={1}
+        distance={10}
+        intensity={2}
         color={"#7FFFD4"}
       />
       <Arrow hovered={hovered} />

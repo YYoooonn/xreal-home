@@ -14,6 +14,19 @@ export const FILTER = {
 } as const;
 export type FILTER = (typeof FILTER)[keyof typeof FILTER];
 
+// XXX
+export const filterType: Record<string, FILTER> = {
+  "Virtual Human": FILTER.VIRTUALHUMAN,
+  "360 영상": FILTER.FULL_VIDEO,
+  UXUI: FILTER.UXUI,
+  NFT: FILTER.NFT,
+  "Media Art": FILTER.MEDIA_ART,
+  AI: FILTER.AI,
+  Study: FILTER.STUDY,
+  Web3: FILTER.WEB3,
+  XR: FILTER.XR,
+};
+
 interface FilterState {
   projectFilter: FILTER;
   setProjectFilter: (newFIlter: FILTER) => void;
