@@ -1,11 +1,11 @@
-import { theme } from "@/styles/theme.css";
 import { globalStyle, style } from "@vanilla-extract/css";
+import { theme } from "@/styles/theme.css";
 
 export * from "../_internal.css";
 export const visionList = style({
   marginTop: "40px",
-  overflowX: "scroll",
   display: "flex",
+  flexWrap: "wrap",
   justifyContent: "start",
   gap: "24px",
 });
@@ -35,7 +35,7 @@ const childNode = style({
 
 const groupNode = style({
   background:
-    "linear-gradient(0deg, rgba(0, 250, 119, 0.15) 0%, rgba(0, 250, 119, 0.15) 100%), #FFF",
+    "linear-gradient(217deg, rgba(164, 255, 207, 0.70) 10.38%, rgba(209, 250, 255, 0.70) 78.33%)",
   border: "none",
   height: "150px",
 });

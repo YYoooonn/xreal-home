@@ -57,7 +57,12 @@ export default function RootPageModal({
           </aside>
           <div className={styles.pageModalMain}>
             <header className={styles.pageModalHeader}>
-              <IconButton onClick={handleClose} style={{ marginLeft: "auto" }}>
+              <IconButton
+                onClick={handleClose}
+                style={{
+                  marginLeft: "auto",
+                }}
+              >
                 <CloseIcon />
               </IconButton>
             </header>

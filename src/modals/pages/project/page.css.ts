@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+
 export * from "../_internal.css";
 
 export const projectPageContainer = style({
@@ -49,9 +50,9 @@ export const tagBadge = style({
 });
 
 export const leaderBadge = style({
-  color: "white",
+  color: "#222222",
   padding: "6px",
-  backgroundColor: "#5352F5",
+  background: "linear-gradient(to bottom, #A4FFCF, white)",
   fontWeight: "bold",
   borderRadius: "3px",
 });

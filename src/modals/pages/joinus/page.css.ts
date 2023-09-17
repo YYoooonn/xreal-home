@@ -1,6 +1,6 @@
+import { createVar, keyframes, style } from "@vanilla-extract/css";
 import { breakpoints } from "@/styles/breakpoints";
 import { theme } from "@/styles/theme.css";
-import { createVar, keyframes, style } from "@vanilla-extract/css";
 
 export * from "../_internal.css";
 
@@ -88,30 +88,7 @@ export const sponsorImage = style({
   height: "fit-content",
   objectFit: "contain",
 });
-function easeOutQuint(x: number): number {
-  return 1 - Math.pow(1 - x, 5);
-}
-const fadeFrameEntries = Array.from({ length: 101 }, (_, i) => [
-  `${i}%`,
-  {
-    background:
-      i <= 50
-        ? `linear-gradient(to bottom, #A4FFCF 0%, color-mix(in srgb, #D1FAFF ${Math.min(
-            100,
-            i * 2
-          )}%, white) 0%)`
-        : `linear-gradient(to bottom, rgba(164, 255, 207, ${
-            (i - 50) * 2 * 255
-          }) 0%, #D1FAFF ${Math.min(
-            100,
-            (i - 50) * 2 * easeOutQuint((i - 50) / 50)
-          )}%)`,
-  },
-]) as [string, { background: string }][];
-const gradientFadeAnimation = keyframes(Object.fromEntries(fadeFrameEntries));
-const gradientFadeAnimationReverse = keyframes(
-  Object.fromEntries(fadeFrameEntries.map(([k, v], i) => [`${100 - i}%`, v]))
-);
+
 export const recruitingLink = style({
   display: "flex",
   flexDirection: "column",
@@ -123,16 +100,10 @@ export const recruitingLink = style({
   padding: "52px",
   marginTop: "40px",
   borderRadius: "10px",
-  border: `2px solid ${theme.color.blue}`,
+  border: "2px solid",
+  borderImage: "linear-gradient(to bottom, #A4FFCF, white) 2",
   cursor: "pointer",
   transition: "background 0s 1s",
-  animation: `${gradientFadeAnimationReverse} 1s`,
-  selectors: {
-    "&:hover": {
-      background: "linear-gradient(to bottom, #A4FFCF 0%, #D1FAFF 90%)",
-      animation: `${gradientFadeAnimation} 1s`,
-    },
-  },
 });
 
 export const recruitingLinkHeading = style({
@@ -140,7 +111,10 @@ export const recruitingLinkHeading = style({
   alignItems: "center",
   justifyContent: "center",
   gap: "24px",
-  color: theme.color.blue,
+  color: "#A4FFCF",
+  background: "linear-gradient(to bottom, #A4FFCF, white)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
 });
 
 export const recruitingLinkHeadingLabel = style({
@@ -165,22 +139,21 @@ export const groupRecuritCard = style({
   minWidth: "calc(20ch + 28px * 2)",
   borderRadius: "10px",
   background: `linear-gradient(236deg, 
-    color-mix(in srgb, ${groupRecuritCardColor} 18%, white) 0%, 
-    #FFF 100%
+    color-mix(in srgb, ${groupRecuritCardColor} 80%, white) 0%, 
+    rgba(255, 255, 255, 10%) 100%
   )`,
+  color: "white",
 });
 
 export const groupRecuritCardHeading = style({
   fontWeight: "700",
   fontSize: "26px",
   lineHeight: "24px",
-  color: theme.color.gray5,
   marginBottom: "16px",
   textAlign: "center",
 });
 
 export const groupRecruitCardItem = style({
-  color: "#222222",
   fontFamily: "Inter",
   fontSize: "14px",
   fontWeight: 400,
@@ -269,13 +242,16 @@ export const accordionTrigger = style({
   width: "100%",
   textAlign: "left",
   background: "none",
+  color: "white",
   border: "none",
 });
 export const accordionItem = style({
-  borderRadius: "10px",
   ...theme.textStyle.body2,
+  color: "white",
+  borderRadius: "10px",
   transition: "all 300ms",
   borderBottom: "1px solid lightgray",
+  background: "rgba(0, 0, 0, 0.60)",
   selectors: {
     [`&:has(${accordionTrigger}:hover)`]: {
       boxShadow: "0px 2px 16px 0px rgba(0, 0, 0, 0.08)",
@@ -311,6 +287,7 @@ export const accordionChevron = style({
     [`${accordionItem}:has(${accordionContent}[data-state='open']) &`]: {
       transform: "rotate(0deg)",
       backgroundColor: "#7AF7B5",
+      backgroundImage: "linear-gradient(to bottom, #A4FFCF, white)",
     },
   },
 });

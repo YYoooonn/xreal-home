@@ -7,6 +7,7 @@ export const pageModalContainer = style({
   padding: `40px 48px`,
   pointerEvents: "auto",
   overflowY: "auto",
+  color: "white",
   selectors: {
     "&::before": {
       content: "''",
@@ -28,8 +29,8 @@ export const pageModalInWrapper = style({
 export const pageModalSidebar = style({
   width: "300px",
   padding: "24px 0",
+  background: "rgba(255, 255, 255, 20%)",
   backdropFilter: "blur(10px)",
-  backgroundColor: "rgba(100%, 100%, 100%, 48%)",
   borderRadius: "33px 0 0 33px",
   "@media": {
     [breakpoints.lowTablet]: { borderRadius: "0 0 0 0", display: "none" },
@@ -49,7 +50,6 @@ export const pageModalSidebarInWrapper = style({
 export const breadcrumbContainer = style({
   textTransform: "uppercase",
   fontWeight: "bold",
-  color: "white",
 });
 
 export const veryBigModelIcon = style({
@@ -61,7 +61,9 @@ export const veryBigModelIcon = style({
 export const pageModalMain = style({
   width: "100%",
   padding: `${3 * 8}px`,
-  backgroundColor: "#fafafa",
+  background:
+    "linear-gradient(138deg, rgba(0, 0, 0, 0.55) 23.72%, rgba(250, 250, 250, 0.07) 94.07%)",
+  backdropFilter: "blur(25px)",
   borderRadius: "0 33px 33px 0",
   display: "flex",
   flexDirection: "column",
@@ -100,7 +102,6 @@ export const pageModalFooterLinks = style({
   flexWrap: "wrap",
   gap: "10px 64px",
   fontWeight: "bold",
-  color: "black",
 });
 
 globalStyle(`${pageModalFooterLinks} > div`, {
