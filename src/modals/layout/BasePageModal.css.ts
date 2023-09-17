@@ -1,5 +1,5 @@
-import { breakpoints } from "@/styles/breakpoints";
 import { style, globalStyle } from "@vanilla-extract/css";
+import { breakpoints } from "@/styles/breakpoints";
 
 export const pageModalContainer = style({
   position: "fixed",
@@ -53,9 +53,8 @@ export const breadcrumbContainer = style({
 });
 
 export const veryBigModelIcon = style({
-  position: "relative",
-  width: "150px",
-  height: "150px",
+  width: "180px",
+  objectFit: "contain",
   alignSelf: "center",
 });
 
