@@ -119,4 +119,5 @@ export const pageModalFooterScrollUpButton = style({
   bottom: 70,
   background: "lightgray",
   padding: 10,
+  transform: "scale(0.75)", // just fuckoff
 });
