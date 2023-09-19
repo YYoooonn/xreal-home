@@ -6,7 +6,6 @@ export const useMappedProjects = (() => {
 
   const useMappedProjects = () => {
     const { projects } = useCMSData();
-
     useEffect(() => {
       for (const project of projects) {
         mappedProjects[project.title] = project;

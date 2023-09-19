@@ -23,6 +23,7 @@ function validatePath(path: string): path is modalPathType {
   return pageRoute.includes(path as modalPathType);
 }
 
+// 이름 바꿔야 하나??
 function isRoot(path: modalPathType): path is rootPages {
   return (
     path == "xreal" ||

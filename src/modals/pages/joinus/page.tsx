@@ -14,6 +14,7 @@ import SarifArrowLeftIcon from "@/assets/icons/sarifArrowLeft";
 import CrampArrowUpIcon from "@/assets/icons/crampASrrowUp";
 import CommasIcon from "@/assets/icons/commas";
 import FAQDataset from "./_data/faqDataset.json";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
 
 const memberComments = [
   "Connecting Reaity",
@@ -26,6 +27,8 @@ export default function JoinusPage() {
   const { collectData } = useSideNav();
   useEffect(() => collectData(), []);
 
+  const { push } = useModalRoute();
+
   return (
     <div className={styles.pageContainer}>
       <section data-modal-section>
@@ -33,7 +36,16 @@ export default function JoinusPage() {
         <h3 className={styles.paragraph.subTitle}>XREAL Pioneers</h3>
         <div className={styles.memberFolderList}>
           {Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className={styles.memberFolderContainer}>
+            <div
+              key={i}
+              className={styles.memberFolderContainer}
+              onClick={() =>
+                push(`joinus/members`, {
+                  generation: i,
+                  memberComment: memberComments[i],
+                })
+              }
+            >
               <div className={styles.memberImageLayer}>
                 <Image
                   src={`/assets/images/Members-${i + 1}.png`}
