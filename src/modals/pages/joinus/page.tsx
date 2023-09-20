@@ -41,7 +41,7 @@ export default function JoinusPage() {
               className={styles.memberFolderContainer}
               onClick={() =>
                 push(`joinus/members`, {
-                  generation: i,
+                  generation: i + 1,
                   memberComment: memberComments[i],
                 })
               }

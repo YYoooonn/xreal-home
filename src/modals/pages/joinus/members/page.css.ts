@@ -14,14 +14,14 @@ export const memberListContainer = style({
 
 const name = style({
   fontSize: "16px",
-  marginTop: "10px",
+  marginTop: "0px",
   color: "#222222",
 });
 
 const major = style({
   color: "#222222",
   fontSize: "8px",
-  marginTop: "8px",
+  marginTop: "0px",
 });
 
 const hashTagContainer = (marginTop: string) => ({
@@ -41,7 +41,7 @@ const projectContainer = style({
 });
 
 const positionContainer = style({
-  ...hashTagContainer("11px"),
+  ...hashTagContainer("0px"),
 });
 
 const position = style({
@@ -71,7 +71,7 @@ const motto = style({
   color: "#222222",
   lineHeight: "20.8px",
   width: "97px",
-  marginTop: "16px",
+  marginTop: "0px",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
