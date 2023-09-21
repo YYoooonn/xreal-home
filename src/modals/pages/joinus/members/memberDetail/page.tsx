@@ -46,6 +46,7 @@ export default function MemberDetail(props: Member) {
             <section
               data-modal-section
               className={styles.rightSideElement.contentSection}
+              key={index}
             >
               <div className={styles.rightSideElement.content}>
                 {memberContentsKey[index]}

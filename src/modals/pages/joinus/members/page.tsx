@@ -26,7 +26,7 @@ export default function MembersWithGeneration(
           <Chip
             key={i}
             onClick={() =>
-              push(`joinus/members/memberDetail`, {
+              push("joinus/members/memberDetail", {
                 name: "정문회",
                 mento: "후회없이 열정적으로",
                 profileSrc:
