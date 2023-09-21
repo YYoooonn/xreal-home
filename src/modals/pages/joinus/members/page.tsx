@@ -2,6 +2,7 @@ import { useSideNav } from "@/components/SideNavProvider";
 import Chip from "../../_components/Chip";
 import * as styles from "./page.css";
 import { useEffect } from "react";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
 
 export interface MembersWithGenerationProps {
   generation: number;
@@ -12,6 +13,8 @@ export default function MembersWithGeneration(
   props: MembersWithGenerationProps
 ) {
   const { collectData } = useSideNav();
+  const { push } = useModalRoute();
+
   useEffect(() => collectData(), []);
 
   return (
@@ -20,7 +23,28 @@ export default function MembersWithGeneration(
       <h3 className={styles.paragraph.subTitle}>"{props.memberComment}"</h3>
       <div className={styles.memberListContainer}>
         {Array.from({ length: 8 }, (_, i) => (
-          <Chip key={i}>
+          <Chip
+            key={i}
+            onClick={() =>
+              push(`joinus/members/memberDetail`, {
+                name: "정문회",
+                mento: "후회없이 열정적으로",
+                profileSrc:
+                  "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+                role: ["총무", "부회장", "부회장과 회장 겸직한 새로운 자리"],
+                projects: ["XBlocks", "LGVR"],
+                contents: {
+                  intro:
+                    "3기 시니어로 활동하고 있으며 현재는 전 총무로써 총무의 인수인계를 돕고 있습니다.",
+                  metaverseForMe:
+                    "메타버스는 신이야 신이야 신이야 으아아아아아아앙아아아아아ㅏㅇ ㄱㄴㄷㄻㅁㅄ ㅇ 니어로 활동하고 있으며 현재는 전 총무로써 총무의 인수인계를 돕고 있습니다.니어로 활동하고 있으며 현재는 전 총무로써 총무의 인수인계를 돕고 있습니다.",
+                  nextPlan: "앞으로 뭐하지",
+                  todo: "아트워크 제작",
+                  lastSay: "XREAL 최고",
+                },
+              })
+            }
+          >
             <h2 className={styles.memberDetails.name}>이세라</h2>
             <div className={styles.memberDetails.major}>
               서울대학교 건설환경공학부
