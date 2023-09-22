@@ -9,7 +9,9 @@ export interface MembersWithGenerationProps {
   memberComment: string;
 }
 
-export default function MembersWithGeneration() {
+export default function MembersWithGeneration(
+  props: MembersWithGenerationProps
+) {
   const { collectData } = useSideNav();
   const { push } = useModalRoute();
 
