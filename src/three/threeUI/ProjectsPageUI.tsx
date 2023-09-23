@@ -9,16 +9,14 @@ import { useState } from "react";
 import { Block } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 export default function ProjectsPageUI() {
-  // TODO: Catagory Button 의 category를 projects data와 연결해야합니다.
-
-  // const [otherCategory, setOtherCategory] = useState(false);
-  // const toggleCategory = () => {
-  //   setOtherCategory(!otherCategory);
-  // };
+  const [isSelected, setSelected] = useState(false);
 
   const { setStatus } = useStatus();
   const { projectFilter, setProjectFilter } = useFilter();
   const handleClick = (filterValue: FILTER) => {
+    setSelected(!isSelected);
+    console.log(isSelected);
+
     if (filterValue === projectFilter) {
       setProjectFilter(FILTER.DEFAULT);
     } else {
@@ -32,20 +30,22 @@ export default function ProjectsPageUI() {
   const options = [
     { value: "OTHER", label: "OTHER" },
     { value: "AI", label: "AI" },
-    { value: "Media Art", label: "Media Art" },
+    { value: "MEDIA_ART", label: "Media Art" },
     { value: "NFT", label: "NFT" },
     { value: "UXUI", label: "UXUI" },
-    { value: "360 영상", label: "360 영상" },
-    { value: "Virtual Human", label: "Virtual Human" },
+    { value: "FULL_VIDEO", label: "360 영상" },
+    { value: "VIRTUALHUMAN", label: "Virtual Human" },
   ];
 
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
+    console.log(isDropdownVisible);
   };
 
-  const handleOptionClick = (value: string) => {
+  const handleOtherClick = (value: string) => {
     setSelectedValue(value);
     setIsDropdownVisible(false);
+    handleClick(FILTER.AI);
   };
 
   return (
@@ -68,19 +68,25 @@ export default function ProjectsPageUI() {
 
         <div className={styles.category}>
           <button
-            className={styles.categoryButton}
+            className={`${
+              isSelected ? styles.categoryButtonSelected : styles.categoryButton
+            }`}
             onClick={() => handleClick(FILTER.XR)}
           >
             XR
           </button>
           <button
-            className={styles.categoryButton}
+            className={`${
+              isSelected ? styles.categoryButtonSelected : styles.categoryButton
+            }`}
             onClick={() => handleClick(FILTER.WEB3)}
           >
             WEB3
           </button>
           <button
-            className={styles.categoryButton}
+            className={`${
+              isSelected ? styles.categoryButtonSelected : styles.categoryButton
+            }`}
             onClick={() => handleClick(FILTER.STUDY)}
           >
             STUDY
@@ -88,26 +94,38 @@ export default function ProjectsPageUI() {
 
           <div className={styles.dropDown}>
             <button
-              className={styles.dropBtn}
+              className={`${
+                isSelected ? styles.categoryButtonSelected : styles.dropBtn
+              }`}
               onClick={() => {
-                toggleDropdown;
+                toggleDropdown();
               }}
             >
               {selectedValue}
             </button>
-            <ul className={styles.dropdownContent}>
-              {options.map((option) => (
-                <div key={option.value}>
-                  <button
-                    type="button"
-                    className={styles.dropdownCategoryButton}
-                    onClick={() => handleOptionClick(option.value)}
-                  >
-                    {option.label}
-                  </button>
-                </div>
-              ))}
-            </ul>
+            {isDropdownVisible && (
+              <ul
+                className={`${
+                  isDropdownVisible
+                    ? styles.dropdownContentBlock
+                    : styles.dropdownContentHidden
+                }`}
+              >
+                {options.map((option) => (
+                  <div key={option.value}>
+                    <button
+                      type="button"
+                      className={styles.dropdownCategoryButton}
+                      onClick={() => {
+                        handleOtherClick(option.value);
+                      }}
+                    >
+                      {option.label}
+                    </button>
+                  </div>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
