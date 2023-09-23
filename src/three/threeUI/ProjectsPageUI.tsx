@@ -5,6 +5,8 @@ import ProgressBar from "./ProgressBar";
 import { StatusEnum, useStatus } from "@/hooks/useStatus";
 import pushHistory from "@/hooks/pushHistory";
 import { FILTER, useFilter } from "@/hooks/useFilter";
+import { useState } from "react";
+import { Block } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 export default function ProjectsPageUI() {
   // TODO: Catagory Button 의 category를 projects data와 연결해야합니다.
@@ -23,6 +25,29 @@ export default function ProjectsPageUI() {
       setProjectFilter(filterValue);
     }
   };
+
+  const [selectedValue, setSelectedValue] = useState("OTHER");
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const options = [
+    { value: "OTHER", label: "OTHER" },
+    { value: "AI", label: "AI" },
+    { value: "Media Art", label: "Media Art" },
+    { value: "NFT", label: "NFT" },
+    { value: "UXUI", label: "UXUI" },
+    { value: "360 영상", label: "360 영상" },
+    { value: "Virtual Human", label: "Virtual Human" },
+  ];
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  const handleOptionClick = (value: string) => {
+    setSelectedValue(value);
+    setIsDropdownVisible(false);
+  };
+
   return (
     <>
       {/* <ProgressBar/> */}
@@ -60,46 +85,29 @@ export default function ProjectsPageUI() {
           >
             STUDY
           </button>
+
           <div className={styles.dropDown}>
-            <button className={`${styles.dropBtn}`}>OTHER</button>
-            <div id="DropdownCategories" className={styles.dropdownContent}>
-              <button
-                className={styles.dropdownCategoryButton}
-                onClick={() => handleClick(FILTER.AI)}
-              >
-                AI
-              </button>
-              <button
-                className={styles.dropdownCategoryButton}
-                onClick={() => handleClick(FILTER.MEDIA_ART)}
-              >
-                Media Art
-              </button>
-              <button
-                className={styles.dropdownCategoryButton}
-                onClick={() => handleClick(FILTER.NFT)}
-              >
-                NFT
-              </button>
-              <button
-                className={styles.dropdownCategoryButton}
-                onClick={() => handleClick(FILTER.UXUI)}
-              >
-                UXUI
-              </button>
-              <button
-                className={styles.dropdownCategoryButton}
-                onClick={() => handleClick(FILTER.FULL_VIDEO)}
-              >
-                360 영상
-              </button>
-              <button
-                className={styles.dropdownCategoryButton}
-                onClick={() => handleClick(FILTER.VIRTUALHUMAN)}
-              >
-                Virtual Human
-              </button>
-            </div>
+            <button
+              className={styles.dropBtn}
+              onClick={() => {
+                toggleDropdown;
+              }}
+            >
+              {selectedValue}
+            </button>
+            <ul className={styles.dropdownContent}>
+              {options.map((option) => (
+                <div key={option.value}>
+                  <button
+                    type="button"
+                    className={styles.dropdownCategoryButton}
+                    onClick={() => handleOptionClick(option.value)}
+                  >
+                    {option.label}
+                  </button>
+                </div>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

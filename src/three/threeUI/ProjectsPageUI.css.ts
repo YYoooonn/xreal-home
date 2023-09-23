@@ -82,6 +82,7 @@ export const dropdownCategoryButton = style({
 });
 
 export const dropBtn = style({
+  appearance: "none",
   border: "none",
   marginTop: 32,
   marginRight: 32,
@@ -116,6 +117,7 @@ export const dropdownContent = style({
   backgroundColor: "rgba(100,100,100,0%)",
   minWidth: 106,
   zIndex: 1,
+  overflow: "hidden",
 
   selectors: {
     [`${dropDown}:hover &`]: { display: "block" },
