@@ -3,8 +3,6 @@ import * as styles from "./page.css";
 import { useEffect } from "react";
 
 export default function MemberDetail(props: Member) {
-  const { collectData } = useSideNav();
-
   const memberContentsKey = [
     "자기소개",
     "나에게 메타버스란",
@@ -12,8 +10,6 @@ export default function MemberDetail(props: Member) {
     "하고싶은 일",
     "남기고 싶은 말",
   ];
-
-  useEffect(() => collectData(), []);
 
   return (
     <div className={styles.pageContainer}>
@@ -54,7 +50,7 @@ export default function MemberDetail(props: Member) {
               <p className={styles.rightSideElement.contentDetail}>
                 {props.contents[key as keyof MemberContents]}
               </p>
-              <hr className={styles.rightSideElement.contourLine}></hr>
+              <hr className={styles.rightSideElement.contourLine} />
             </section>
           );
         })}

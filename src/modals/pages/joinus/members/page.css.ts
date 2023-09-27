@@ -5,8 +5,8 @@ import { style } from "@vanilla-extract/css";
 export const memberListContainer = style({
   display: "grid",
   gridTemplateColumns: "repeat(5, 192px)",
-  gridColumnGap: "24px",
-  gridRowGap: "16px",
+  gridColumnGap: "48px",
+  gridRowGap: "32px",
   margin: "40px 0",
   justifyContent: "center",
   alignContent: "center",

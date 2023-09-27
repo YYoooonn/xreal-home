@@ -12,13 +12,10 @@ export interface MembersWithGenerationProps {
 export default function MembersWithGeneration(
   props: MembersWithGenerationProps
 ) {
-  const { collectData } = useSideNav();
   const { push } = useModalRoute();
 
-  useEffect(() => collectData(), []);
-
   return (
-    <section data-modal-section>
+    <section>
       <h2 className={styles.paragraph.title}>{props.generation}th Members</h2>
       <h3 className={styles.paragraph.subTitle}>"{props.memberComment}"</h3>
       <div className={styles.memberListContainer}>
