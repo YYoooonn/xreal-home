@@ -6,7 +6,7 @@ export const visionList = style({
   marginTop: "40px",
   display: "flex",
   flexWrap: "wrap",
-  justifyContent: "start",
+  justifyContent: "flex-start",
   gap: "24px",
 });
 
