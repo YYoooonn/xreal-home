@@ -36,13 +36,9 @@ const hashTagContainer = (marginTop: string) => ({
   marginTop: marginTop,
 });
 
-const projectContainer = style({
-  ...hashTagContainer("4px"),
-});
+const projectContainer = style(hashTagContainer("4px"));
 
-const positionContainer = style({
-  ...hashTagContainer("0px"),
-});
+const positionContainer = style(hashTagContainer("0px"));
 
 const position = style({
   backgroundColor: "black",
