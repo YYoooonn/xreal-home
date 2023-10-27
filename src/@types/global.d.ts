@@ -39,6 +39,7 @@ interface Press {
   title: string;
   description: string;
   thumbnailSrc: string;
+  pressLink: string;
 }
 
 interface CMSData {
