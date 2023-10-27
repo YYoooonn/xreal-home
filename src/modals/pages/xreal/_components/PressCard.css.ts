@@ -8,6 +8,11 @@ export const container = style({
   gap: "8px",
   width: "100%",
   maxWidth: "960px",
+  selectors: {
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
 });
 
 export const bodyContainer = style({
@@ -41,3 +46,5 @@ export const imageContainer = style({
   height: "120px",
   backgroundColor: theme.color.gray2,
 });
+
+export const underlineHoverEffect = style({});
