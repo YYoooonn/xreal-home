@@ -15,10 +15,11 @@ export const GuideUI = style({
 
   color: "white",
   textAlign: "center",
-  fontSize: "32px",
+  fontSize: "24px",
   fontWeight: "bold",
 });
 
 export const GuideImg = style({
   marginBottom: "32px",
+  opacity: "70%",
 });

@@ -24,9 +24,9 @@ export const recruiting = style({
   cursor: "pointer",
   selectors: {
     "&:hover": {
-      color: "#7CEFFF",
+      color: "#A6F4FF",
       background:
-        "linear-gradient(to bottom, #A4FFCF 50%, color-mix(in srgb, #7CEFFF 80%, white) 0%)",
+        "linear-gradient(to bottom, #A4FFCF 50%, color-mix(in srgb, #A6F4FF 80%, white) 0%)",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
     },

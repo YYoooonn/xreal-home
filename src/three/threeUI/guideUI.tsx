@@ -17,11 +17,11 @@ export default function GuideUI() {
       {visible && isMobile && (
         <div className={styles.GuideUI} onWheel={removeElement}>
           <Image
-            src="/assets/images/scrollGuide.png"
+            src="/assets/images/scrolling.png"
             alt="scroll"
             className={styles.GuideImg}
-            width={64}
-            height={232}
+            width={52}
+            height={180}
           />
           <p>scroll to move</p>
         </div>
