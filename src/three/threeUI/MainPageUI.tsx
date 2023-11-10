@@ -13,7 +13,11 @@ export default function MainPageUI() {
         className={styles.logo}
       />
       {/* TODO : recruiting page 연결 */}
-      <a className={styles.recruiting} href="" target="_blank">
+      <a
+        className={styles.recruiting}
+        href="https://docs.google.com/forms/d/e/1FAIpQLScFKp3V01O6GALycIi7EqSb9_S3d_kv2kCp7Sm8sv6sMxGagw/viewform"
+        target="_blank"
+      >
         6th Recruiting 알림 받기&nbsp;
         <SarifArrowLeftIcon style={{ width: 20, height: 20 }} />
       </a>

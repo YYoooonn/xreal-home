@@ -5,17 +5,21 @@ import ProgressBar from "./ProgressBar";
 import { StatusEnum, useStatus } from "@/hooks/useStatus";
 import pushHistory from "@/hooks/pushHistory";
 import { FILTER, useFilter } from "@/hooks/useFilter";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Block } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 export default function ProjectsPageUI() {
-  const [isSelected, setSelected] = useState(false);
-
+  const [selected, setSelected] = useState("");
+  const [isClicked, setClicked] = useState(false);
   const { setStatus } = useStatus();
   const { projectFilter, setProjectFilter } = useFilter();
-  const handleClick = (filterValue: FILTER) => {
-    setSelected(!isSelected);
-    console.log(isSelected);
+
+  const handleClick = (
+    filterValue: FILTER,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setSelected(e.currentTarget.innerText);
+    setClicked(!isClicked);
 
     if (filterValue === projectFilter) {
       setProjectFilter(FILTER.DEFAULT);
@@ -42,10 +46,13 @@ export default function ProjectsPageUI() {
     console.log(isDropdownVisible);
   };
 
-  const handleOtherClick = (value: string) => {
+  const handleOtherClick = (
+    value: string,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     setSelectedValue(value);
     setIsDropdownVisible(false);
-    handleClick(FILTER.AI);
+    handleClick(FILTER.AI, e);
   };
 
   return (
@@ -69,34 +76,38 @@ export default function ProjectsPageUI() {
         <div className={styles.category}>
           <button
             className={`${
-              isSelected ? styles.categoryButtonSelected : styles.categoryButton
+              FILTER.XR === selected && isClicked
+                ? styles.categoryButtonSelected
+                : styles.categoryButton
             }`}
-            onClick={() => handleClick(FILTER.XR)}
+            onClick={(e) => handleClick(FILTER.XR, e)}
           >
             XR
           </button>
           <button
             className={`${
-              isSelected ? styles.categoryButtonSelected : styles.categoryButton
+              FILTER.WEB3 === selected && isClicked
+                ? styles.categoryButtonSelected
+                : styles.categoryButton
             }`}
-            onClick={() => handleClick(FILTER.WEB3)}
+            onClick={(e) => handleClick(FILTER.WEB3, e)}
           >
             WEB3
           </button>
           <button
             className={`${
-              isSelected ? styles.categoryButtonSelected : styles.categoryButton
+              FILTER.STUDY === selected && isClicked
+                ? styles.categoryButtonSelected
+                : styles.categoryButton
             }`}
-            onClick={() => handleClick(FILTER.STUDY)}
+            onClick={(e) => handleClick(FILTER.STUDY, e)}
           >
             STUDY
           </button>
 
           <div className={styles.dropDown}>
             <button
-              className={`${
-                isSelected ? styles.categoryButtonSelected : styles.dropBtn
-              }`}
+              className={`${styles.dropBtn}`}
               onClick={() => {
                 toggleDropdown();
               }}
@@ -116,8 +127,8 @@ export default function ProjectsPageUI() {
                     <button
                       type="button"
                       className={styles.dropdownCategoryButton}
-                      onClick={() => {
-                        handleOtherClick(option.value);
+                      onClick={(e) => {
+                        handleOtherClick(option.value, e);
                       }}
                     >
                       {option.label}

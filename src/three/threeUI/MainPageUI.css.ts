@@ -12,12 +12,25 @@ export const recruiting = style({
   bottom: 72,
   left: 72,
   color: "white",
+  background: "white",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
   fontSize: 20,
+  fontWeight: "bold",
   textDecoration: "none",
   display: "flex",
   alignItems: "center",
   justifyItems: "center",
   cursor: "pointer",
+  selectors: {
+    "&:hover": {
+      color: "#7CEFFF",
+      background:
+        "linear-gradient(to bottom, #A4FFCF 50%, color-mix(in srgb, #7CEFFF 80%, white) 0%)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+    },
+  },
 });
 
 export const contactUs = style({
