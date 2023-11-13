@@ -33,7 +33,7 @@ export const category = style({
   display: "flex",
   flexDirection: "row",
   justifyContent: "center",
-  alignItems: "start",
+  alignItems: "flex-start",
 });
 
 export const categoryButton = style({

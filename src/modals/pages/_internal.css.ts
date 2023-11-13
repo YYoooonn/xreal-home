@@ -1,5 +1,5 @@
-import { theme } from "@/styles/theme.css";
 import { style } from "@vanilla-extract/css";
+import { theme } from "@/styles/theme.css";
 
 export const pageContainer = style({
   display: "flex",
@@ -11,7 +11,7 @@ export const cardListContainer = style({
   display: "flex",
   gap: "24px",
   margin: "40px 0",
-  overflowX: "scroll",
+  overflowX: "auto",
 });
 
 const title = style({
