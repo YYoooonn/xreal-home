@@ -1,5 +1,6 @@
 import conferenceUrl from "@public/assets/images/conference.png";
 import SarifArrowLeftIcon from "@/assets/icons/sarifArrowLeft";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
 import kapehornUrl from "@public/assets/images/kapehorn.png";
 import hackthonUrl from "@public/assets/images/hackthon.png";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
@@ -15,6 +16,7 @@ import Image from "next/image";
 import FAQDataset from "./_data/faqDataset.json";
 import * as styles from "./page.css";
 
+
 const memberComments = [
   "Connecting Reaity",
   "Road to XR",
@@ -26,6 +28,8 @@ export default function JoinusPage() {
   const { collectData } = useSideNav();
   useEffect(() => collectData(), []);
 
+  const { push } = useModalRoute();
+
   return (
     <div className={styles.pageContainer}>
       <section data-modal-section>
@@ -33,7 +37,16 @@ export default function JoinusPage() {
         <h3 className={styles.paragraph.subTitle}>XREAL Pioneers</h3>
         <div className={styles.memberFolderList}>
           {Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className={styles.memberFolderContainer}>
+            <div
+              key={i}
+              className={styles.memberFolderContainer}
+              onClick={() =>
+                push(`joinus/members`, {
+                  generation: i + 1,
+                  memberComment: memberComments[i],
+                })
+              }
+            >
               <div className={styles.memberImageLayer}>
                 <Image
                   src={`/assets/images/Members-${i + 1}.png`}

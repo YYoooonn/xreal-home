@@ -147,14 +147,17 @@ export default function XrealPage() {
         <h3 className={styles.paragraph.subTitle}>XREAL 기사</h3>
         <div className={styles.pressListContainer}>
           {presses &&
-            presses.map(({ title, description, thumbnailSrc }, i) => (
-              <PressCard
-                key={i}
-                title={title}
-                description={description}
-                thumbnailSrc={thumbnailSrc}
-              />
-            ))}
+            presses.map(
+              ({ title, description, thumbnailSrc, pressLink }, i) => (
+                <PressCard
+                  key={i}
+                  title={title}
+                  description={description}
+                  thumbnailSrc={thumbnailSrc}
+                  pressLink={pressLink}
+                />
+              )
+            )}
         </div>
       </section>
     </div>

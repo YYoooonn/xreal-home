@@ -18,25 +18,28 @@ interface Project {
   };
 }
 
+interface MemberContents {
+  intro: string; // 자기소개
+  metaverseForMe: string; // 나에게 메타버스란
+  nextPlan: string;
+  todo: string;
+  lastSay: string;
+}
+
 interface Member {
   name: string;
   mento: string;
   profileSrc: string;
   role: string[];
   projects: string[];
-  contents: {
-    intro: string; // 자기소개
-    metaverseForMe: string; // 나에게 메타버스란
-    nextPlan: string;
-    todo: string;
-    lastSay: string;
-  };
+  contents: MemberContents;
 }
 
 interface Press {
   title: string;
   description: string;
   thumbnailSrc: string;
+  pressLink: string;
 }
 
 interface CMSData {

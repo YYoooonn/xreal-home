@@ -27,7 +27,6 @@ export async function getProjects() {
     )
       .then((result) => result.results ?? [])
       .catch(() => []);
-
   const projects: Project[] = await Promise.all(
     pages.map(async (page) => {
       const blocks: Block[] =
