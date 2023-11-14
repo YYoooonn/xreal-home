@@ -8,6 +8,7 @@ export default function ProjectPage({ projectName }: ProjectPageProps) {
   const projects = useMappedProjects();
   console.log(projects);
   console.log(projectName);
+
   const project = projects[projectName];
   if (!project) return null;
 

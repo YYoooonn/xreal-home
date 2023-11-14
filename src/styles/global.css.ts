@@ -31,6 +31,7 @@ globalStyle(".react-flow__node", {
   borderRadius: "8px",
   border: "0.8px solid black",
   background: "white",
+  color: "black",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

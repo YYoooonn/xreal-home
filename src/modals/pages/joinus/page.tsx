@@ -1,19 +1,21 @@
+import conferenceUrl from "@public/assets/images/conference.png";
+import SarifArrowLeftIcon from "@/assets/icons/sarifArrowLeft";
+import { useModalRoute } from "@/modals/ModalRoutingProvider";
+import kapehornUrl from "@public/assets/images/kapehorn.png";
+import hackthonUrl from "@public/assets/images/hackthon.png";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import CrampArrowUpIcon from "@/assets/icons/crampASrrowUp";
+import unnotedUrl from "@public/assets/images/unnoted.png";
+import { useSideNav } from "@/components/SideNavProvider";
+import * as Accordion from "@radix-ui/react-accordion";
+import CommasIcon from "@/assets/icons/commas";
+import { theme } from "@/styles/theme.css";
 import { useEffect } from "react";
 import Image from "next/image";
-import { assignInlineVars } from "@vanilla-extract/dynamic";
-import { useSideNav } from "@/components/SideNavProvider";
-import { theme } from "@/styles/theme.css";
-import * as styles from "./page.css";
-import * as Accordion from "@radix-ui/react-accordion";
 
-import conferenceUrl from "@public/assets/images/conference.png";
-import kapehornUrl from "@public/assets/images/kapehorn.png";
-import unnotedUrl from "@public/assets/images/unnoted.png";
-import hackthonUrl from "@public/assets/images/hackthon.png";
-import SarifArrowLeftIcon from "@/assets/icons/sarifArrowLeft";
-import CrampArrowUpIcon from "@/assets/icons/crampASrrowUp";
-import CommasIcon from "@/assets/icons/commas";
 import FAQDataset from "./_data/faqDataset.json";
+import * as styles from "./page.css";
+
 
 const memberComments = [
   "Connecting Reaity",
@@ -26,6 +28,8 @@ export default function JoinusPage() {
   const { collectData } = useSideNav();
   useEffect(() => collectData(), []);
 
+  const { push } = useModalRoute();
+
   return (
     <div className={styles.pageContainer}>
       <section data-modal-section>
@@ -33,7 +37,16 @@ export default function JoinusPage() {
         <h3 className={styles.paragraph.subTitle}>XREAL Pioneers</h3>
         <div className={styles.memberFolderList}>
           {Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className={styles.memberFolderContainer}>
+            <div
+              key={i}
+              className={styles.memberFolderContainer}
+              onClick={() =>
+                push(`joinus/members`, {
+                  generation: i + 1,
+                  memberComment: memberComments[i],
+                })
+              }
+            >
               <div className={styles.memberImageLayer}>
                 <Image
                   src={`/assets/images/Members-${i + 1}.png`}
@@ -125,6 +138,27 @@ export default function JoinusPage() {
           <div
             className={styles.groupRecuritCard}
             style={assignInlineVars({
+              [styles.groupRecuritCardColor]: theme.color.green,
+            })}
+          >
+            <h4 className={styles.groupRecuritCardHeading}>Research</h4>
+            <ul>
+              <li className={styles.groupRecruitCardItem}>
+                메타버스 산업에 대한 deep-dive 분석을 통한 유의미한 insight 도출
+              </li>
+              <li className={styles.groupRecruitCardItem}>
+                데이터 기반 산업 분석 및 가설 검증을 통한 비즈니스 설계 및
+                product에 대한 의사결정 제안
+              </li>
+              <li className={styles.groupRecruitCardItem}>
+                타 그룹과의 협업을 통한 리서치 기획역량 개발 및 프로토타이핑
+                경험
+              </li>
+            </ul>
+          </div>
+          <div
+            className={styles.groupRecuritCard}
+            style={assignInlineVars({
               [styles.groupRecuritCardColor]: theme.color.blue,
             })}
           >
@@ -145,7 +179,7 @@ export default function JoinusPage() {
           <div
             className={styles.groupRecuritCard}
             style={assignInlineVars({
-              [styles.groupRecuritCardColor]: theme.color.purple,
+              [styles.groupRecuritCardColor]: "#FF3CB7",
             })}
           >
             <h4 className={styles.groupRecuritCardHeading}>Design</h4>
@@ -158,27 +192,6 @@ export default function JoinusPage() {
               </li>
               <li className={styles.groupRecruitCardItem}>
                 타 그룹과의 협업을 통한 디자인 에셋 관리 경험
-              </li>
-            </ul>
-          </div>
-          <div
-            className={styles.groupRecuritCard}
-            style={assignInlineVars({
-              [styles.groupRecuritCardColor]: theme.color.green,
-            })}
-          >
-            <h4 className={styles.groupRecuritCardHeading}>Research</h4>
-            <ul>
-              <li className={styles.groupRecruitCardItem}>
-                메타버스 산업에 대한 deep-dive 분석을 통한 유의미한 insight 도출
-              </li>
-              <li className={styles.groupRecruitCardItem}>
-                데이터 기반 산업 분석 및 가설 검증을 통한 비즈니스 설계 및
-                product에 대한 의사결정 제안
-              </li>
-              <li className={styles.groupRecruitCardItem}>
-                타 그룹과의 협업을 통한 리서치 기획역량 개발 및 프로토타이핑
-                경험
               </li>
             </ul>
           </div>

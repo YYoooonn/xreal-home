@@ -1,13 +1,12 @@
-import Image from "next/image";
-import type { ModalProps } from "../ModalControlProvider";
+import SideNavProvider from "@/components/SideNavProvider";
 import IconButton from "@/components/IconButton";
 import ArrowUpIcon from "@/assets/icons/arrowUp";
 import CloseIcon from "@/assets/icons/close";
-import SideNavigator from "./SideNavigator";
 
-import * as styles from "./BasePageModal.css";
-import SideNavProvider from "@/components/SideNavProvider";
+import type { ModalProps } from "../ModalControlProvider";
 import { useModalRoute } from "../ModalRoutingProvider";
+import * as styles from "./BasePageModal.css";
+import SideNavigator from "./SideNavigator";
 
 const pageTabMap: Record<rootPages, string[]> = {
   xreal: ["vision", "organization", "curriculum", "press"],
@@ -47,11 +46,10 @@ export default function RootPageModal({
                 {`home > ${name}`}
               </div>
               <div className={styles.veryBigModelIcon}>
-                <Image
+                <img
                   src={`/assets/images/modalPages/${name}.png`}
                   alt={`${name}'s icon`}
-                  fill
-                  sizes="10vw"
+                  width={180}
                 />
               </div>
               <SideNavigator tabs={tabs} />
@@ -59,7 +57,12 @@ export default function RootPageModal({
           </aside>
           <div className={styles.pageModalMain}>
             <header className={styles.pageModalHeader}>
-              <IconButton onClick={handleClose} style={{ marginLeft: "auto" }}>
+              <IconButton
+                onClick={handleClose}
+                style={{
+                  marginLeft: "auto",
+                }}
+              >
                 <CloseIcon />
               </IconButton>
             </header>

@@ -1,18 +1,22 @@
-import PressCard from "./_components/PressCard";
-import VisionCard from "./_components/VisionCard";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { useSideNav } from "@/components/SideNavProvider";
+import { useCMSData } from "@/components/CMSDataProvider";
+import { theme } from "@/styles/theme.css";
 import ReactFlow from "reactflow";
-import * as styles from "./page.css";
+import { useEffect } from "react";
 import "reactflow/dist/base.css";
+
 import {
-  curriculumEdges,
-  curriculumNodes,
   curriculumEdgeType,
   organizationEdges,
   organizationNodes,
+  curriculumEdges,
+  curriculumNodes,
 } from "./_data/flowchartNodeEdges";
-import { useSideNav } from "@/components/SideNavProvider";
-import { useEffect } from "react";
-import { useCMSData } from "@/components/CMSDataProvider";
+import { cardColor } from "./_components/VisionCard.css";
+import VisionCard from "./_components/VisionCard";
+import PressCard from "./_components/PressCard";
+import * as styles from "./page.css";
 
 export default function XrealPage() {
   const { presses } = useCMSData();
@@ -103,16 +107,25 @@ export default function XrealPage() {
         </section>
         <div className={styles.visionList}>
           <VisionCard
+            style={assignInlineVars({
+              [cardColor]: theme.color.green,
+            })}
             name="RESEARCH"
             description="리서치 그룹은 메타버스 생태계에 대한 insight를 학회에 제공하고, 프로젝트 활동에 있어 시장과 필드에 대한 관점으로 다양한 ‘의사결정’에 관여한다."
             image="/assets/images/curriculum-research.png"
           />
           <VisionCard
+            style={assignInlineVars({
+              [cardColor]: theme.color.blue,
+            })}
             name="DEV"
             description="데브 그룹은 유니티 및 VR 개발 역량을 함양하여 프로젝트의 뼈대가 되는 개발을 원활히 진행한다."
             image="/assets/images/curriculum-dev.png"
           />
           <VisionCard
+            style={assignInlineVars({
+              [cardColor]: "#FF3CB7",
+            })}
             name="DESIGN"
             description="디자인 그룹은 아이디어를 형상화하는 활동을 기반하며 사용자 친화적인 디자인을 목표한다."
             image="/assets/images/curriculum-design.png"
@@ -134,14 +147,17 @@ export default function XrealPage() {
         <h3 className={styles.paragraph.subTitle}>XREAL 기사</h3>
         <div className={styles.pressListContainer}>
           {presses &&
-            presses.map(({ title, description, thumbnailSrc }, i) => (
-              <PressCard
-                key={i}
-                title={title}
-                description={description}
-                thumbnailSrc={thumbnailSrc}
-              />
-            ))}
+            presses.map(
+              ({ title, description, thumbnailSrc, pressLink }, i) => (
+                <PressCard
+                  key={i}
+                  title={title}
+                  description={description}
+                  thumbnailSrc={thumbnailSrc}
+                  pressLink={pressLink}
+                />
+              )
+            )}
         </div>
       </section>
     </div>

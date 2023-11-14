@@ -1,5 +1,6 @@
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
 
+export const cardColor = createVar();
 export const container = style({
   display: "flex",
   flexDirection: "column",
@@ -14,6 +15,12 @@ export const imageContainer = style({
   height: "240px",
   borderRadius: "24px",
   position: "relative",
+  background: cardColor
+    ? `linear-gradient(236deg, 
+    color-mix(in srgb, ${cardColor} 80%, white) 0%, 
+    rgba(255, 255, 255, 10%) 100% 
+  )`
+    : "linear-gradient(to bottom, #A4FFCF, white)",
 });
 
 export const nameLabel = style({
