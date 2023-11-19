@@ -1,8 +1,8 @@
-import { style, globalStyle } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
-export const GuideUI = style({
+export const MobileGuide = style({
   position: "absolute",
-  zIndex: "1",
+  zIndex: "2",
   top: "0",
   display: "flex",
   flexDirection: "column",
@@ -15,11 +15,6 @@ export const GuideUI = style({
 
   color: "white",
   textAlign: "center",
-  fontSize: "24px",
-  fontWeight: "bold",
-});
-
-export const GuideImg = style({
-  marginBottom: "32px",
-  opacity: "70%",
+  fontSize: "18px",
+  fontWeight: "medium",
 });
