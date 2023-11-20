@@ -11,7 +11,7 @@ export default function VisionCard({
   name,
   description,
   image,
-  className,
+  className = "",
   ...props
 }: React.PropsWithElementProps<HTMLDivElement, VisionCardProps>) {
   return (

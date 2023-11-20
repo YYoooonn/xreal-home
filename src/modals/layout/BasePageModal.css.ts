@@ -50,6 +50,7 @@ export const pageModalSidebarInWrapper = style({
 export const breadcrumbContainer = style({
   textTransform: "uppercase",
   fontWeight: "bold",
+  color: "white",
 });
 
 export const veryBigModelIcon = style({

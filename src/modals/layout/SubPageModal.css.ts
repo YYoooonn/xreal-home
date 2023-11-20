@@ -10,7 +10,7 @@ export const backButton = style({
 });
 
 export const subPageBreadcrumbContainer = style({
-  color: "black",
+  color: "white",
   fontFamily: "var(--font-inter-plex-sans)",
   fontWeight: 500,
   fontSize: "24px",

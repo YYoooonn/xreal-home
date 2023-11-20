@@ -2,6 +2,7 @@ import { createVar, style } from "@vanilla-extract/css";
 
 export const cardColor = createVar();
 export const container = style({
+  width: "240px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",

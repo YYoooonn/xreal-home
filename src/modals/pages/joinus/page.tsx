@@ -16,7 +16,6 @@ import Image from "next/image";
 import FAQDataset from "./_data/faqDataset.json";
 import * as styles from "./page.css";
 
-
 const memberComments = [
   "Connecting Reaity",
   "Road to XR",
@@ -109,17 +108,24 @@ export default function JoinusPage() {
           <br /> 정규 활동은 매주 월, 목 오후 8시에 비대면으로 진행되며, 일정에
           따라 대면으로도 진행할 예정입니다.
         </p>
-        <a className={styles.recruitingLink} href="" target="_blank">
+        <a
+          className={styles.recruitingLink}
+          href="https://docs.google.com/forms/d/e/1FAIpQLScFKp3V01O6GALycIi7EqSb9_S3d_kv2kCp7Sm8sv6sMxGagw/viewform"
+          target="_blank"
+        >
           <div className={styles.recruitingLinkHeading}>
             <SarifArrowLeftIcon />
             <p className={styles.recruitingLinkHeadingLabel}>
-              <span>5th Recruiting&nbsp;</span>
-              <span>Google Form&nbsp;</span>
+              <span>6th Recruiting&nbsp;</span>
+              <span>알림 신청 Google Form&nbsp;</span>
               <span>작성하러 가기</span>
             </p>
             <SarifArrowLeftIcon />
           </div>
-          <p>2023.08.??~08.?? 12:00am 마감</p>
+          <p>
+            5기 리크루팅은 마감되었습니다! 6기 알림 신청을 원하시는 분들은
+            눌러주세요!
+          </p>
         </a>
       </section>
       <section>

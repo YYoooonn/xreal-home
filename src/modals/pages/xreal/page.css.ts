@@ -3,13 +3,22 @@ import { theme } from "@/styles/theme.css";
 
 export * from "../_internal.css";
 export const visionList = style({
-  marginTop: "40px",
+  marginTop: "80px",
   display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "flex-start",
-  gap: "24px",
+  flexDirection: "column",
 });
 
+export const curriculumList = style({
+  display: "flex",
+  flexDirection: "row",
+  gap: "60px",
+});
+
+export const operationalSupportTeamList = style({
+  display: "flex",
+  flexGrow: 0,
+  flexDirection: "row",
+});
 export const pressListContainer = style({
   display: "flex",
   flexDirection: "column",
