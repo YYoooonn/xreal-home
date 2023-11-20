@@ -6,6 +6,7 @@ export const pageContainer = style({
   gap: "64px",
   marginLeft: "57px",
   marginTop: "42px",
+  color: "white",
 });
 
 export const leftsideContainer = style({
@@ -22,7 +23,6 @@ export const hashtagContainer = style({
 
 const name = style({
   fontSize: "32px",
-  color: "#222222",
   fontFamily: "Pretandard",
   lineHeight: "28px",
   fontWeight: "bold",
@@ -34,12 +34,12 @@ const mento = style({
 });
 
 const position = style({
-  backgroundColor: "black",
+  backgroundColor: "white",
   height: "33px",
   minWidth: "51px",
   width: "auto",
   borderRadius: "3px",
-  color: "white",
+  color: "black",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -76,14 +76,12 @@ export const rightsideContainer = style({
 
 const content = style({
   fontWeight: "bold",
-  color: "#222222",
   fontSize: "24px",
   width: "100%",
   marginBottom: "16px",
 });
 
 const contentDetail = style({
-  color: "#222222",
   fontSize: "18px",
   width: "100%",
   marginBottom: "32px",

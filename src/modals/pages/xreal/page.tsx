@@ -106,40 +106,35 @@ export default function XrealPage() {
           />
         </section>
         <div className={styles.visionList}>
-          <VisionCard
-            style={assignInlineVars({
-              [cardColor]: theme.color.green,
-            })}
-            name="RESEARCH"
-            description="리서치 그룹은 메타버스 생태계에 대한 insight를 학회에 제공하고, 프로젝트 활동에 있어 시장과 필드에 대한 관점으로 다양한 ‘의사결정’에 관여한다."
-            image="/assets/images/curriculum-research.png"
-          />
-          <VisionCard
-            style={assignInlineVars({
-              [cardColor]: theme.color.blue,
-            })}
-            name="DEV"
-            description="데브 그룹은 유니티 및 VR 개발 역량을 함양하여 프로젝트의 뼈대가 되는 개발을 원활히 진행한다."
-            image="/assets/images/curriculum-dev.png"
-          />
-          <VisionCard
-            style={assignInlineVars({
-              [cardColor]: "#FF3CB7",
-            })}
-            name="DESIGN"
-            description="디자인 그룹은 아이디어를 형상화하는 활동을 기반하며 사용자 친화적인 디자인을 목표한다."
-            image="/assets/images/curriculum-design.png"
-          />
-          <VisionCard
-            name="BRANDING"
-            description="2022년 1월 XMC를 시작으로 유튜브 조회수 9.30일 기준 8.4천회 기록"
-            image="/assets/images/curriculum-branding.png"
-          />
-          <VisionCard
-            name="NEWMEDIA"
-            description="메타버스에 대해 탐구하여 미디움 등에 칼럼 기고 600명 이상이 읽는 뉴스레터를 운영"
-            image="/assets/images/curriculum-newmedia.png"
-          />
+          <div className={styles.curriculumList}>
+            <VisionCard
+              name="RESEARCH"
+              description="리서치 그룹은 메타버스 생태계에 대한 insight를 학회에 제공하고, 프로젝트 활동에 있어 시장과 필드에 대한 관점으로 다양한 ‘의사결정’에 관여한다."
+              image="/assets/images/xrealOrganization/curriculum-research.png"
+            />
+            <VisionCard
+              name="DEV"
+              description="데브 그룹은 유니티 및 VR 개발 역량을 함양하여 프로젝트의 뼈대가 되는 개발을 원활히 진행한다."
+              image="/assets/images/xrealOrganization/curriculum-dev.png"
+            />
+            <VisionCard
+              name="DESIGN"
+              description="디자인 그룹은 아이디어를 형상화하는 활동을 기반하며 사용자 친화적인 디자인을 목표한다."
+              image="/assets/images/xrealOrganization/curriculum-design.png"
+            />
+          </div>
+          <div className={styles.operationalSupportTeamList}>
+            <VisionCard
+              name="BRANDING"
+              description="2022년 1월 XMC를 시작으로 유튜브 조회수 9.30일 기준 8.4천회 기록"
+              image="/assets/images/xrealOrganization/branding.png"
+            />
+            <VisionCard
+              name="NEWMEDIA"
+              description="메타버스에 대해 탐구하여 미디움 등에 칼럼 기고 600명 이상이 읽는 뉴스레터를 운영"
+              image="/assets/images/xrealOrganization/newmedia.png"
+            />
+          </div>
         </div>
       </section>
       <section data-modal-section>
