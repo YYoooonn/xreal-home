@@ -6,6 +6,34 @@ import Chip from "../_components/Chip";
 export default function NewMediaPage() {
   useEffect(useSideNav().collectData, []);
 
+  const newMediaLinks: Record<string, string> = {
+    NEWSLETTER: "https://page.stibee.com/archives/155225",
+    "Global\nNewMedia": "https://www.xreal.info/eng/magazine",
+    "DEEP\nDIVE": "https://www.xreal.info/magazine/deepdive",
+    "Encyclopedia\nof\nmetaverse": "https://www.xreal.info/metawiki",
+  };
+
+  const handleRedirect = (link: string) => {
+    window.open(link, "_blank");
+  };
+
+  let chips: any[] = [];
+  let index = 0;
+
+  for (let label in newMediaLinks) {
+    chips.push(
+      <Chip key={index}>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: `${label.replaceAll("\n", "<br/>")}`,
+          }}
+          onClick={() => handleRedirect(newMediaLinks[label])}
+        />
+      </Chip>
+    );
+    index++;
+  }
+
   return (
     <div className={styles.pageContainer}>
       <section data-modal-section>
@@ -13,22 +41,7 @@ export default function NewMediaPage() {
         <h3 className={styles.paragraph.subTitle}>
           메타버스 뉴스레터 from XREAL
         </h3>
-        <div className={styles.cardListContainer}>
-          {[
-            "NEWSLETTER",
-            "Global\nNewMedia",
-            "DEEP\nDIVE",
-            "Encyclopedia\nof\nmetaverse",
-          ].map((label, i) => (
-            <Chip key={i}>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: `${label.replaceAll("\n", "<br/>")}`,
-                }}
-              />
-            </Chip>
-          ))}
-        </div>
+        <div className={styles.cardListContainer}>{chips}</div>
         <p className={styles.paragraph.description}>
           메타버스가 뭔데 도대체? 메타버스 관련 최신 정보들을 쉽고, 맛있게
           전합니다. 여러분은 수저🍴만 준비하세요. XREAL이 떠먹여드립니다👩‍🍳
